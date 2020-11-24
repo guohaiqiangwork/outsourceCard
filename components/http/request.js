@@ -1,0 +1,136 @@
+/**
+ * Request 0.0.5
+ * @Class uni-app request网络请求库
+ * @Author lu-ch
+ * @Date 2019-06-05
+ * @Email webwork.s@qq.com
+ * **/
+export default class Request {
+	config = {
+		baseUrl: '',
+		header: '',
+		method: 'GET',
+		dataType: 'json',
+		responseType: 'text',
+		success() {},
+		fail() {},
+		complete() {}
+	}
+
+	static posUrl(url) { /* 判断url是否为绝对路径 */
+		return /(http|https):\/\/([\w.]+\/?)\S*/.test(url)
+	}
+
+	interceptor = {
+		request(f) {
+			if (f) {
+				Request.requestBeforeFun = f
+			}
+		},
+		response(f) {
+			if (f) {
+				Request.requestComFun = f
+			}
+		}
+	}
+
+	static requestBeforeFun(config) {
+		return config
+	}
+
+	static requestComFun(response) {
+		return response
+	}
+
+	setConfig(f) {
+		this.config = f(this.config)
+	}
+
+	request(options = {}) {
+		options.baseUrl = options.baseUrl || this.config.baseUrl
+		options.dataType = options.dataType || this.config.dataType
+		options.url = Request.posUrl(options.url) ? options.url : (options.baseUrl + options.url)
+		options.data = options.data || {}
+		options.header = options.header || this.config.header
+		options.method = options.method || this.config.method
+		return new Promise((resolve, reject) => {
+			let next = true
+			let _config = null
+			options.complete = (response) => {
+				let statusCode = response.statusCode
+				response.config = _config
+				response = Request.requestComFun(response)
+				if (statusCode === 200 || statusCode === 500) { // 成功
+					resolve(response)
+				} else {
+					reject(response)
+				}
+			}
+			let cancel = (t = 'handle cancel') => {
+				let err = {
+					errMsg: t,
+					config: afC
+				}
+				reject(err)
+				next = false
+			}
+			let afC = { ...this.config,
+				...options
+			}
+			_config = { ...afC,
+				...Request.requestBeforeFun(afC, cancel)
+			}
+			if (!next) return
+			uni.request(_config)
+		})
+	}
+
+	get(url, data,noHeard, options = {}) {
+		// console.log('第一个' + url)
+		// console.log('第2个' + data)
+		// console.log('第3个' + noHeard)
+		options.url = url
+		options.data = data
+		options.method = 'GET'
+		if(noHeard){
+			options.header = {
+				'Authorization': 'Bearer' +' '+ uni.getStorageSync('token'),
+				'client': 'APP',
+				...options.header
+			}
+		}
+		
+		return this.request(options)
+	}
+
+	post(url,data,noHeard,type,logFalg,options = {},) {
+		console.log(noHeard +  'bearer' + uni.getStorageSync('token'))
+		if (type) {
+			options.header = {
+					'Content-Type': 'application/json;charset=UTF-8',
+				}
+		}else{
+			options.header = {
+				'content-type': 'application/x-www-form-urlencoded', // 默认值 
+			}
+		}
+		if(noHeard){
+			options.header = {
+				'Authorization': 'Bearer'  +  ' ' + uni.getStorageSync('token'),
+				'client': 'APP',
+				...options.header
+			}
+		}
+		if(logFalg){
+			options.header = {
+				'Authorization': "Basic c3lzLW1hbmFnZToxMjM0NTY=",
+				'client': 'APP',
+				...options.header
+			}
+		}
+		options.url = url
+		options.data = data
+		options.method = 'POST'
+		return this.request(options)
+	}
+}
