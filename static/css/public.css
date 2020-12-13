@@ -1,0 +1,448 @@
+page{
+	background-color: #F7F8FC;
+}
+
+.page_widthMoudel {
+	width: 92%;
+	margin-left: 4%;
+}
+.moudel_list{
+	background-color: #FFFFFF;
+	border-radius: 10upx;
+	padding: 30upx;
+	box-shadow: 0upx 4upx 14upx 0upx #e2e5ef; 
+}
+.font_size20{
+	font-size: 20upx;
+}
+.font_size22{
+	font-size: 22upx;
+}
+.font_size24{
+	font-size: 24upx;
+}
+.font_size25{
+	font-size: 24upx;
+}
+.font_size26{
+	font-size: 26upx;
+}
+.font_size28{
+	font-size: 28upx;
+}
+.font_size30{
+	font-size: 30upx;
+}
+.font_size32{
+	font-size: 32upx;
+}
+.font_size34{
+	font-size: 34upx;
+}
+.font_size36{
+	font-size: 36upx;
+}
+.font_size38{
+	font-size: 38upx;
+}
+.font_size40{
+	font-size: 40upx;
+}
+.font_size44{
+	font-size: 44upx;
+}
+.font_size46{
+	font-size: 46upx;
+}
+.font_size50{
+	font-size: 50upx;
+}
+.font_size54{
+	font-size: 54upx;
+}
+.font_size60{
+	font-size: 60upx;
+}
+.font_size75{
+	font-size: 75upx;
+}
+.font_color22{
+	color: #222222;
+}
+.font_color33{
+	color: #333333;
+}
+.font_color00{
+	color: #003D48;
+}
+.font_colorcc{
+	color: #CCCCCC;
+}
+.font_color66{
+	color: #666666;
+}
+.font_color99{
+	color: #999999;
+}
+.font_colorf4{
+	color: #FF4141;
+}
+.font_color2b{
+	color: #2B65EB;
+}
+.font_colore1{
+	color: #E14938;
+}
+.font_colorff{
+	color: #FFFFFF;
+}
+.font_colorfc{
+	color: #FCCD8F;
+}
+.font_colorf7{
+	color: #F75349;
+}
+
+.font_weight700{
+	font-weight: 700;
+}
+
+.margin_top1 {
+	margin-top: 1%;
+}
+.margin_top2 {
+	margin-top: 2%;
+}
+.margin_top3 {
+	margin-top: 3%;
+}
+.margin_top3u {
+	margin-top: 30upx;
+}
+.margin_top4u {
+	margin-top: 40upx;
+}
+.margin_top4{
+	margin-top:4%
+}
+
+.margin_top5 {
+	margin-top: 5%;
+}
+.margin_top5u {
+	margin-top: 50upx;
+}
+
+.margin_top6 {
+	margin-top: 6%;
+}
+
+.margin_top8 {
+	margin-top: 8%;
+}
+.margin_left1{
+	margin-left: 1%;
+}
+.margin_left2{
+	margin-left: 2%;
+}
+.margin_left3{
+	margin-left: 3%;
+}
+.margin_right4{
+	margin-right: 4%;
+}
+.margin_left1u{
+	margin-left: 10upx;
+}
+.margin_left2u{
+	margin-left: 20upx;
+}
+.margin_left4{
+	margin-left: 3%;
+}
+.font_sise22{
+	font-size: 22upx;
+}
+
+/* 宽度 */
+.width10 {
+	width: 10%;
+}
+
+.width15 {
+	width: 15%;
+}
+
+.width18 {
+	width: 18%;
+}
+
+.width20 {
+	width: 20%;
+}
+
+.width25 {
+	width: 25%;
+}
+
+.width30 {
+	width: 30%;
+}
+.width33 {
+	width: 33%;
+}
+
+
+.width35 {
+	width: 35%;
+}
+
+.width40 {
+	width: 40%;
+}
+
+.width45 {
+	width: 45%;
+}
+
+.width49 {
+	width: 49%;
+}
+
+.width50 {
+	width: 50%;
+}
+
+.width55 {
+	width: 55%;
+}
+
+.width60 {
+	width: 60%;
+}
+
+.width65 {
+	width: 65%;
+}
+
+
+.width66 {
+	width: 66%;
+}
+
+.width70 {
+	width: 70%;
+}
+
+.width75 {
+	width: 75%;
+}
+
+.width80 {
+	width: 80%;
+}
+
+.width90 {
+	width: 90%;
+}
+
+/* 内容位置 */
+.text_left {
+	text-align: left;
+}
+.text_right{
+	text-align: right;
+}
+.padding_bottom2 {
+	padding-bottom: 2%;
+}
+
+.padding_top2 {
+	padding-top: 2%;
+}
+
+.padding_bottom3 {
+	padding-bottom: 3%;
+}
+.padding_bottom3u {
+	padding-bottom: 30upx;
+}
+.padding_top3u {
+	padding-top: 30upx;
+}
+.padding_left3u {
+	padding-left: 30upx;
+}
+.padding_right3u {
+	padding-right: 30upx;
+}
+.padding_top3 {
+	padding-top: 3%;
+}
+
+.padding_left2 {
+	padding-left: 2%;
+}
+.padding_left3 {
+	padding-left: 3%;
+}
+.padding_right3 {
+	padding-right: 3%;
+}
+
+
+
+/* display 位置 */
+.text_center{
+	text-align: center;
+}
+
+.display_inline {
+	display: inline-block;
+}
+.display_center {
+	-webkit-justify-content: center;
+	justify-content: center;
+}
+
+.display_right {
+	justify-content: right;
+	-webkit-justify-content: right;
+	justify-content: flex-end
+}
+
+.display_left {
+	justify-content: left;
+	-webkit-justify-content: left;
+}
+
+.display_space {
+	-webkit-justify-content: space-between;
+	justify-content: space-between;
+}
+
+
+.background_colorff{
+	background-color: #FFFFFF;
+}
+.background_color2b{
+	background-color: #2B65EB;
+}
+.background_color49{
+	background-color: #4976DD;
+}
+.background_colordc{
+	background-color: #dce0ec;
+}
+.border_bottom{
+	border-bottom: 1px solid #eeeeee
+}
+/* 搜索框 */
+.searce_moudel {
+	width: 94%;
+	margin-left: 3%;
+	background: #f4f5f5;
+	border-radius: 33upx;
+	height: 66upx;
+	line-height: 66upx;
+}
+
+.searce_left {
+	width: 5%;
+	margin-left: 2%;
+	margin-top: 2%;
+
+}
+
+.searce_right {
+	margin-top: 1%;
+	margin-left: 2%;
+}
+
+.searce_width {
+	width: 30upx;
+	height: 30upx;
+	margin-top: 1%;
+}
+
+.text_hidden {
+	/* 	text-overflow: ellipsis;
+	overflow: hidden; */
+
+	overflow: hidden;
+	word-break: break-all;
+	/* break-all(允许在单词内换行。) */
+	text-overflow: ellipsis;
+	/* 超出部分省略号 */
+	display: -webkit-box;
+	/** 对象作为伸缩盒子模型显示 **/
+	-webkit-box-orient: vertical;
+	/** 设置或检索伸缩盒对象的子元素的排列方式 **/
+	-webkit-line-clamp: 1;
+	/** 显示的行数 **/
+}
+
+.text_hidden2 {
+	overflow: hidden;
+	word-break: break-all;
+	/* break-all(允许在单词内换行。) */
+	text-overflow: ellipsis;
+	/* 超出部分省略号 */
+	display: -webkit-box;
+	/** 对象作为伸缩盒子模型显示 **/
+	-webkit-box-orient: vertical;
+	/** 设置或检索伸缩盒对象的子元素的排列方式 **/
+	-webkit-line-clamp: 2;
+	/** 显示的行数 **/
+}
+
+.title_border{
+	width: 60upx;
+	height: 6upx;
+	background: #E14938;
+	border-radius: 3upx;
+	margin-left: 10%;
+}
+.selsect_moudel{
+	height: 60upx;
+	background: #f0f0fa;
+	border-radius: 30upx;
+}
+
+.moudel_content {
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	background-color: rgba(0, 0, 0, 0.4);
+	z-index: 99;
+	top: 0;
+	left: 0;
+}
+
+.uni-scroll-view::-webkit-scrollbar {
+	/* 隐藏滚动条，但依旧具备可以滚动的功能 */
+	display: none !important
+}
+
+.bottom_btnOne {
+	text-align: center;
+	line-height: 88upx;
+	color: #ffffff;
+	font-size: 32upx;
+	height: 88upx;
+	background: #2b65eb;
+	border-radius: 44upx;
+	margin-top: 30upx;
+}
+
+.preL{
+	 white-space: pre-line;
+}
+.noImg{
+	width: 380upx;
+	height: 380upx;
+}
+.margin_top18{
+	margin-top: 180upx;
+}
