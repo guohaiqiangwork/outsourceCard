@@ -155,7 +155,33 @@
 
 		<!-- 分享图片 -->
 		<template v-if="shareaFalg">
-			<view class="moudel_content_myE">
+			<view class="moudel_content_myE" style="background-color: #FFFFFF;">
+				<view class="imgEr_moudel">
+					<view style="width: 95%;" class="margin_top5u  background_colorfe text_right">
+						<image @click="colseMoudel" style="width: 30upx;height: 30upx;" src="../../../static/image/icon/close.png" mode=""></image>
+					</view>
+					<view class="" style="margin-top: 60upx;">
+						<view class="font_colorf7 font_size28" style="margin-left: 180upx;">
+							说明
+							<text class="font_size32 font_weight700 ">长按图片</text>
+							保存邀请二维码海报
+						</view>
+					</view>
+					<view class="uni-flex" style="width: 750upx;padding-left: 10%;padding-right: 5%;">
+						<scroll-view scroll-x="true" class="wrapper" @scroll="nihao">
+							<view class="img_moudel" v-for="(item, index) in posterData" :key="index">
+								<image @longpress="saveImgEr(item)" :src="item" mode="" style="height: 780upx;width: 580upx;border-radius: 10upx;margin-left: 30upx;"></image>
+							</view>
+						</scroll-view>
+					</view>
+
+					<view class="font_size24 font_colorff  uni-flex" style="margin-left: 100upx;">
+						<view class="btn_m" @click="copyData">复制邀请链接</view>
+						<view class="btn_m " @click="wxShare">微信分享</view>
+					</view>
+				</view>
+			</view>
+			<!-- <view class="moudel_content_myE">
 				<view class="imgEr_moudel">
 					<view style="width: 95%;margin-left: 70%;" class="margin_top5u  background_colorfe ">
 						<image @click="colseMoudel" style="width: 30upx;height: 30upx;" src="../../../static/image/icon/colseff.png" mode=""></image>
@@ -177,7 +203,7 @@
 						<view class="font_size24 font_colorf7 width50 text_center" @click="copyData">复制推广码</view>
 					</view>
 				</view>
-			</view>
+			</view> -->
 		</template>
 	</view>
 </template>
@@ -235,7 +261,9 @@ export default {
 			teamIncome: '',
 			shareaFalg: false,
 			posterData: [],
-			openVip:false
+			openVip: false,
+			dataOne: '',
+			copyIndex: 0
 		};
 	},
 
@@ -248,14 +276,21 @@ export default {
 		this.memberData = this.$member.memberObj;
 	},
 	methods: {
-		getVip:function(){
+		nihao: function(item) {
+			// console.log(Math.ceil(item.detail.scrollLeft / 240)　);
+			// console.log(this.dataOne[Math.ceil(item.detail.scrollLeft / 270) - 1])
+			this.copyIndex = Math.ceil(item.detail.scrollLeft / 240) - 1;
+			this.copyIndex < 0 ? (this.copyIndex = 0) : (this.copyIndex = this.copyIndex);
+			console.log(this.copyIndex);
+		},
+
+		getVip: function() {
 			var data = {
-				mbId:uni.getStorageSync('userId')
-			}
+				mbId: uni.getStorageSync('userId')
+			};
 			// 查询是否是vip
 			this.$http.get('/api/member/openVip', data, true).then(res => {
-				this.openVip = res.data.data
-				
+				this.openVip = res.data.data;
 			});
 		},
 		// 初始化
@@ -304,10 +339,14 @@ export default {
 		},
 		// 复制
 		copyData: function(content) {
+			let goodsUrl = '';
+			this.dataOne[this.copyIndex].goodsUrl ? (goodsUrl = this.dataOne[this.copyIndex].goodsUrl) : (goodsUrl = '');
+			var url = 'https://www.hcselected.com/frontend/#/pages/shareUrl/shareUrl?referrerId=' + uni.getStorageSync('userId') + '&flag=false' + '&goodsUrl=' + goodsUrl;
+
 			console.log(content);
 			var _this = this;
 			uni.setClipboardData({
-				data: _this.infoData.inviteCode,
+				data: url,
 				success: function(data) {
 					console.log(data);
 					uni.showToast({
@@ -323,36 +362,37 @@ export default {
 		},
 		goEr: function(item, type) {
 			this.shareaFalg = true;
+			this.copyIndex = 0;
 			uni.hideTabBar(); //隐藏tab
 			// uni.showTabBar(); //显示tab
 			var data = {
 				type: type
 			};
 			this.$http.get('/api/shareMaterisal/promotionPoster', data, true).then(res => {
-				var dataOne = res.data.data;
-				console.log(dataOne);
+				this.dataOne = res.data.data;
+				console.log(this.dataOne);
 				uni.showLoading({
 					title: '加载中'
 				});
 				this.posterData = [];
 				var typeData;
 				this.type == 4 ? (typeData = true) : (typeData = false);
-				for (let i = 0; i < dataOne.length; i++) {
+				for (let i = 0; i < this.dataOne.length; i++) {
 					var a =
 						this.memberData.hostUrl +
 						'/api/common/poster/compose?mbId=' +
 						uni.getStorageSync('userId') +
 						'&imgUrl=' +
-						dataOne[i].poster +
+						this.dataOne[i].poster +
 						'&type=' +
 						typeData +
 						'&goodsUrl=' +
-						dataOne[i].goodsUrl;
+						this.dataOne[i].goodsUrl;
 					this.posterData.push(a);
 				}
 				setTimeout(function() {
 					uni.hideLoading();
-				}, 3000);
+				}, 1500);
 			});
 
 			// uni.navigateTo({
@@ -376,8 +416,8 @@ export default {
 			});
 		},
 
+		// 保存图片
 		saveImg: function() {
-			console.log('99');
 			uni.downloadFile({
 				url: '../../../static/image/erCode.png', //图片地址
 				success: res => {
@@ -401,8 +441,8 @@ export default {
 				}
 			});
 		},
-		
-		saveImgEr:function(item){
+
+		saveImgEr: function(item) {
 			uni.downloadFile({
 				url: item, //图片地址
 				success: res => {
@@ -425,8 +465,32 @@ export default {
 					}
 				}
 			});
+		},
+
+		wxShare: function() {
+			let goodsUrl = '';
+			this.dataOne[this.copyIndex].goodsUrl ? (goodsUrl = this.dataOne[this.copyIndex].goodsUrl) : (goodsUrl = '');
+			var url = 'https://www.hcselected.com/frontend/#/pages/shareUrl/shareUrl?referrerId=' + uni.getStorageSync('userId') + '&flag=false' + '&goodsUrl=' + goodsUrl;
+			//分享到微信朋友
+			console.log(url)
+			uni.share({
+				provider: 'weixin',
+				scene: 'WXSceneSession',
+				type: 0,
+				href: url,
+				title: '汇创精选',
+				summary: '让   生   活    更   优   质 ',
+				imageUrl: this.posterData[this.copyIndex],
+				success: function(res) {
+					if (res) {
+						console.log('success:' + JSON.stringify(res));
+					}
+				},
+				fail: function(err) {
+					console.log('fail:' + JSON.stringify(err));
+				}
+			});
 		}
-		
 	}
 };
 </script>
@@ -584,7 +648,7 @@ page {
 	display: inline-block;
 	// padding-right: 40upx;
 }
-.img_bang{
+.img_bang {
 	background: url('../../../static/image/icon/tVip.png') no-repeat;
 	background-size: 100%;
 	width: 78upx;
@@ -593,9 +657,21 @@ page {
 	color: red;
 	text-align: center;
 }
-.img_bang text{
-	color: #FFFFFF;
+.img_bang text {
+	color: #ffffff;
 	margin-left: 10upx !important;
 	margin-top: -20upx !important;
+}
+.btn_m {
+	background-color: #f75349;
+	text-align: center;
+	height: 88upx;
+	line-height: 88upx;
+	border-radius: 10upx;
+	color: #ffffff;
+	font-size: 32upx;
+	margin-top: 40upx;
+	margin-left: 50upx;
+	width: 30%;
 }
 </style>
