@@ -164,6 +164,9 @@
 						<view style="width: 434upx;margin-left: 180upx;" class=" font_size26 font_colorff text_center">
 							点击右上角选择『发送给朋友』或『分享到朋友圈』，邀请朋友一起成为合伙人
 						</view>
+						<view class="">
+							<button type="default" @click="goShaer">我要请</button>
+						</view>
 					</view>
 					<view class="uni-flex" style="width: 750upx;padding-left: 10%;padding-right: 5%;">
 						<scroll-view scroll-x="true" class="wrapper">
@@ -248,6 +251,11 @@ export default {
 		this.memberData = this.$member.memberObj;
 	},
 	methods: {
+		goShaer:function(){
+			uni.navigateTo({
+				url:'../../shareUrl/shareUrl?referrerId=' + uni.getStorageSync('userId') + '&flag=false'
+			})
+		},
 		getVip:function(){
 			var data = {
 				mbId:uni.getStorageSync('userId')

@@ -86,7 +86,7 @@
 			</view>
 
 			<!--  代理攻略-->
-			<view class="font_size36 font_color22  margin_top6">代理攻略</view>
+			<view class="font_size36 font_color22  margin_top6">信贷攻略</view>
 			<view class="">
 				<scroll-view scroll-x="true" class="wrapper">
 					<view

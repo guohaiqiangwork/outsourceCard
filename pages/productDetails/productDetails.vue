@@ -79,7 +79,7 @@
 							<view class="font_size40 margin_top3u font_color22 text_center font_weight700">申请攻略</view>
 							<view
 								class="margin_top3 "
-								style="max-height: 600upx;overflow-y:auto;padding-left: 20upx;padding-right: 20upx;"
+								style="max-height: 75vh;overflow-y:auto;padding-left: 20upx;padding-right: 20upx;"
 							>
 								<u-parse :content="detailData.raidersResult.context" :loading="loading" @preview="preview" @navigate="navigate" />
 							</view>
@@ -151,7 +151,7 @@
 							<view class="font_size40 margin_top3u font_color22 text_center font_weight700">申请攻略</view>
 							<view
 								class="margin_top3 "
-								style="max-height: 600upx;overflow-y:auto;padding-left: 20upx;padding-right: 20upx;"
+								style="max-height: 75vh;overflow-y:auto;padding-left: 20upx;padding-right: 20upx;"
 							>
 								<u-parse :content="detailData.raidersResult.context" :loading="loading" @preview="preview" @navigate="navigate" />
 							</view>
@@ -182,6 +182,9 @@
 					</view>
 					<view class="font_size24 font_colorff " style="idth: 434upx;margin-left: 180upx;">
 						<view class="">还可以长按保存或截屏分享</view>
+						<view class="">
+							<button type="default" @click="goShare">我要跳转</button>
+						</view>
 						<view class="font_size24 font_colorf7 width50 text_center" @click="copyData">复制推广码</view>
 					</view>
 				</view>
@@ -220,6 +223,12 @@ export default {
 		});
 	},
 	methods: {
+		goShare:function(){
+			uni.navigateTo({
+				url:'../shareUrl/shareUrl?goodsId=' + this.goodsId + '&referrerId=' + uni.getStorageSync('userId') + '&flag=true'
+			})
+		},
+		// 
 		colseErMoudel: function() {
 			this.shareaFalg = false;
 			// uni.showTabBar(); //显示tab
@@ -393,10 +402,10 @@ page {
 	background-color: #ffffff;
 	border-radius: 20upx;
 	position: absolute;
-	top: 20%;
-	max-height: 900upx;
-	width: 600upx;
-	margin-left: 75upx;
+	top: 2vh;
+	// max-height: 900upx;
+	width: 100%;
+	// margin-left: 75upx;
 	padding-bottom: 40upx;
 	// overflow-y: auto;
 }
@@ -430,7 +439,7 @@ page {
 }
 .moudel_bottom {
 	position: fixed;
-	width: 600upx;
+	width: 100%;
 	background-color: #ffffff;
 	padding-bottom: 20upx;
 	border-bottom-left-radius: 20upx;

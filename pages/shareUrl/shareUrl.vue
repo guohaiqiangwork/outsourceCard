@@ -57,7 +57,7 @@
 							<view class="font_sise26 width30">本人姓名</view>
 							<view class=""><input type="text" value="" @input="getName" /></view>
 						</view>
-							<view class="uni-flex border_bottom padding_bottom3 margin_top3u ">
+						<view class="uni-flex border_bottom padding_bottom3 margin_top3u ">
 							<view class="font_sise26 width30 ">本人身份证号</view>
 							<view class=""><input type="text" value="" @input="getIdCard" /></view>
 						</view>
@@ -248,9 +248,14 @@ export default {
 		};
 	},
 	onLoad(option) {
-		//
-		console.log(option);
-
+		console.log('99');
+		// 新增内容
+		uni.setStorageSync('flag', option.flag);
+		if (option.goodsId) {
+			uni.setStorageSync('goodsId', option.goodsId); //产品ID
+			this.getProduct(); //获取详情
+		}
+		//结束
 		if (uni.getStorageSync('flag')) {
 			this.flag = uni.getStorageSync('flag'); //true 产品 false个人
 			this.referrerId = uni.getStorageSync('referrerId'); //分享人ID
@@ -262,13 +267,16 @@ export default {
 		} else {
 			uni.setStorageSync('flag', option.flag);
 			uni.setStorageSync('referrerId', option.referrerId);
-			uni.setStorageSync('goodsId', option.goodsId);
-			uni.setStorageSync('goodsUrl', option.goodsUrl);
+			if (uni.getStorageSync('goodsId')) {
+				uni.setStorageSync('goodsId', option.goodsId);
+				uni.setStorageSync('goodsUrl', option.goodsUrl);
+			}
+
 			console.log('我要进行存储了');
 		}
 		var a = 'https://www.hcselected.com/#/pages/shareUrl/shareUrl';
 		this.redirect_url = a;
-		this.getWxCode();
+		// this.getWxCode();
 	},
 	methods: {
 		getWxCode: function() {
@@ -459,7 +467,7 @@ export default {
 							uni.removeStorageSync('referrerId');
 							uni.removeStorageSync('goodsId');
 							uni.removeStorageSync('goodsUrl');
-							
+
 							window.location.href = this.detailData.thirdPartyUrl;
 						}
 					});
@@ -482,7 +490,7 @@ export default {
 					uni.removeStorageSync('referrerId');
 					uni.removeStorageSync('goodsId');
 					uni.removeStorageSync('goodsUrl');
-					
+
 					window.location.href = 'https://www.hcselected.com';
 				});
 			}

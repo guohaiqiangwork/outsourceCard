@@ -115,7 +115,7 @@ export default {
 					name: '最新线报'
 				},
 				{
-					name: '代理都在看'
+					name: '信贷员都在看'
 				}
 			],
 			tabIndexT: 0,
