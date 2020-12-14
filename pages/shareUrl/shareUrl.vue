@@ -244,7 +244,7 @@ export default {
 			referrerId: '', //分享人ID
 			flag: '', //true 产品 false个人
 			appid: 'wx46d808b929c79829',
-			redirect_url: 'https://www.hcselected.com'
+			redirect_url: 'https://www.hcselected.com/frontend'
 		};
 	},
 	onLoad(option) {
@@ -266,7 +266,7 @@ export default {
 			uni.setStorageSync('goodsUrl', option.goodsUrl);
 			console.log('我要进行存储了');
 		}
-		var a = 'https://www.hcselected.com/#/pages/shareUrl/shareUrl';
+		var a = 'https://www.hcselected.com/frontend/#/pages/shareUrl/shareUrl';
 		this.redirect_url = a;
 		this.getWxCode();
 	},
@@ -483,7 +483,7 @@ export default {
 					uni.removeStorageSync('goodsId');
 					uni.removeStorageSync('goodsUrl');
 					
-					window.location.href = 'https://www.hcselected.com';
+					window.location.href = 'https://www.hcselected.com/frontend';
 				});
 			}
 		}
