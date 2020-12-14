@@ -38,7 +38,7 @@
 				</view>
 
 				<view class="page_widthMoudel" style="padding-bottom: 100upx;">
-					<view class="" v-if="flag == 'true'">
+					<view class="" v-if="false">
 						<view class="font_size40 font_weight700 margin_top3u">申请条件</view>
 
 						<view class="moudel_list margin_top3u" style="background-color: #f7f7ff;">
@@ -111,7 +111,7 @@
 						<text class="font_size30">{{ detailData.cycle }}</text>
 					</view>
 				</view>
-				<view class="page_widthMoudel" style="padding-bottom: 100upx;" v-if="flag == 'true'">
+				<view class="page_widthMoudel" style="padding-bottom: 100upx;" v-if="false">
 					<view class=" ">
 						<view class="font_size40 font_weight700 margin_top3u">申请条件</view>
 
