@@ -79,7 +79,7 @@
     },
     "h5" : {
         "title" : "汇创精选",
-        "domain" : "https://www.hcselected.com",
+        "domain" : "https://www.hcselected.com/frontend",
         "router" : {
             "base" : "./"
         }

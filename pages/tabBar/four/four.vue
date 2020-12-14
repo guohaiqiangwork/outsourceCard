@@ -329,7 +329,7 @@ export default {
 		copyData: function(content) {
 			let goodsUrl  = '';
 			this.dataOne[this.copyIndex].goodsUrl ? goodsUrl= this.dataOne[this.copyIndex].goodsUrl : goodsUrl = '';
-			var url = 'https://www.hcselected.com/#/pages/shareUrl/shareUrl?referrerId=' + uni.getStorageSync('userId') + '&flag=false' + '&goodsUrl=' + goodsUrl ;
+			var url = 'https://www.hcselected.com/frontend/#/pages/shareUrl/shareUrl?referrerId=' + uni.getStorageSync('userId') + '&flag=false' + '&goodsUrl=' + goodsUrl ;
 			var _this = this;
 			uni.setClipboardData({
 				data: url,
