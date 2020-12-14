@@ -170,14 +170,14 @@
 					<view class="uni-flex" style="width: 750upx;padding-left: 10%;padding-right: 5%;">
 						<scroll-view scroll-x="true" class="wrapper" @scroll="nihao">
 							<view class="img_moudel" v-for="(item, index) in posterData" :key="index">
-								<image @longpress="saveImgEr(item)" :src="item" mode="" style="height: 780upx;width: 580upx;border-radius: 10upx;margin-left: 30upx;"></image>
+								<image @longpress="openSaveFenFalg(item)" :src="item" mode="" style="height: 780upx;width: 580upx;border-radius: 10upx;margin-left: 30upx;"></image>
 							</view>
 						</scroll-view>
 					</view>
 
-					<view class="font_size24 font_colorff  uni-flex" style="margin-left: 100upx;">
-						<view class="btn_m" @click="copyData">复制邀请链接</view>
-						<view class="btn_m " @click="wxShare">微信分享</view>
+					<view class="font_size24 font_colorff  uni-flex" style="margin-left: 180upx;">
+						<view class="btn_m" style="width: 50%;" @click="copyData">复制邀请链接</view>
+						<!-- <view class="btn_m " @click="wxShare">微信分享</view> -->
 					</view>
 				</view>
 			</view>
@@ -205,6 +205,19 @@
 				</view>
 			</view> -->
 		</template>
+		
+		<!-- 保存还会分享 -->	
+		<template v-if="saveFenFalg">
+			<view class="moudel_content">
+				<view class="er_moudel">
+					<image @click="colseSaveFenFalg" style="width: 30upx;height: 30upx;" src="../../../static/image/icon/close.png" mode=""></image>
+					<view class="text_center font_size40 font_weight700">请选择贷款类型</view>
+					<view class="moudel_btn_one" style="margin-top: 60upx;" @click="saveImgEr">保存图片</view>
+					<view class="moudel_btn_one" style="background-color: #F75349;" @click="wxShare">微信分享</view>
+				</view>
+			</view>
+		</template>
+		
 	</view>
 </template>
 
@@ -263,7 +276,9 @@ export default {
 			posterData: [],
 			openVip: false,
 			dataOne: '',
-			copyIndex: 0
+			copyIndex: 0,
+			saveFenFalg:false,
+			saveImgData:''
 		};
 	},
 
@@ -418,6 +433,7 @@ export default {
 
 		// 保存图片
 		saveImg: function() {
+			
 			uni.downloadFile({
 				url: '../../../static/image/erCode.png', //图片地址
 				success: res => {
@@ -441,15 +457,30 @@ export default {
 				}
 			});
 		},
-
+		
+		openSaveFenFalg:function(item){
+			this.saveImgData =item;
+			this.saveFenFalg = true
+		},
+		colseSaveFenFalg:function(){
+			this.saveFenFalg = false
+		},
+		
 		saveImgEr: function(item) {
+			console.log('99')
+			uni.showLoading({
+				title: '保存中'
+			});
+			var _this = this;
 			uni.downloadFile({
-				url: item, //图片地址
+				url: _this.saveImgData, //图片地址
 				success: res => {
+					uni.hideLoading();
 					if (res.statusCode === 200) {
 						uni.saveImageToPhotosAlbum({
 							filePath: res.tempFilePath,
 							success: function() {
+								this.colseSaveFenFalg()
 								uni.showToast({
 									title: '保存成功',
 									icon: 'none'
@@ -473,6 +504,9 @@ export default {
 			var url = 'https://www.hcselected.com/frontend/#/pages/shareUrl/shareUrl?referrerId=' + uni.getStorageSync('userId') + '&flag=false' + '&goodsUrl=' + goodsUrl;
 			//分享到微信朋友
 			console.log(url)
+			uni.showLoading({
+				title: '分享中'
+			});
 			uni.share({
 				provider: 'weixin',
 				scene: 'WXSceneSession',
@@ -480,8 +514,10 @@ export default {
 				href: url,
 				title: '汇创精选',
 				summary: '让   生   活    更   优   质 ',
-				imageUrl: this.posterData[this.copyIndex],
+				imageUrl: this.saveImgData,
 				success: function(res) {
+					uni.hideLoading();
+					this.colseSaveFenFalg()
 					if (res) {
 						console.log('success:' + JSON.stringify(res));
 					}
@@ -491,6 +527,8 @@ export default {
 				}
 			});
 		}
+	
+	
 	}
 };
 </script>
@@ -673,5 +711,29 @@ page {
 	margin-top: 40upx;
 	margin-left: 50upx;
 	width: 30%;
+}
+// 弹窗
+.er_moudel {
+	background-color: #ffffff;
+	width: 80%;
+	margin-left: 6%;
+	position: absolute;
+	top: 20%;
+	padding: 30upx;
+	border-radius: 20upx;
+	padding-top: 60upx;
+	padding-bottom: 60upx;
+}
+.moudel_btn_one {
+	height: 88upx;
+	background: #2b65eb;
+	border-radius: 44upx;
+	text-align: center;
+	line-height: 88upx;
+	color: #ffffff;
+	font-size: 32upx;
+	width: 80%;
+	margin-left: 10%;
+	margin-top: 30upx;
 }
 </style>

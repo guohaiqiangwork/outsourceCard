@@ -94,9 +94,9 @@
 			</view>
 			<view class="page_widthMoudel">
 				<view class="">
-					<swiper class="imageContainer" circular autoplay @change="handleChange">
+					<swiper class="imageContainer" circular autoplay  @change="handleChange">
 						<block v-for="(item, index) in promotionPosterData" :key="index">
-							<swiper-item ><image @longpress="saveImgEr(item)" class="itemImg" :src="item" lazy-load mode="scaleToFill"></image></swiper-item>
+							<swiper-item ><image @longpress="openSaveFenFalg(item)" class="itemImg" :src="item" lazy-load mode="scaleToFill"></image></swiper-item>
 						</block>
 					</swiper>
 				</view>
@@ -106,7 +106,7 @@
 						<view class="font_size26 margin_top2">{{ item.name }}</view>
 					</view>
 				</view> -->
-				<view class="font_size30 text_center margin_top3u font_colorf7">长按分享</view>
+				<view class="font_size30 text_center margin_top3u font_colorf7">长按分享00</view>
 			</view>
 		</template>
 
@@ -118,7 +118,7 @@
 					<swiper class="imageContainer" circular autoplay style="height: 75vh;border-radius: 10upx;" @change="handleChange">
 						<block v-for="(item, index) in promotionPosterData" :key="index">
 							<swiper-item >
-								<image @longpress="saveImgEr(item)" style="height: 75vh;border-radius: 10upx;" class="itemImg" :src="item" lazy-load mode="scaleToFill"></image>
+								<image @longpress="openSaveFenFalg(item)" style="height: 75vh;border-radius: 10upx;" class="itemImg" :src="item" lazy-load mode="scaleToFill"></image>
 							</swiper-item>
 						</block>
 					</swiper>
@@ -129,7 +129,7 @@
 						<view class="font_size26 margin_top2">{{ item.name }}</view>
 					</view>
 				</view> -->
-				<view class="font_size30 text_center margin_top3u font_colorf7">长按分享</view>
+				<view class="font_size30 text_center margin_top3u font_colorf7">长按分99享</view>
 			</view>
 		</template>
 
@@ -139,6 +139,19 @@
 				<view @click="myshare" class="width25 text_center" v-for="(item, index) in [1, 2, 3, 4]" :key="index">
 					<view class=""><image style="width: 60upx;height: 60upx;" src="../../static/image/icon/home3.png" mode=""></image></view>
 					<view class="font_size26 margin_top2">分享海报</view>
+				</view>
+			</view>
+		</template>
+		
+		
+		<!-- 保存还会分享 -->
+		<template v-if="saveFenFalg">
+			<view class="moudel_content">
+				<view class="er_moudel">
+					<image @click="colseSaveFenFalg" style="width: 30upx;height: 30upx;" src="../../static/image/icon/close.png" mode=""></image>
+					<view class="text_center font_size40 font_weight700">请选择贷款类型</view>
+					<view class="moudel_btn_one" style="margin-top: 60upx;" @click="saveImgEr">保存图片</view>
+					<view class="moudel_btn_one" style="background-color: #F75349;" @click="wxShare">微信分享</view>
 				</view>
 			</view>
 		</template>
@@ -188,7 +201,10 @@ export default {
 			currentIndex: 0,
 			currentIndexOne: '',
 			memberData: '',
-			keywordData:''
+			keywordData:'',
+			saveFenFalg:false,
+			saveImgData:'',
+			copyIndex:0
 		};
 	},
 	onLoad(option) {
@@ -232,29 +248,29 @@ export default {
 				type: this.tabIndexTwo + 1
 			};
 			this.$http.get('/api/shareMaterisal/promotionPoster', data, true).then(res => {
-				let dataOne = res.data.data;
+				this.dataOne = res.data.data;
 				uni.showLoading({
 					title: '加载中'
 				});
 					this.promotionPosterData =[];
 					var typeData;
 					this.tabIndexTwo + 1 == 3 ? typeData = false :typeData = true; 
-				for (let i = 0; i < dataOne.length; i++) {
+				for (let i = 0; i < this.dataOne.length; i++) {
 					var a =
 						this.memberData.hostUrl +
 						'/api/common/poster/compose?mbId=' +
 						uni.getStorageSync('userId') +
 						'&goodsId=' +
 						'&imgUrl=' +
-						dataOne[i].poster +
+						this.dataOne[i].poster +
 						'&type=' + typeData + '&goodsUrl=' +
-						dataOne[i].goodsUrl;
+						this.dataOne[i].goodsUrl;
 
 					this.promotionPosterData.push(a);
 				}
 				setTimeout(function() {
 					uni.hideLoading();
-				}, 3000);
+				}, 1500);
 				// this.promotionPosterData = res.data.data;
 			});
 		},
@@ -273,6 +289,7 @@ export default {
 		// 轮播邀请好友
 		handleChange: function(e) {
 			this.currentIndex = e.detail.current;
+			this.copyIndex = e.detail.current
 		},
 
 		// handleChange1: function(e) {
@@ -352,11 +369,25 @@ export default {
 				complete: function(res) {}
 			});
 		},
+		openSaveFenFalg:function(item){
+			console.log('99')
+			this.saveImgData =item;
+			this.saveFenFalg = true
+		},
+		colseSaveFenFalg:function(){
+			this.saveFenFalg = false
+		},
 		
-		saveImgEr:function(item){
+		saveImgEr: function(item) {
+			console.log('99')
+			uni.showLoading({
+				title: '保存中'
+			});
+			var _this = this;
 			uni.downloadFile({
-				url: item, //图片地址
+				url: _this.saveImgData, //图片地址
 				success: res => {
+					uni.hideLoading();
 					if (res.statusCode === 200) {
 						uni.saveImageToPhotosAlbum({
 							filePath: res.tempFilePath,
@@ -365,6 +396,7 @@ export default {
 									title: '保存成功',
 									icon: 'none'
 								});
+								_this.colseSaveFenFalg()
 							},
 							fail: function() {
 								uni.showToast({
@@ -377,6 +409,40 @@ export default {
 				}
 			});
 		},
+		
+		wxShare: function() {
+			var _this = this;
+			let goodsUrl = '';
+			this.dataOne[this.copyIndex].goodsUrl ? (goodsUrl = this.dataOne[this.copyIndex].goodsUrl) : (goodsUrl = '');
+			var url = 'https://www.hcselected.com/frontend/#/pages/shareUrl/shareUrl?referrerId=' + uni.getStorageSync('userId') + '&flag=false' + '&goodsUrl=' + goodsUrl;
+			//分享到微信朋友
+			console.log(url)
+			uni.showLoading({
+				title: '分享中'
+			});
+			uni.share({
+				provider: 'weixin',
+				scene: 'WXSceneSession',
+				type: 0,
+				href: url,
+				title: '汇创精选',
+				summary: '让   生   活    更   优   质 ',
+				imageUrl: this.saveImgData,
+				success: function(res) {
+					uni.hideLoading();
+					_this.colseSaveFenFalg()
+					if (res) {
+						console.log('success:' + JSON.stringify(res));
+					}
+				},
+				fail: function(err) {
+					console.log('fail:' + JSON.stringify(err));
+				}
+			});
+		},
+			
+		
+	
 		// 分享功能块
 		// 截取链接换取签名
 		// #ifdef H5
@@ -396,6 +462,9 @@ export default {
 				}
 			});
 		},
+		
+		
+		
 
 		// 分享
 		shareurl() {
@@ -514,5 +583,29 @@ page {
 	width: 100%;
 	height: 70vh;
 	border-radius: 10upx;
+}
+// 弹窗
+.er_moudel {
+	background-color: #ffffff;
+	width: 80%;
+	margin-left: 6%;
+	position: absolute;
+	top: 20%;
+	padding: 30upx;
+	border-radius: 20upx;
+	padding-top: 60upx;
+	padding-bottom: 60upx;
+}
+.moudel_btn_one {
+	height: 88upx;
+	background: #2b65eb;
+	border-radius: 44upx;
+	text-align: center;
+	line-height: 88upx;
+	color: #ffffff;
+	font-size: 32upx;
+	width: 80%;
+	margin-left: 10%;
+	margin-top: 30upx;
 }
 </style>
