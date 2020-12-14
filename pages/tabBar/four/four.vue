@@ -155,32 +155,39 @@
 
 		<!-- 分享图片 -->
 		<template v-if="shareaFalg">
-			<view class="moudel_content_myE">
+			<view class="moudel_content_myE" style="background-color: #FFFFFF;">
 				<view class="imgEr_moudel">
 					<view style="width: 95%;" class="margin_top5u  background_colorfe text_right">
-						<image @click="colseMoudel" style="width: 30upx;height: 30upx;" src="../../../static/image/icon/colseff.png" mode=""></image>
+						<image @click="colseMoudel" style="width: 30upx;height: 30upx;" src="../../../static/image/icon/close.png" mode=""></image>
 					</view>
-					<view class="" style="margin-top: 100upx;">
-						<view style="width: 434upx;margin-left: 180upx;" class=" font_size26 font_colorff text_center">
+					<view class="" style="margin-top: 60upx;">
+						<view class="font_colorf7 font_size28" style="margin-left: 180upx;">
+							说明
+							<text class="font_size32 font_weight700 ">长按图片</text>
+							保存邀请二维码海报
+						</view>
+						<!-- <view style="width: 434upx;" class=" font_size26 font_colorff text_center">
 							点击右上角选择『发送给朋友』或『分享到朋友圈』，邀请朋友一起成为合伙人
-						</view>
-						<view class="">
+						</view> -->
+						<!-- <view class="">
 							<button type="default" @click="goShaer">我要请</button>
-						</view>
+						</view> -->
 					</view>
 					<view class="uni-flex" style="width: 750upx;padding-left: 10%;padding-right: 5%;">
-						<scroll-view scroll-x="true" class="wrapper">
+						<scroll-view scroll-x="true" class="wrapper" @scroll="nihao">
 							<view class="img_moudel" v-for="(item, index) in posterData" :key="index">
-								<image :src="item" mode="" style="height: 648upx;width: 434upx;border-radius: 10upx;margin-left: 30upx;"></image>
+								<image :src="item" mode="" style="height: 780upx;width: 580upx;border-radius: 10upx;margin-left: 30upx;"></image>
 							</view>
 						</scroll-view>
 					</view>
 					<view class="font_size24 font_colorff " style="idth: 434upx;margin-left: 180upx;">
-						<view class="">还可以长按保存或截屏分享</view>
-						<view class="font_size24 font_colorf7 width50 text_center" @click="copyData">复制推广码</view>
+						<!-- <view class="">还可以长按保存或截屏分享</view> -->
+						<view class="btn_m   width50 " @click="copyData">复制邀请链接</view>
 					</view>
 				</view>
 			</view>
+	
+	
 		</template>
 	</view>
 </template>
@@ -238,7 +245,9 @@ export default {
 			teamIncome: '',
 			shareaFalg: false,
 			posterData: [],
-			openVip:false
+			openVip: false,
+			dataOne: '',
+			copyIndex:0,
 		};
 	},
 
@@ -251,19 +260,25 @@ export default {
 		this.memberData = this.$member.memberObj;
 	},
 	methods: {
-		goShaer:function(){
-			uni.navigateTo({
-				url:'../../shareUrl/shareUrl?referrerId=' + uni.getStorageSync('userId') + '&flag=false'
-			})
+		nihao: function(item) {
+			// console.log(Math.ceil(item.detail.scrollLeft / 240)　);
+			// console.log(this.dataOne[Math.ceil(item.detail.scrollLeft / 270) - 1])
+			this.copyIndex = Math.ceil(item.detail.scrollLeft / 240) -1;
+			this.copyIndex  < 0 ? this.copyIndex = 0 :this.copyIndex  =this.copyIndex ;
+			console.log(this.copyIndex )
 		},
-		getVip:function(){
+		goShaer: function() {
+			uni.navigateTo({
+				url: '../../shareUrl/shareUrl?referrerId=' + uni.getStorageSync('userId') + '&flag=false'
+			});
+		},
+		getVip: function() {
 			var data = {
-				mbId:uni.getStorageSync('userId')
-			}
+				mbId: uni.getStorageSync('userId')
+			};
 			// 查询是否是vip
 			this.$http.get('/api/member/openVip', data, true).then(res => {
-				this.openVip = res.data.data
-				
+				this.openVip = res.data.data;
 			});
 		},
 		// 初始化
@@ -312,10 +327,12 @@ export default {
 		},
 		// 复制
 		copyData: function(content) {
-			console.log(content);
+			let goodsUrl  = '';
+			this.dataOne[this.copyIndex].goodsUrl ? goodsUrl= this.dataOne[this.copyIndex].goodsUrl : goodsUrl = '';
+			var url = 'https://www.hcselected.com/#/pages/shareUrl/shareUrl?referrerId=' + uni.getStorageSync('userId') + '&flag=false' + '&goodsUrl=' + goodsUrl ;
 			var _this = this;
 			uni.setClipboardData({
-				data: _this.infoData.inviteCode,
+				data: url,
 				success: function(data) {
 					console.log(data);
 					uni.showToast({
@@ -337,25 +354,25 @@ export default {
 				type: type
 			};
 			this.$http.get('/api/shareMaterisal/promotionPoster', data, true).then(res => {
-				var dataOne = res.data.data;
-				console.log(dataOne);
+				this.dataOne = res.data.data;
+				console.log(this.dataOne);
 				uni.showLoading({
 					title: '加载中'
 				});
 				this.posterData = [];
 				var typeData;
 				this.type == 4 ? (typeData = true) : (typeData = false);
-				for (let i = 0; i < dataOne.length; i++) {
+				for (let i = 0; i < this.dataOne.length; i++) {
 					var a =
 						this.memberData.hostUrl +
 						'/api/common/poster/compose?mbId=' +
 						uni.getStorageSync('userId') +
 						'&imgUrl=' +
-						dataOne[i].poster +
+						this.dataOne[i].poster +
 						'&type=' +
 						typeData +
 						'&goodsUrl=' +
-						dataOne[i].goodsUrl;
+						this.dataOne[i].goodsUrl;
 					this.posterData.push(a);
 				}
 				setTimeout(function() {
@@ -563,7 +580,7 @@ page {
 	display: inline-block;
 	// padding-right: 40upx;
 }
-.img_bang{
+.img_bang {
 	background: url('../../../static/image/icon/tVip.png') no-repeat;
 	background-size: 100%;
 	width: 78upx;
@@ -572,9 +589,20 @@ page {
 	color: red;
 	text-align: center;
 }
-.img_bang text{
-	color: #FFFFFF;
+.img_bang text {
+	color: #ffffff;
 	margin-left: 10upx !important;
 	margin-top: -20upx !important;
+}
+.btn_m {
+	background-color: #f75349;
+	text-align: center;
+	height: 88upx;
+	line-height: 88upx;
+	border-radius: 10upx;
+	color: #ffffff;
+	font-size: 32upx;
+	margin-top: 40upx;
+	margin-left: 50upx;
 }
 </style>

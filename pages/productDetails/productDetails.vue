@@ -163,30 +163,39 @@
 		</template>
 		<!-- 分享图片 -->
 		<template v-if="shareaFalg">
-			<view class="moudel_content_myE">
+			<view class="moudel_content_myE" style="background-color: #FFFFFF;">
 				<view class="imgEr_moudel">
 					<view style="width: 95%;" class="margin_top5u  background_colorfe text_right">
-						<image @click="colseErMoudel" style="width: 30upx;height: 30upx;" src="../../static/image/icon/colseff.png" mode=""></image>
+						<image @click="colseErMoudel" style="width: 30upx;height: 30upx;" src="../../static/image/icon/close.png" mode=""></image>
 					</view>
-					<view class="" style="margin-top: 100upx;">
-						<view style="width: 434upx;margin-left: 180upx;" class=" font_size26 font_colorff text_center">
-							点击右上角选择『发送给朋友』或『分享到朋友圈』，邀请朋友一起成为合伙人
+					<view class="" style="margin-top: 60upx;">
+						<view class="font_colorf7 font_size28" style="margin-left: 180upx;">
+							说明
+							<text class="font_size32 font_weight700 ">长按图片</text>
+							保存邀请二维码海报
 						</view>
+						<!-- <view style="width: 434upx;margin-left: 180upx;" class=" font_size26 font_colorff text_center">
+							点击右上角选择『发送给朋友』或『分享到朋友圈』，邀请朋友一起成为合伙人
+						</view> -->
 					</view>
 					<view class="uni-flex" style="width: 750upx;padding-left: 10%;padding-right: 5%;">
-						<scroll-view scroll-x="true" class="wrapper">
+						<scroll-view scroll-x="true" class="wrapper"  @scroll="nihao">
 							<view class="img_moudel" v-for="(item, index) in posterData" :key="index">
-								<image :src="item" mode="" style="height: 648upx;width: 434upx;border-radius: 10upx;margin-left: 30upx;"></image>
+								<image :src="item" mode="" style="height: 780upx;width: 580upx;border-radius: 10upx;margin-left: 30upx;"></image>
 							</view>
 						</scroll-view>
 					</view>
 					<view class="font_size24 font_colorff " style="idth: 434upx;margin-left: 180upx;">
+						<!-- <view class="">还可以长按保存或截屏分享</view> -->
+						<view class="btn_m   width50 " @click="copyData">复制邀请链接</view>
+					</view>
+				<!-- 	<view class="font_size24 font_colorff " style="idth: 434upx;margin-left: 180upx;">
 						<view class="">还可以长按保存或截屏分享</view>
 						<view class="">
 							<button type="default" @click="goShare">我要跳转</button>
 						</view>
 						<view class="font_size24 font_colorf7 width50 text_center" @click="copyData">复制推广码</view>
-					</view>
+					</view> -->
 				</view>
 			</view>
 		</template>
@@ -207,7 +216,10 @@ export default {
 			loading: false, //开启loading不显示默认值
 			shareaFalg: false,
 			posterData: [],
-			infoData: ''
+			infoData: '',
+			copyFalg:'',
+			copyIndex:0,
+			dataOne:''
 		};
 	},
 	onLoad(option) {
@@ -223,6 +235,11 @@ export default {
 		});
 	},
 	methods: {
+		nihao: function(item) {
+			this.copyIndex = Math.ceil(item.detail.scrollLeft / 240) -1;
+			this.copyIndex  < 0 ? this.copyIndex = 0 :this.copyIndex  =this.copyIndex ;
+			console.log(this.copyIndex )
+		},
 		goShare:function(){
 			uni.navigateTo({
 				url:'../shareUrl/shareUrl?goodsId=' + this.goodsId + '&referrerId=' + uni.getStorageSync('userId') + '&flag=true'
@@ -236,9 +253,15 @@ export default {
 		// 复制
 		copyData: function(content) {
 			console.log(content);
+			// this.copyFalg = 1 ?
+			let goodsId = '';
+			let goodsUrl = '';
+			this.dataOne[this.copyIndex].goodsUrl ? goodsUrl= this.dataOne[this.copyIndex].goodsUrl : goodsUrl = '';
+			this.dataOne[this.copyIndex].goodsId ? goodsId= this.dataOne[this.copyIndex].goodsId : goodsId = '';
+			var url = 'https://www.hcselected.com/#/pages/shareUrl/shareUrl?referrerId=' + uni.getStorageSync('userId') + '&flag=false' + '&goodsId=' + goodsId +'&goodsUrl=' + goodsUrl ;
 			var _this = this;
 			uni.setClipboardData({
-				data: _this.infoData.inviteCode,
+				data: url,
 				success: function(data) {
 					console.log(data);
 					uni.showToast({
@@ -255,31 +278,32 @@ export default {
 		goEr: function(item, type) {
 			console.log('99');
 			this.shareaFalg = true;
+			this.copyFalg =type;
 			// uni.hideTabBar(); //隐藏tab
 			// uni.showTabBar(); //显示tab
 			var data = {
 				type: type
 			};
 			this.$http.get('/api/shareMaterisal/promotionPoster', data, true).then(res => {
-				var dataOne = res.data.data;
-				console.log(dataOne);
+				this.dataOne = res.data.data;
+				console.log(this.dataOne);
 				uni.showLoading({
 					title: '加载中'
 				});
 				var typeData;
 				this.posterData = [];
 				this.type == 4 ? (typeData = true) : (typeData = false);
-				for (let i = 0; i < dataOne.length; i++) {
+				for (let i = 0; i < this.dataOne.length; i++) {
 					var a =
 						this.memberData.hostUrl +
 						'/api/common/poster/compose?mbId=' +
 						uni.getStorageSync('userId') +
 						'&imgUrl=' +
-						dataOne[i].poster +
+						this.dataOne[i].poster +
 						'&type=' +
 						typeData +
 						'&goodsUrl=' +
-						dataOne[i].goodsUrl;
+						this.dataOne[i].goodsUrl;
 					this.posterData.push(a);
 				}
 				setTimeout(function() {
@@ -318,26 +342,27 @@ export default {
 		// 我要推广
 		goPage: function(item) {
 			this.shareaFalg = true;
+			this.copyFalg = item;
 			var data = {
 				goodsId: this.detailData.id
 			};
 			this.posterData = [];
 			this.$http.get('/api/goodsInfo/poster', data, true).then(res => {
-				let dataOne = res.data.data;
+				this.dataOne= res.data.data;
 				uni.showLoading({
 					title: '加载中'
 				});
-				for (let i = 0; i < dataOne.length; i++) {
+				for (let i = 0; i < this.dataOne.length; i++) {
 					var a =
 						this.memberData.hostUrl +
 						'/api/common/poster/compose?mbId=' +
 						uni.getStorageSync('userId') +
 						'&goodsId=' +
-						dataOne[i].goodsId +
+						this.dataOne[i].goodsId +
 						'&imgUrl=' +
-						dataOne[i].posterUrl +
+						this.dataOne[i].posterUrl +
 						'&type=true&goodsUrl=' +
-						dataOne[i].goodsUrl;
+						this.dataOne[i].goodsUrl;
 					this.posterData.push(a);
 				}
 				setTimeout(function() {
@@ -469,5 +494,16 @@ page {
 }
 .imgEr_moudel {
 	position: absolute;
+}
+.btn_m {
+	background-color: #f75349;
+	text-align: center;
+	height: 88upx;
+	line-height: 88upx;
+	border-radius: 10upx;
+	color: #ffffff;
+	font-size: 32upx;
+	margin-top: 40upx;
+	margin-left: 50upx;
 }
 </style>

@@ -50,7 +50,7 @@ export default {
 			msgErr: '',
 			userPhone: '',
 			appid: 'wx46d808b929c79829',
-			redirect_url: 'https://www.hcselected.com'
+			redirect_url: 'https://www.hcselected.com/frontend'
 		};
 	},
 	onLoad() {
