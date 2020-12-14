@@ -173,7 +173,7 @@
 					<view class="uni-flex" style="width: 750upx;padding-left: 10%;padding-right: 5%;">
 						<scroll-view scroll-x="true" class="wrapper" @scroll="nihao">
 							<view class="img_moudel" v-for="(item, index) in posterData" :key="index">
-								<image :src="item" mode="" style="height: 780upx;width: 580upx;border-radius: 10upx;margin-left: 30upx;"></image>
+								<image :src="item" mode="" style="height: 866upx;width: 580upx;border-radius: 10upx;margin-left: 30upx;"></image>
 							</view>
 						</scroll-view>
 					</view>
