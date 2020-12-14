@@ -9,9 +9,8 @@
 							<view class="font_size40 width20">银行</view>
 							<view style="border-right: 1px solid #FF9D95;height: 26upx;width: 1upx;margin-top: 4%; "></view>
 							<view class="font_size40 margin_left3">{{ detailData.bankName }}</view>
-							
 						</view>
-						
+
 						<view class="font_size20 font_colorff width30 text_right margin_top3" v-if="detailData.promotion">
 							已推广{{ detailData.promotion }}人
 							<!--  -->
@@ -31,7 +30,7 @@
 						<view class="width50 text_center margin_top4">
 							<view>
 								<view class="font_size34 font_weight700 text_center margin_top3" style="font-size: 52upx;">{{ detailData.cycle }}</view>
-								<view class="font_size26 margin_top2 text_center " >结算周期</view>
+								<view class="font_size26 margin_top2 text_center ">结算周期</view>
 							</view>
 							<!-- <view class="uni-flex display_center margin_top8">
 								<view class="font_size24 margin_top2 width50">授信期限</view>
@@ -77,10 +76,7 @@
 					<view class="moudel_content">
 						<view class="product_content_block">
 							<view class="font_size40 margin_top3u font_color22 text_center font_weight700">申请攻略</view>
-							<view
-								class="margin_top3 "
-								style="max-height: 75vh;overflow-y:auto;padding-left: 20upx;padding-right: 20upx;"
-							>
+							<view class="margin_top3 " style="max-height: 75vh;overflow-y:auto;padding-left: 20upx;padding-right: 20upx;">
 								<u-parse :content="detailData.raidersResult.context" :loading="loading" @preview="preview" @navigate="navigate" />
 							</view>
 							<view class="moudel_bottom"><view class="moudel_btn" @click="colseMoudel">我知道了</view></view>
@@ -98,9 +94,8 @@
 							<view class="font_size40 width20">银行</view>
 							<view style="border-right: 1px solid #FF9D95;height: 26upx;width: 1upx;margin-top: 4%; "></view>
 							<view class="font_size40 margin_left3">{{ detailData.bankName }}</view>
-							
 						</view>
-						
+
 						<view class="font_size20 font_colorff width30 text_right margin_top3" v-if="detailData.promotion">
 							已推广{{ detailData.promotion }}人
 							<!--  -->
@@ -110,7 +105,7 @@
 
 					<view class="font_size24 font_colorff margin_top3u">
 						结算周期
-						<text class="font_size30 margin_left3">{{ detailData.cycle }} </text>
+						<text class="font_size30 margin_left3">{{ detailData.cycle }}</text>
 					</view>
 				</view>
 
@@ -149,10 +144,7 @@
 					<view class="moudel_content">
 						<view class="product_content_block">
 							<view class="font_size40 margin_top3u font_color22 text_center font_weight700">申请攻略</view>
-							<view
-								class="margin_top3 "
-								style="max-height: 75vh;overflow-y:auto;padding-left: 20upx;padding-right: 20upx;"
-							>
+							<view class="margin_top3 " style="max-height: 75vh;overflow-y:auto;padding-left: 20upx;padding-right: 20upx;">
 								<u-parse :content="detailData.raidersResult.context" :loading="loading" @preview="preview" @navigate="navigate" />
 							</view>
 							<view class="moudel_bottom"><view class="moudel_btn" @click="colseMoudel">我知道了</view></view>
@@ -179,7 +171,7 @@
 						</view> -->
 					</view>
 					<view class="uni-flex" style="width: 750upx;padding-left: 10%;padding-right: 5%;">
-						<scroll-view scroll-x="true" class="wrapper"  @scroll="nihao">
+						<scroll-view scroll-x="true" class="wrapper" @scroll="nihao">
 							<view class="img_moudel" v-for="(item, index) in posterData" :key="index">
 								<image :src="item" mode="" style="height: 780upx;width: 580upx;border-radius: 10upx;margin-left: 30upx;"></image>
 							</view>
@@ -189,7 +181,7 @@
 						<!-- <view class="">还可以长按保存或截屏分享</view> -->
 						<view class="btn_m   width50 " @click="copyData">复制邀请链接</view>
 					</view>
-				<!-- 	<view class="font_size24 font_colorff " style="idth: 434upx;margin-left: 180upx;">
+					<!-- 	<view class="font_size24 font_colorff " style="idth: 434upx;margin-left: 180upx;">
 						<view class="">还可以长按保存或截屏分享</view>
 						<view class="">
 							<button type="default" @click="goShare">我要跳转</button>
@@ -217,9 +209,9 @@ export default {
 			shareaFalg: false,
 			posterData: [],
 			infoData: '',
-			copyFalg:'',
-			copyIndex:0,
-			dataOne:''
+			copyFalg: '',
+			copyIndex: 0,
+			dataOne: ''
 		};
 	},
 	onLoad(option) {
@@ -236,16 +228,16 @@ export default {
 	},
 	methods: {
 		nihao: function(item) {
-			this.copyIndex = Math.ceil(item.detail.scrollLeft / 240) -1;
-			this.copyIndex  < 0 ? this.copyIndex = 0 :this.copyIndex  =this.copyIndex ;
-			console.log(this.copyIndex )
+			this.copyIndex = Math.ceil(item.detail.scrollLeft / 240) - 1;
+			this.copyIndex < 0 ? (this.copyIndex = 0) : (this.copyIndex = this.copyIndex);
+			console.log(this.copyIndex);
 		},
-		goShare:function(){
+		goShare: function() {
 			uni.navigateTo({
-				url:'../shareUrl/shareUrl?goodsId=' + this.goodsId + '&referrerId=' + uni.getStorageSync('userId') + '&flag=true'
-			})
+				url: '../shareUrl/shareUrl?goodsId=' + this.goodsId + '&referrerId=' + uni.getStorageSync('userId') + '&flag=true'
+			});
 		},
-		// 
+		//
 		colseErMoudel: function() {
 			this.shareaFalg = false;
 			// uni.showTabBar(); //显示tab
@@ -256,9 +248,10 @@ export default {
 			// this.copyFalg = 1 ?
 			let goodsId = '';
 			let goodsUrl = '';
-			this.dataOne[this.copyIndex].goodsUrl ? goodsUrl= this.dataOne[this.copyIndex].goodsUrl : goodsUrl = '';
-			this.dataOne[this.copyIndex].goodsId ? goodsId= this.dataOne[this.copyIndex].goodsId : goodsId = '';
-			var url = 'https://www.hcselected.com/#/pages/shareUrl/shareUrl?referrerId=' + uni.getStorageSync('userId') + '&flag=false' + '&goodsId=' + goodsId +'&goodsUrl=' + goodsUrl ;
+			this.dataOne[this.copyIndex].goodsUrl ? (goodsUrl = this.dataOne[this.copyIndex].goodsUrl) : (goodsUrl = '');
+			this.dataOne[this.copyIndex].goodsId ? (goodsId = this.dataOne[this.copyIndex].goodsId) : (goodsId = '');
+			var url =
+				'https://www.hcselected.com/#/pages/shareUrl/shareUrl?referrerId=' + uni.getStorageSync('userId') + '&flag=false' + '&goodsId=' + goodsId + '&goodsUrl=' + goodsUrl;
 			var _this = this;
 			uni.setClipboardData({
 				data: url,
@@ -278,7 +271,7 @@ export default {
 		goEr: function(item, type) {
 			console.log('99');
 			this.shareaFalg = true;
-			this.copyFalg =type;
+			this.copyFalg = type;
 			// uni.hideTabBar(); //隐藏tab
 			// uni.showTabBar(); //显示tab
 			var data = {
@@ -348,7 +341,7 @@ export default {
 			};
 			this.posterData = [];
 			this.$http.get('/api/goodsInfo/poster', data, true).then(res => {
-				this.dataOne= res.data.data;
+				this.dataOne = res.data.data;
 				uni.showLoading({
 					title: '加载中'
 				});
