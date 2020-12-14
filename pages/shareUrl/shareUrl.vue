@@ -3,7 +3,7 @@
 		<!-- 1475 -->
 		<template v-if="detailData.cid1 == '1475'">
 			<view style="padding-bottom: 99upx;">
-				<view class="top_moudel" v-if="flag == 'true'">
+				<view class="top_moudel" v-if="flag">
 					<view class="uni-flex   font_weight700">
 						<view class="font_size40 width15">银行</view>
 						<view style="border-right: 1px solid #FF9D95;height: 26upx;width: 1upx;margin-top: 4%; "></view>
@@ -155,7 +155,7 @@
 					</view>
 				</view>
 
-				<view class="page_widthMoudel" style="padding-top: 80upx;" v-if="flag == 'false'">
+				<view class="page_widthMoudel" style="padding-top: 80upx;" v-if="!flag">
 					<view class="font_size44  margin_top3u">邀请好友</view>
 
 					<view class=" margin_top3u">
