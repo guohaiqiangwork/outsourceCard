@@ -96,7 +96,7 @@
 				<view class="">
 					<swiper class="imageContainer" circular autoplay @change="handleChange">
 						<block v-for="(item, index) in promotionPosterData" :key="index">
-							<swiper-item @click="swiperClick(item)"><image class="itemImg" :src="item" lazy-load mode="scaleToFill"></image></swiper-item>
+							<swiper-item ><image @longpress="saveImgEr(item)" class="itemImg" :src="item" lazy-load mode="scaleToFill"></image></swiper-item>
 						</block>
 					</swiper>
 				</view>
@@ -117,8 +117,8 @@
 				<view class="">
 					<swiper class="imageContainer" circular autoplay style="height: 75vh;border-radius: 10upx;" @change="handleChange">
 						<block v-for="(item, index) in promotionPosterData" :key="index">
-							<swiper-item @click="swiperClick(item)">
-								<image style="height: 75vh;border-radius: 10upx;" class="itemImg" :src="item" lazy-load mode="scaleToFill"></image>
+							<swiper-item >
+								<image @longpress="saveImgEr(item)" style="height: 75vh;border-radius: 10upx;" class="itemImg" :src="item" lazy-load mode="scaleToFill"></image>
 							</swiper-item>
 						</block>
 					</swiper>
@@ -352,10 +352,34 @@ export default {
 				complete: function(res) {}
 			});
 		},
-
+		
+		saveImgEr:function(item){
+			uni.downloadFile({
+				url: item, //图片地址
+				success: res => {
+					if (res.statusCode === 200) {
+						uni.saveImageToPhotosAlbum({
+							filePath: res.tempFilePath,
+							success: function() {
+								uni.showToast({
+									title: '保存成功',
+									icon: 'none'
+								});
+							},
+							fail: function() {
+								uni.showToast({
+									title: '保存失败',
+									icon: 'none'
+								});
+							}
+						});
+					}
+				}
+			});
+		},
 		// 分享功能块
 		// 截取链接换取签名
-		// #ifndef H5
+		// #ifdef H5
 		getIndexData() {
 			uni.request({
 				url: app.appUrl + 'Index/index',

@@ -3,7 +3,7 @@
 		<view class="background_color2b" style="height: 200upx;"></view>
 
 		<view class="margin_top3">
-			<swiper class="imageContainer" @change="handleChange" circular autoplay>
+			<swiper class="imageContainer" circular autoplay>
 				<block v-for="(item, index) in lunBo" :key="index">
 					<swiper-item><image class="itemImg" :src="item" lazy-load mode="scaleToFill"></image></swiper-item>
 				</block>

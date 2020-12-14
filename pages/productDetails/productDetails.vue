@@ -66,7 +66,7 @@
 
 					<view class="font_size40 font_weight700 margin_top3u">推广须知</view>
 
-					<view class="margin_top3"><u-parse :content="detailData.promotionNotice" :loading="loading" @preview="preview" @navigate="navigate" /></view>
+					<view class="margin_top3"><u-parse :content="detailData.promotionNotice" :loading="loading" /></view>
 				</view>
 				<view class="bottom_btn uni-flex">
 					<view class="width50 text_center leftB" @click="goPage('1')">我要推广</view>
@@ -81,7 +81,7 @@
 								class="margin_top3 "
 								style="max-height: 600upx;overflow-y:auto;padding-left: 20upx;padding-right: 20upx;"
 							>
-								<u-parse :content="detailData.raidersResult.context" :loading="loading" @preview="preview" @navigate="navigate" />
+								<u-parse :content="detailData.raidersResult.context" :loading="loading" />
 							</view>
 							<view class="moudel_bottom"><view class="moudel_btn" @click="colseMoudel">我知道了</view></view>
 						</view>
@@ -139,7 +139,7 @@
 
 					<view class="font_size40 font_weight700 margin_top3u">推广须知</view>
 
-					<view class="margin_top3"><u-parse :content="detailData.promotionNotice" :loading="loading" @preview="preview" @navigate="navigate" /></view>
+					<view class="margin_top3"><u-parse :content="detailData.promotionNotice" :loading="loading" /></view>
 				</view>
 				<view class="bottom_btn uni-flex">
 					<view class="width50 text_center leftB" @click="goPage('1')">我要推广</view>
@@ -153,7 +153,7 @@
 								class="margin_top3 "
 								style="max-height: 600upx;overflow-y:auto;padding-left: 20upx;padding-right: 20upx;"
 							>
-								<u-parse :content="detailData.raidersResult.context" :loading="loading" @preview="preview" @navigate="navigate" />
+								<u-parse :content="detailData.raidersResult.context" :loading="loading"  />
 							</view>
 							<view class="moudel_bottom"><view class="moudel_btn" @click="colseMoudel">我知道了</view></view>
 						</view>
@@ -165,7 +165,7 @@
 		<template v-if="shareaFalg">
 			<view class="moudel_content_myE">
 				<view class="imgEr_moudel">
-					<view style="width: 95%;" class="margin_top5u  background_colorfe text_right">
+					<view style="width: 95%;margin-left: 70%;" class="margin_top5u  background_colorfe ">
 						<image @click="colseErMoudel" style="width: 30upx;height: 30upx;" src="../../static/image/icon/colseff.png" mode=""></image>
 					</view>
 					<view class="" style="margin-top: 100upx;">
@@ -176,7 +176,7 @@
 					<view class="uni-flex" style="width: 750upx;padding-left: 10%;padding-right: 5%;">
 						<scroll-view scroll-x="true" class="wrapper">
 							<view class="img_moudel" v-for="(item, index) in posterData" :key="index">
-								<image :src="item" mode="" style="height: 648upx;width: 434upx;border-radius: 10upx;margin-left: 30upx;"></image>
+								<image @longpress="saveImgEr(item)" :src="item" mode="" style="height: 648upx;width: 434upx;border-radius: 10upx;margin-left: 30upx;"></image>
 							</view>
 						</scroll-view>
 					</view>
@@ -200,7 +200,7 @@ export default {
 		return {
 			goodsId: '',
 			moudelFalg: false,
-			detailData: { raidersResult: { name } },
+			detailData: { raidersResult:{name:''} },
 			loading: false, //开启loading不显示默认值
 			shareaFalg: false,
 			posterData: [],
@@ -349,7 +349,34 @@ export default {
 			// 		'&type=' +
 			// 		item
 			// });
+		},
+		
+		
+		saveImgEr:function(item){
+			uni.downloadFile({
+				url: item, //图片地址
+				success: res => {
+					if (res.statusCode === 200) {
+						uni.saveImageToPhotosAlbum({
+							filePath: res.tempFilePath,
+							success: function() {
+								uni.showToast({
+									title: '保存成功',
+									icon: 'none'
+								});
+							},
+							fail: function() {
+								uni.showToast({
+									title: '保存失败',
+									icon: 'none'
+								});
+							}
+						});
+					}
+				}
+			});
 		}
+		
 	}
 };
 </script>

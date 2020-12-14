@@ -60,7 +60,7 @@
 			</view>
 		</view>
 
-		<view @click="goOut" v-if="false" class="background_colorff margin_top3u text_center font_sise32 padding_bottom3 padding_top3">安全退出</view>
+		<view @click="goOut"  class="background_colorff margin_top3u text_center font_sise32 padding_bottom3 padding_top3">安全退出</view>
 
 		<!-- 修改名字 -->
 		<template v-if="nameFalg">
@@ -103,7 +103,7 @@ export default {
 		return {
 			nameFalg: false,//名字
 			wxFalg:false,
-			infoData:'',
+			infoData:{mobile:''},
 			isVerified:true
 		};
 	},

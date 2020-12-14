@@ -157,7 +157,7 @@
 		<template v-if="shareaFalg">
 			<view class="moudel_content_myE">
 				<view class="imgEr_moudel">
-					<view style="width: 95%;" class="margin_top5u  background_colorfe text_right">
+					<view style="width: 95%;margin-left: 70%;" class="margin_top5u  background_colorfe ">
 						<image @click="colseMoudel" style="width: 30upx;height: 30upx;" src="../../../static/image/icon/colseff.png" mode=""></image>
 					</view>
 					<view class="" style="margin-top: 100upx;">
@@ -168,7 +168,7 @@
 					<view class="uni-flex" style="width: 750upx;padding-left: 10%;padding-right: 5%;">
 						<scroll-view scroll-x="true" class="wrapper">
 							<view class="img_moudel" v-for="(item, index) in posterData" :key="index">
-								<image :src="item" mode="" style="height: 648upx;width: 434upx;border-radius: 10upx;margin-left: 30upx;"></image>
+								<image @longpress="saveImgEr(item)" :src="item" mode="" style="height: 648upx;width: 434upx;border-radius: 10upx;margin-left: 30upx;"></image>
 							</view>
 						</scroll-view>
 					</view>
@@ -400,7 +400,33 @@ export default {
 					}
 				}
 			});
+		},
+		
+		saveImgEr:function(item){
+			uni.downloadFile({
+				url: item, //图片地址
+				success: res => {
+					if (res.statusCode === 200) {
+						uni.saveImageToPhotosAlbum({
+							filePath: res.tempFilePath,
+							success: function() {
+								uni.showToast({
+									title: '保存成功',
+									icon: 'none'
+								});
+							},
+							fail: function() {
+								uni.showToast({
+									title: '保存失败',
+									icon: 'none'
+								});
+							}
+						});
+					}
+				}
+			});
 		}
+		
 	}
 };
 </script>
@@ -532,6 +558,9 @@ page {
 	width: 100%;
 	bottom: 6%;
 	z-index: 9;
+	/* #ifdef APP-PLUS */
+	bottom: 0 !important;
+	/* #endif */
 }
 
 .moudel_content_myE {
