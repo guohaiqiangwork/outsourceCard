@@ -252,6 +252,8 @@ export default {
 		console.log('99');
 		// 新增内容
 		if(option.flag){
+			option.flag == 'false' ? option.flag = false : option.flag =true
+
 			uni.setStorageSync('flag', option.flag);
 		}
 		if(option.referrerId){
