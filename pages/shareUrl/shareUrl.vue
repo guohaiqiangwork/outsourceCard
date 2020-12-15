@@ -437,7 +437,7 @@ export default {
 			}
 			// 企业
 			console.log(this.flag);
-			if (this.flag == 'true') {
+			if (this.flag) {
 				// 1个人 2 企业
 				if (this.detailData.types == '1') {
 					var data = {
