@@ -290,7 +290,7 @@ export default {
 		}
 		var a = 'https://www.hcselected.com/frontend/#/pages/shareUrl/shareUrl';
 		this.redirect_url = a;
-		// this.getWxCode();
+		this.getWxCode();
 	},
 	methods: {
 		getWxCode: function() {
@@ -444,7 +444,7 @@ export default {
 			}
 			// 企业
 			console.log(this.flag);
-			if (this.flag == 'true') {
+			if (this.flag) {
 				// 1个人 2 企业
 				if (this.detailData.types == '1') {
 					var data = {
