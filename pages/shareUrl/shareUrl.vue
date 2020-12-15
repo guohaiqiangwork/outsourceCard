@@ -98,7 +98,7 @@
 
 		<template v-else>
 			<view style="padding-bottom: 99upx;">
-				<view v-if="flag == 'true'" class="top_moudel" style="height: 240upx;">
+				<view v-if="flag" class="top_moudel" style="height: 240upx;">
 					<view class="uni-flex   font_weight700">
 						<view class="font_size40 width15">银行</view>
 						<view style="border-right: 1px solid #FF9D95;height: 26upx;width: 1upx;margin-top: 4%; "></view>
@@ -111,8 +111,8 @@
 						<text class="font_size30">{{ detailData.cycle }}</text>
 					</view>
 				</view>
-				<view class="page_widthMoudel" style="padding-bottom: 100upx;" v-if="false">
-					<view class=" ">
+				<view class="page_widthMoudel" style="padding-bottom: 100upx;">
+					<view class=" "  v-if="false">
 						<view class="font_size40 font_weight700 margin_top3u">申请条件</view>
 
 						<view class="moudel_list margin_top3u" style="background-color: #f7f7ff;">
@@ -124,35 +124,41 @@
 							<view class="font_size26 " style="white-space: pre-line;">{{ detailData.precautions }}</view>
 						</view>
 					</view>
-					<view class="font_size40 font_weight700 margin_top3u">申请人信息</view>
-
-					<view class="moudel_list margin_top3u" style="background-color: #f7f7ff;">
-						<view class="uni-flex border_bottom padding_bottom3 ">
-							<view class="font_sise26 width30">本人姓名</view>
-							<view class=""><input type="text" value="" @input="getName" /></view>
-						</view>
-						<view class="uni-flex border_bottom padding_bottom3 margin_top3u ">
-							<view class="font_sise26 width30 ">本人身份证号</view>
-							<view class=""><input type="text" value="" @input="getIdCard" /></view>
-						</view>
-						<view class="uni-flex border_bottom padding_bottom3 margin_top3u">
-							<view class="font_sise26 width30">常用手机号码</view>
-							<view class=""><input type="text" value="" @input="getPhone" /></view>
-						</view>
-						<view class="uni-flex   margin_top3u">
-							<view class="font_sise26 width30">短信验证码</view>
-							<view class=""><input type="text" value="" @input="getCode" /></view>
-
-							<view class="yzm_moudel" @click="yzm_function">
-								{{ countdown }}
-								<text v-show="timestatus" class="forgetpwd2">秒重获</text>
+					
+					<view class="" v-if="flag">
+						<view class="font_size40 font_weight700 margin_top3u">申请人信息</view>
+						
+						<view class="moudel_list margin_top3u" style="background-color: #f7f7ff;">
+							<view class="uni-flex border_bottom padding_bottom3 ">
+								<view class="font_sise26 width30">本人姓名</view>
+								<view class=""><input type="text" value="" @input="getName" /></view>
+							</view>
+							<view class="uni-flex border_bottom padding_bottom3 margin_top3u ">
+								<view class="font_sise26 width30 ">本人身份证号</view>
+								<view class=""><input type="text" value="" @input="getIdCard" /></view>
+							</view>
+							<view class="uni-flex border_bottom padding_bottom3 margin_top3u">
+								<view class="font_sise26 width30">常用手机号码</view>
+								<view class=""><input type="text" value="" @input="getPhone" /></view>
+							</view>
+							<view class="uni-flex   margin_top3u">
+								<view class="font_sise26 width30">短信验证码</view>
+								<view class=""><input type="text" value="" @input="getCode" /></view>
+						
+								<view class="yzm_moudel" @click="yzm_function">
+									{{ countdown }}
+									<text v-show="timestatus" class="forgetpwd2">秒重获</text>
+								</view>
+							</view>
+							<view class="uni-flex  padding_bottom3 margin_top3u" v-if="detailData.types == 2">
+								<view class="font_sise26 width30">企业名称</view>
+								<view class=""><input type="text" value="" @input="getCode" /></view>
 							</view>
 						</view>
-						<view class="uni-flex  padding_bottom3 margin_top3u" v-if="detailData.types == 2">
-							<view class="font_sise26 width30">企业名称</view>
-							<view class=""><input type="text" value="" @input="getCode" /></view>
-						</view>
+										
 					</view>
+					
+				
 				</view>
 
 				<view class="page_widthMoudel" style="padding-top: 80upx;" v-if="!flag">
@@ -253,7 +259,6 @@ export default {
 		// 新增内容
 		if(option.flag){
 			option.flag == 'false' ? option.flag = false : option.flag =true
-
 			uni.setStorageSync('flag', option.flag);
 		}
 		if(option.referrerId){
@@ -266,6 +271,7 @@ export default {
 		//结束
 		if (uni.getStorageSync('flag')) {
 			this.flag = uni.getStorageSync('flag'); //true 产品 false个人
+			console.log(this.flag)
 			this.referrerId = uni.getStorageSync('referrerId'); //分享人ID
 			if (uni.getStorageSync('goodsId')) {
 				this.goodsId = uni.getStorageSync('goodsId'); //产品ID
@@ -284,7 +290,7 @@ export default {
 		}
 		var a = 'https://www.hcselected.com/frontend/#/pages/shareUrl/shareUrl';
 		this.redirect_url = a;
-		this.getWxCode();
+		// this.getWxCode();
 	},
 	methods: {
 		getWxCode: function() {

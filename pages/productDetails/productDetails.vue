@@ -251,7 +251,7 @@ export default {
 			this.dataOne[this.copyIndex].goodsUrl ? (goodsUrl = this.dataOne[this.copyIndex].goodsUrl) : (goodsUrl = '');
 			this.dataOne[this.copyIndex].goodsId ? (goodsId = this.dataOne[this.copyIndex].goodsId) : (goodsId = '');
 			var url =
-				'https://www.hcselected.com/frontend/#/pages/shareUrl/shareUrl?referrerId=' + uni.getStorageSync('userId') + '&flag=false' + '&goodsId=' + goodsId + '&goodsUrl=' + goodsUrl;
+				'https://www.hcselected.com/frontend/#/pages/shareUrl/shareUrl?referrerId=' + uni.getStorageSync('userId') + '&flag=true' + '&goodsId=' + goodsId + '&goodsUrl=' + goodsUrl;
 			var _this = this;
 			uni.setClipboardData({
 				data: url,
