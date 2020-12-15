@@ -284,7 +284,7 @@ export default {
 		}
 		var a = 'https://www.hcselected.com/frontend/#/pages/shareUrl/shareUrl';
 		this.redirect_url = a;
-		// this.getWxCode();
+		this.getWxCode();
 	},
 	methods: {
 		getWxCode: function() {
