@@ -38,7 +38,7 @@
 				</view>
 
 				<view class="page_widthMoudel" style="padding-bottom: 100upx;">
-					<view class="" v-if="flag == 'true'">
+					<view class="" v-if="false">
 						<view class="font_size40 font_weight700 margin_top3u">申请条件</view>
 
 						<view class="moudel_list margin_top3u" style="background-color: #f7f7ff;">
@@ -57,7 +57,7 @@
 							<view class="font_sise26 width30">本人姓名</view>
 							<view class=""><input type="text" value="" @input="getName" /></view>
 						</view>
-							<view class="uni-flex border_bottom padding_bottom3 margin_top3u ">
+						<view class="uni-flex border_bottom padding_bottom3 margin_top3u ">
 							<view class="font_sise26 width30 ">本人身份证号</view>
 							<view class=""><input type="text" value="" @input="getIdCard" /></view>
 						</view>
@@ -111,7 +111,7 @@
 						<text class="font_size30">{{ detailData.cycle }}</text>
 					</view>
 				</view>
-				<view class="page_widthMoudel" style="padding-bottom: 100upx;" v-if="flag == 'true'">
+				<view class="page_widthMoudel" style="padding-bottom: 100upx;" v-if="false">
 					<view class=" ">
 						<view class="font_size40 font_weight700 margin_top3u">申请条件</view>
 
@@ -244,13 +244,25 @@ export default {
 			referrerId: '', //分享人ID
 			flag: '', //true 产品 false个人
 			appid: 'wx46d808b929c79829',
-			redirect_url: 'https://www.hcselected.com/frontend'
+			redirect_url: 'https://www.hcselected.com/frontend',
+			
 		};
 	},
 	onLoad(option) {
-		//
-		console.log(option);
-
+		console.log('99');
+		// 新增内容
+		if(option.flag){
+			option.flag == 'false' ? option.flag = false : option.flag =true
+			uni.setStorageSync('flag', option.flag);
+		}
+		if(option.referrerId){
+			uni.setStorageSync('referrerId', option.referrerId);
+		}
+		if (option.goodsId) {
+			uni.setStorageSync('goodsId', option.goodsId); //产品ID
+			this.getProduct(); //获取详情
+		}
+		//结束
 		if (uni.getStorageSync('flag')) {
 			this.flag = uni.getStorageSync('flag'); //true 产品 false个人
 			this.referrerId = uni.getStorageSync('referrerId'); //分享人ID
@@ -262,13 +274,16 @@ export default {
 		} else {
 			uni.setStorageSync('flag', option.flag);
 			uni.setStorageSync('referrerId', option.referrerId);
-			uni.setStorageSync('goodsId', option.goodsId);
-			uni.setStorageSync('goodsUrl', option.goodsUrl);
+			if (uni.getStorageSync('goodsId')) {
+				uni.setStorageSync('goodsId', option.goodsId);
+				uni.setStorageSync('goodsUrl', option.goodsUrl);
+			}
+
 			console.log('我要进行存储了');
 		}
 		var a = 'https://www.hcselected.com/frontend/#/pages/shareUrl/shareUrl';
 		this.redirect_url = a;
-		this.getWxCode();
+		// this.getWxCode();
 	},
 	methods: {
 		getWxCode: function() {
@@ -459,7 +474,7 @@ export default {
 							uni.removeStorageSync('referrerId');
 							uni.removeStorageSync('goodsId');
 							uni.removeStorageSync('goodsUrl');
-							
+
 							window.location.href = this.detailData.thirdPartyUrl;
 						}
 					});
@@ -482,7 +497,7 @@ export default {
 					uni.removeStorageSync('referrerId');
 					uni.removeStorageSync('goodsId');
 					uni.removeStorageSync('goodsUrl');
-					
+
 					window.location.href = 'https://www.hcselected.com/frontend';
 				});
 			}
