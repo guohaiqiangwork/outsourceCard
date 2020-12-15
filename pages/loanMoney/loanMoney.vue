@@ -3,30 +3,6 @@
 		<view class="font_size46  margin_left4 margin_top3" style="color: #E14938;">贷款精选</view>
 		<view class="title_border"></view>
 
-		<view class="uni-flex page_widthMoudel padding_top3" v-if="false">
-			<view class="width30 ">
-				<picker @change="bindPickerChange" :value="index" :range="rebateRatioList" range-key="name">
-					<view class="uni-input">{{ rebateRatioList[index].name }}</view>
-				</picker>
-				<view class="padding_top2"><image src="../../static/image/icon/homeDown.png" class="selsect_img" mode=""></image></view>
-			</view>
-			<view class="width30 margin_left3">
-				<picker @change="bindPickerChange1" :value="index" :range="billingCycleList" range-key="name">
-					<view class="uni-input">{{ billingCycleList[index1].name }}</view>
-				</picker>
-				<view class="padding_top2"><image src="../../static/image/icon/homeDown.png" class="selsect_img" mode=""></image></view>
-			</view>
-			<view class="width30 margin_left3 cityMoudel uni-flex">
-				<text @click="keyArea">{{ area }}</text>
-
-				<!-- 				<input class="list_input width90" placeholder="请选择市" disabled="disabled" :value="area" /> -->
-				<image src="../../static/image/icon/homeDown.png" class="city_img margin_top3" mode=""></image>
-				<!-- <picker @change="bindPickerChange3" :value="index" :range="cityData" range-key="name">
-					<view class="uni-input">{{ cityData[index].label }}</view>
-				</picker> -->
-				<!-- <view class="padding_top2"><image src="../../static/image/icon/homeDown.png" class="selsect_img" mode=""></image></view> -->
-			</view>
-		</view>
 		<view class=" padding_bottom3 border_bottom padding_top3">
 			<view class="text_center width20 display_inline" v-for="(item, index) in twoList" :key="index" @click="tabOne(item.id)">
 				<view :class="tabFalg == item.id ? 'tab_color' : 'tab_color1'">{{ item.name }}</view>
@@ -34,7 +10,23 @@
 			</view>
 		</view>
 
-		<w-picker mode="region" :defaultVal="[4, 1, 1]" @confirm="onConfirm" ref="region" themeColor="#f00"></w-picker>
+		<view class="uni-flex page_widthMoudel padding_top3">
+			<view class="width30 text_center"><view class="uni-input">全国</view></view>
+			<view class="width30 margin_left3">
+				<picker @change="bindPickerChange1" :value="index1" :range="provinceList" range-key="label">
+					<view class="uni-input">{{ provinceList[index1].label }}</view>
+				</picker>
+				<view class="padding_top2"><image src="../../static/image/icon/homeDown.png" class="selsect_img" mode=""></image></view>
+			</view>
+			<view class="width30 margin_left3" >
+				<picker @change="bindPickerChange" :value="indexAre" :range="areaList" range-key="label">
+					<view class="uni-input text_hidden">{{ areaList[indexAre].label }}</view>
+				</picker>
+				<view class="padding_top2"><image src="../../static/image/icon/homeDown.png" class="selsect_img" mode=""></image></view>
+			</view>
+		</view>
+
+		<!-- <w-picker mode="region" :defaultVal="[4, 1, 1]" @confirm="onConfirm" ref="region" themeColor="#f00"></w-picker> -->
 
 		<!-- 内容 -->
 		<view class=" ">
@@ -42,9 +34,7 @@
 				<!-- :style="index == [1, 2, 3, 4].length - 1 ? 'border:none' : ''" -->
 				<view class="border_bottom padding_bottom3 padding_top3" @click="goToDetail(item)" v-for="(item, index) in loanSelectionList" :key="index">
 					<view class="uni-flex">
-						<view class="">
-							<image style="width: 28upx;height: 28upx;" :src="item.logoUrl" mode=""></image>
-						</view>
+						<view class=""><image style="width: 28upx;height: 28upx;" :src="item.logoUrl" mode=""></image></view>
 						<view class="width20 margin_left1 text_hidden">{{ item.goodsName }}</view>
 						<view v-if="item.cycle" class="list_one " style="margin-top: 0;">{{ item.cycle }}</view>
 						<view v-if="item.rate" class="list_oneL  " style="margin-top: 0;">{{ item.rate }}</view>
@@ -71,13 +61,10 @@
 				</view>
 			</view>
 		</view>
-
-		
 	</view>
 </template>
 
 <script>
-import cityList from '@/components/w-picker/city-data/city.js';
 export default {
 	data() {
 		return {
@@ -90,7 +77,9 @@ export default {
 			rebateRatioList: [{ name: '' }],
 			billingCycleList: [{ name: '' }],
 			area: '请选择市',
-			
+			provinceList: [{ label: '' }],
+			areaList: [{ label: '' }],
+			indexAre: 0
 		};
 	},
 	onLoad(option) {
@@ -100,6 +89,7 @@ export default {
 		this.typeId = option.typeId;
 		this.getTwoList();
 		this.init();
+		this.getAddressList(); //获取省市
 	},
 	methods: {
 		tabOne: function(index) {
@@ -118,6 +108,38 @@ export default {
 				this.billingCycleList = res.data.data;
 			});
 		},
+		// 获取省区
+		getAddressList: function() {
+			var data = {
+				parentId: ''
+			};
+			this.$http.get('/api/common/area/list', data, true).then(res => {
+				this.provinceList = res.data.data;
+				this.getArea(this.provinceList[this.index1].value);
+			});
+		},
+		bindPickerChange1: function(e) {
+			console.log('picker发送选择改变，携带值为：' + e.detail.value);
+			this.index1 = e.detail.value;
+			this.getArea(this.provinceList[this.index1].value);
+		},
+
+		// 获取区
+		getArea: function(parentId) {
+			var data = {
+				parentId: parentId
+			};
+			this.$http.get('/api/common/area/list', data, true).then(res => {
+				this.areaList = res.data.data;
+			});
+		},
+		// 分类
+		bindPickerChange: function(e) {
+			console.log('picker发送选择改变，携带值为：' + e.detail.value);
+			this.indexAre = e.detail.value;
+			this.getLoanList()
+		},
+
 		// 获取二级分类
 		getTwoList: function() {
 			var data = {
@@ -134,9 +156,7 @@ export default {
 		},
 		// 地址
 		keyArea: function(event) {
-			// #ifdef APP-PLUS
 			plus.key.hideSoftKeybord();
-			// #endif
 			this.$refs['region'].show();
 		},
 		onConfirm(val) {
@@ -156,24 +176,13 @@ export default {
 			let data = {
 				cid1: this.typeId,
 				cid2: this.tabFalg,
-				area: dataArea,
+				area: this.areaList[this.indexAre].label,
 				rebateRatio: rebateRatio,
 				cycle: cycle
 			};
 			this.$http.get('/api/goodsInfo/loanSelection', data, true).then(res => {
 				this.loanSelectionList = res.data.data;
 			});
-		},
-		// 分类
-		bindPickerChange: function(e) {
-			console.log('picker发送选择改变，携带值为：' + e.detail.value);
-			this.index = e.detail.value;
-			this.getLoanList();
-		},
-		bindPickerChange1: function(e) {
-			console.log('picker发送选择改变，携带值为：' + e.detail.value);
-			this.index1 = e.detail.value;
-			this.getLoanList();
 		},
 
 		goToDetail: function(item) {
@@ -275,6 +284,4 @@ page {
 	margin-left: 21%;
 	margin-top: 30upx;
 }
-
-
 </style>
