@@ -251,7 +251,12 @@ export default {
 	onLoad(option) {
 		console.log('99');
 		// 新增内容
-		uni.setStorageSync('flag', option.flag);
+		if(option.flag){
+			uni.setStorageSync('flag', option.flag);
+		}
+		if(option.referrerId){
+			uni.setStorageSync('referrerId', option.referrerId);
+		}
 		if (option.goodsId) {
 			uni.setStorageSync('goodsId', option.goodsId); //产品ID
 			this.getProduct(); //获取详情
