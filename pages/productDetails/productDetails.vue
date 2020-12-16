@@ -160,7 +160,7 @@
 					<view style="width: 95%;" class="margin_top5u  background_colorfe text_right">
 						<image @click="colseErMoudel" style="width: 30upx;height: 30upx;" src="../../static/image/icon/close.png" mode=""></image>
 					</view>
-					<view class="" style="margin-top: 60upx;">
+					<view class="" style="">
 						<view class="font_colorf7 font_size28" style="margin-left: 180upx;">
 							说明
 							<text class="font_size32 font_weight700 ">长按图片</text>
@@ -496,7 +496,7 @@ page {
 	border-radius: 10upx;
 	color: #ffffff;
 	font-size: 32upx;
-	margin-top: 40upx;
+	margin-top: 10upx;
 	margin-left: 50upx;
 }
 </style>

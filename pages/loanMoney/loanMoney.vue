@@ -11,16 +11,23 @@
 		</view>
 
 		<view class="uni-flex page_widthMoudel padding_top3">
-			<view class="width30 text_center"><view class="uni-input">全国</view></view>
+			<view class="width30 text_center"><view class="uni-input" @click="getLoanList('全国')">全国</view></view>
 			<view class="width30 margin_left3">
 				<picker @change="bindPickerChange1" :value="index1" :range="provinceList" range-key="label">
-					<view class="uni-input">{{ provinceList[index1].label }}</view>
+					<view class="uni-input">
+						{{provinceData}}
+					<!-- {{ provinceList[index1].label }} -->
+				</view>
+				
 				</picker>
 				<view class="padding_top2"><image src="../../static/image/icon/homeDown.png" class="selsect_img" mode=""></image></view>
 			</view>
-			<view class="width30 margin_left3" >
+			<view class="width30 margin_left3">
 				<picker @change="bindPickerChange" :value="indexAre" :range="areaList" range-key="label">
-					<view class="uni-input text_hidden">{{ areaList[indexAre].label }}</view>
+					<view class="uni-input text_hidden">
+						{{cityData}}
+					<!-- {{ areaList[indexAre].label }} -->
+				</view>
 				</picker>
 				<view class="padding_top2"><image src="../../static/image/icon/homeDown.png" class="selsect_img" mode=""></image></view>
 			</view>
@@ -79,7 +86,9 @@ export default {
 			area: '请选择市',
 			provinceList: [{ label: '' }],
 			areaList: [{ label: '' }],
-			indexAre: 0
+			indexAre: 0,
+			provinceData:'请选择',
+			cityData:'请选择'
 		};
 	},
 	onLoad(option) {
@@ -121,7 +130,9 @@ export default {
 		bindPickerChange1: function(e) {
 			console.log('picker发送选择改变，携带值为：' + e.detail.value);
 			this.index1 = e.detail.value;
+			this.provinceData =  this.provinceList[this.index1].label 
 			this.getArea(this.provinceList[this.index1].value);
+			this.getLoanList();
 		},
 
 		// 获取区
@@ -137,7 +148,8 @@ export default {
 		bindPickerChange: function(e) {
 			console.log('picker发送选择改变，携带值为：' + e.detail.value);
 			this.indexAre = e.detail.value;
-			this.getLoanList()
+			this.cityData = this.areaList[this.indexAre].label
+			this.getLoanList();
 		},
 
 		// 获取二级分类
@@ -159,12 +171,12 @@ export default {
 			plus.key.hideSoftKeybord();
 			this.$refs['region'].show();
 		},
-		onConfirm(val) {
+		onConfirm:function(val) {
 			this.area = val.checkArr[1];
 			this.getLoanList();
 		},
 		// 获取列表
-		getLoanList: function() {
+		getLoanList: function(e) {
 			console.log(this.index + this.index1 + '我在这');
 			let dataArea = this.area;
 			dataArea == '请选择市' ? (dataArea = '') : (dataArea = this.area);
@@ -172,14 +184,24 @@ export default {
 			rebateRatio == '全部' ? (rebateRatio = '') : (rebateRatio = this.rebateRatioList[this.index].name);
 			let cycle = this.billingCycleList[this.index].name;
 			cycle == '全部' ? (cycle = '') : (cycle = this.billingCycleList[this.index].name);
+			if (e) {
+				var data = {
+					cid1: this.typeId,
+					cid2: this.tabFalg,
+					area: '',
+					rebateRatio: rebateRatio,
+					cycle: cycle
+				};
+			} else {
+				var data = {
+					cid1: this.typeId,
+					cid2: this.tabFalg,
+					area: this.areaList[this.indexAre].label,
+					rebateRatio: rebateRatio,
+					cycle: cycle
+				};
+			}
 
-			let data = {
-				cid1: this.typeId,
-				cid2: this.tabFalg,
-				area: this.areaList[this.indexAre].label,
-				rebateRatio: rebateRatio,
-				cycle: cycle
-			};
 			this.$http.get('/api/goodsInfo/loanSelection', data, true).then(res => {
 				this.loanSelectionList = res.data.data;
 			});
@@ -221,7 +243,7 @@ page {
 	height: 60upx;
 	border-radius: 40upx;
 	padding-top: 0;
-	line-height: 70upx;
+	line-height:76upx;
 }
 .list_one {
 	// width: 10%;
