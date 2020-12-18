@@ -14,7 +14,7 @@
 			<view class="width30 text_center"><view class="uni-input" @click="getLoanList('全国')">全国</view></view>
 			<view class="width30 margin_left3">
 				<picker @change="bindPickerChange1" :value="index1" :range="provinceList" range-key="label">
-					<view class="uni-input">
+					<view class="uni-input text_hidden">
 						{{provinceData}}
 					<!-- {{ provinceList[index1].label }} -->
 				</view>
@@ -50,7 +50,7 @@
 						<view class="width25">
 							<view class="font_size54 font_weight700 font_colorf4">
 								{{ item.highestReturn }}
-								<text class="font_size24">%</text>
+								<!-- <text class="font_size24">%</text> -->
 							</view>
 							<view class="font_size22 font_color99">最高反</view>
 						</view>
@@ -130,8 +130,10 @@ export default {
 		bindPickerChange1: function(e) {
 			console.log('picker发送选择改变，携带值为：' + e.detail.value);
 			this.index1 = e.detail.value;
-			this.provinceData =  this.provinceList[this.index1].label 
+			var dataR =  this.provinceList[this.index1].label
+			this.provinceData = dataR;
 			this.getArea(this.provinceList[this.index1].value);
+			this.cityData ='请选择'
 			this.getLoanList();
 		},
 
@@ -142,6 +144,7 @@ export default {
 			};
 			this.$http.get('/api/common/area/list', data, true).then(res => {
 				this.areaList = res.data.data;
+				
 			});
 		},
 		// 分类
@@ -185,6 +188,8 @@ export default {
 			let cycle = this.billingCycleList[this.index].name;
 			cycle == '全部' ? (cycle = '') : (cycle = this.billingCycleList[this.index].name);
 			if (e) {
+				this.provinceData='请选择',
+			this.cityData='请选择'
 				var data = {
 					cid1: this.typeId,
 					cid2: this.tabFalg,
@@ -193,10 +198,14 @@ export default {
 					cycle: cycle
 				};
 			} else {
+				var pData ='';
+				var cData = '';
+				this.provinceData  == '请选择' ? pData = '' : pData = this.provinceData;
+				this.cityData  == '请选择' ? cData = '' : cData = this.cityData;
 				var data = {
 					cid1: this.typeId,
 					cid2: this.tabFalg,
-					area: this.areaList[this.indexAre].label,
+					area: pData + '_' + cData,
 					rebateRatio: rebateRatio,
 					cycle: cycle
 				};

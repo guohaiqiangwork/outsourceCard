@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="">
-			<image src="../../static/image/my/11.png" style="width: 100%;height: 9000upx;position: absolute;top: 0;" mode=""></image>
+			<image src="../../static/image/my/11.png" style="width: 100%;height: 11478upx;position: absolute;top: 0;" mode=""></image>
 		</view>
 	</view>
 </template>

@@ -157,37 +157,32 @@
 		<template v-if="shareaFalg">
 			<view class="moudel_content_myE" style="background-color: #FFFFFF;">
 				<view class="imgEr_moudel">
-					<view style="width: 95%;" class="margin_top5u  background_colorfe text_right">
-						<image @click="colseMoudel" style="width: 30upx;height: 30upx;" src="../../../static/image/icon/close.png" mode=""></image>
-					</view>
+					<!-- 		<view style="width: 95%;" class="margin_top5u  background_colorfe text_right">
+						
+					</view> -->
 					<view class="" style="margin-top: 60upx;">
+						<view class="text_right" style="width: 75%;">
+							<image @click="colseMoudel" style="width: 30upx;height: 30upx;" src="../../../static/image/icon/close.png" mode=""></image>
+						</view>
 						<view class="font_colorf7 font_size28" style="margin-left: 180upx;">
 							说明
 							<text class="font_size32 font_weight700 ">长按图片</text>
 							保存邀请二维码海报
 						</view>
-						<!-- <view style="width: 434upx;" class=" font_size26 font_colorff text_center">
-							点击右上角选择『发送给朋友』或『分享到朋友圈』，邀请朋友一起成为合伙人
-						</view> -->
-						<!-- <view class="">
-							<button type="default" @click="goShaer">我要请</button>
-						</view> -->
 					</view>
 					<view class="uni-flex" style="width: 750upx;padding-left: 10%;padding-right: 5%;">
 						<scroll-view scroll-x="true" class="wrapper" @scroll="nihao">
 							<view class="img_moudel" v-for="(item, index) in posterData" :key="index">
-								<image :src="item" mode="" style="height: 866upx;width: 580upx;border-radius: 10upx;margin-left: 30upx;"></image>
+								<image :src="item" mode="" style="height: 800upx;width: 580upx;border-radius: 10upx;margin-left: 30upx;"></image>
 							</view>
 						</scroll-view>
 					</view>
-					<view class="font_size24 font_colorff " style="idth: 434upx;margin-left: 180upx;">
+					<view class="font_size24 font_colorff " style="width: 434upx;margin-left: 180upx;">
 						<!-- <view class="">还可以长按保存或截屏分享</view> -->
-						<view class="btn_m   width50 " @click="copyData">复制邀请链接</view>
+						<view class="btn_m   width50 " @click="copyIosData">复制邀请链接</view>
 					</view>
 				</view>
 			</view>
-	
-	
 		</template>
 	</view>
 </template>
@@ -247,7 +242,8 @@ export default {
 			posterData: [],
 			openVip: false,
 			dataOne: '',
-			copyIndex:0,
+			copyIndex: 0,
+			copyDataOne: ''
 		};
 	},
 
@@ -263,9 +259,9 @@ export default {
 		nihao: function(item) {
 			// console.log(Math.ceil(item.detail.scrollLeft / 240)　);
 			// console.log(this.dataOne[Math.ceil(item.detail.scrollLeft / 270) - 1])
-			this.copyIndex = Math.ceil(item.detail.scrollLeft / 240) -1;
-			this.copyIndex  < 0 ? this.copyIndex = 0 :this.copyIndex  =this.copyIndex ;
-			console.log(this.copyIndex )
+			this.copyIndex = Math.ceil(item.detail.scrollLeft / 240) - 1;
+			this.copyIndex < 0 ? (this.copyIndex = 0) : (this.copyIndex = this.copyIndex);
+			console.log(this.copyIndex);
 		},
 		goShaer: function() {
 			uni.navigateTo({
@@ -327,14 +323,14 @@ export default {
 		},
 		// 复制
 		copyData: function(content) {
-			let goodsUrl  = '';
-			this.dataOne[this.copyIndex].goodsUrl ? goodsUrl= this.dataOne[this.copyIndex].goodsUrl : goodsUrl = '';
-			var url = 'https://www.hcselected.com/frontend/#/pages/shareUrl/shareUrl?referrerId=' + uni.getStorageSync('userId') + '&flag=false' + '&goodsUrl=' + goodsUrl ;
 			var _this = this;
+			let goodsUrl = '';
+			this.dataOne[this.copyIndex].goodsUrl ? (goodsUrl = this.dataOne[this.copyIndex].goodsUrl) : (goodsUrl = '');
+			var url = 'https://www.hcselected.com/frontend/#/pages/shareUrl/shareUrl?referrerId=' + uni.getStorageSync('userId') + '&flag=false' + '&goodsUrl=' + goodsUrl;
+
 			uni.setClipboardData({
 				data: url,
 				success: function(data) {
-					console.log(data);
 					uni.showToast({
 						title: '复制成功',
 						icon: 'none',
@@ -342,8 +338,84 @@ export default {
 						position: 'top'
 					});
 				},
-				fail: function(err) {},
+				fail: function(err) {
+					uni.showToast({
+						title: err,
+						icon: 'none',
+						duration: 2000,
+						position: 'top'
+					});
+				},
 				complete: function(res) {}
+			});
+		},
+		copyIosData: function() {
+			let goodsUrl = '';
+			this.dataOne[this.copyIndex].goodsUrl ? (goodsUrl = this.dataOne[this.copyIndex].goodsUrl) : (goodsUrl = '');
+			var url = 'https://www.hcselected.com/frontend/#/pages/shareUrl/shareUrl?referrerId=' + uni.getStorageSync('userId') + '&flag=false' + '&goodsUrl=' + goodsUrl;
+			var _this = this;
+			
+			if (uni.getSystemInfoSync().platform === 'ios'){
+				uni.setClipboardData({
+					data: url,
+					success: function(data) {
+						uni.showToast({
+							title: '复制成功',
+							icon: 'none',
+							duration: 2000,
+							position: 'top'
+						});
+					},
+					fail: function(err) {
+						uni.showToast({
+							title: err,
+							icon: 'none',
+							duration: 2000,
+							position: 'top'
+						});
+					},
+					complete: function(res) {}
+				});
+				return
+			}
+			var data = {
+				mbId: uni.getStorageSync('userId'),
+				goodsUrl: goodsUrl,
+				type: false,
+				goodsId: ''
+			};
+			this.$http.get('/api/common/poster/shortUrl', data, true).then(res => {
+				if (res.data.code == 200) {
+					_this.copyDataOne = JSON.stringify(res.data.data);
+						uni.setClipboardData({
+							data: res.data.data,
+							success: function(data) {
+								uni.showToast({
+									title: '复制成功',
+									icon: 'none',
+									duration: 2000,
+									position: 'top'
+								});
+							},
+							fail: function(err) {
+								uni.showToast({
+									title: err,
+									icon: 'none',
+									duration: 2000,
+									position: 'top'
+								});
+							},
+							complete: function(res) {}
+						});
+				
+				} else {
+					uni.showToast({
+						title: '复制失败,请重试',
+						icon: 'none',
+						duration: 2000,
+						position: 'top'
+					});
+				}
 			});
 		},
 		goEr: function(item, type) {
@@ -602,7 +674,7 @@ page {
 	border-radius: 10upx;
 	color: #ffffff;
 	font-size: 32upx;
-	margin-top: 40upx;
+	margin-top: 10upx;
 	margin-left: 50upx;
 }
 </style>

@@ -66,7 +66,7 @@
 			<!--  了解汇创精选-->
 			<view class="font_size36 margin_top3 font_color22">了解汇创精选</view>
 			<view class="moudel_two" @click="goPromotion('learnMore')">
-				<view class="background_color49 padding_top3 padding_bottom3" style="border-top-left-radius: 10upx;border-top-right-radius: 10upx;">
+				<view class="backgroud_img2 padding_top3 padding_bottom3" style="border-top-left-radius: 10upx;border-top-right-radius: 10upx;">
 					<view class="font_size30 font_colorff margin_left3">汇创精选使用指南</view>
 					<view class="uni-flex margin_top1 display_space margin_left3">
 						<view class="font_size22 width50" style="color: #DAE3F8;">权威解读 了解汇创精选</view>
@@ -347,6 +347,15 @@ page {
 	background-size: 100%;
 	height: 200upx;
 	border-radius: 10upx;
+	background-repeat: no-repeat;
+	padding: 30upx;
+}
+.backgroud_img2 {
+	background-image: url(../../../static/image/icon/120.png);
+	background-size: 100%;
+	height: 100upx;
+	border-top-left-radius: 10upx;
+	border-top-right-radius: 10upx;
 	background-repeat: no-repeat;
 	padding: 30upx;
 }

@@ -6,36 +6,30 @@
 				<view class="top_moudel">
 					<view class="uni-flex display_space  font_weight700">
 						<view class="width70 uni-flex">
-							<view class="font_size40 width20">银行</view>
-							<view style="border-right: 1px solid #FF9D95;height: 26upx;width: 1upx;margin-top: 4%; "></view>
-							<view class="font_size40 margin_left3">{{ detailData.bankName }}</view>
+							<view class="font_size34 ">{{ detailData.bankName }}</view>
 						</view>
 
 						<view class="font_size20 font_colorff width30 text_right margin_top3" v-if="detailData.promotion">
 							已推广{{ detailData.promotion }}人
-							<!--  -->
 						</view>
-					</view>
-					<view class="font_size26 font_colorff">
-						<text style="color: #FEDCDA;">授信期限</text>
-						<text class="font_size26 margin_left3">{{ detailData.creditPeriod }}</text>
 					</view>
 
 					<view class="uni-flex">
-						<view class="width50 text_center">
-							<view class=" font_size75 font_weight700 ">{{ detailData.maxAmount }}</view>
-							<view class="font_size26">授信额度(元)</view>
+						<view class="width40 text_center">
+							<view class=" font_size50 font_weight700 ">{{ detailData.maxAmount }}</view>
+							<view class="font_size22">授信额度(元)</view>
 						</view>
-						<view class="" style="margin-top:7%; width: 1px;height: 140upx;opacity: 0.3;border-left: 1px solid #ffffff;"></view>
-						<view class="width50 text_center margin_top4">
-							<view>
-								<view class="font_size34 font_weight700 text_center margin_top3" style="font-size: 52upx;">{{ detailData.cycle }}</view>
-								<view class="font_size26 margin_top2 text_center ">结算周期</view>
+						<view class="" style="margin-top:4%; width: 1px;height: 96upx;opacity: 0.3;border-left: 1px solid #ffffff;"></view>
+						<view class="width60  margin_top1" style="margin-left: 40upx;">
+							<view class="font_size22 font_colorff  margin_top3">
+									<text style="color: #FEDCDA;" class="font_size22">授信期限</text>
+									<text class="font_size22 margin_left3">{{ detailData.creditPeriod }}</text>
 							</view>
-							<!-- <view class="uni-flex display_center margin_top8">
-								<view class="font_size24 margin_top2 width50">授信期限</view>
-								<view class="font_size30 font_weight700 width50 ">{{ detailData.creditPeriod }}</view>
-							</view> -->
+							<view class="font_size22 font_colorff  margin_top3">
+									<text style="color: #FEDCDA;">结算利率</text>
+									<text class="font_size22 margin_left3">{{ detailData.rate }}</text>
+							</view>
+
 						</view>
 					</view>
 				</view>
@@ -88,26 +82,56 @@
 
 		<template v-else>
 			<view style="padding-bottom: 99upx;">
-				<view class="top_moudel" style="height: 240upx;">
+				<view class="top_moudel">
+					<view class="uni-flex display_space  font_weight700">
+						<view class="width70 uni-flex">
+							<view class="font_size34 ">{{ detailData.bankName }}</view>
+						</view>
+				
+						<view class="font_size20 font_colorff width30 text_right margin_top3" v-if="detailData.promotion">
+							已推广{{ detailData.promotion }}人
+						</view>
+					</view>
+				
+					<view class="uni-flex">
+						<view class="width40 text_center">
+							<view class=" font_size50 font_weight700 ">{{ detailData.maxAmount }}</view>
+							<view class="font_size22">授信额度(元)</view>
+						</view>
+						<view class="" style="margin-top:4%; width: 1px;height: 96upx;opacity: 0.3;border-left: 1px solid #ffffff;"></view>
+						<view class="width60  margin_top1" style="margin-left: 40upx;">
+							<view class="font_size22 font_colorff  margin_top3">
+									<text style="color: #FEDCDA;" class="font_size22">授信期限</text>
+									<text class="font_size22 margin_left3">{{ detailData.creditPeriod }}</text>
+							</view>
+							<view class="font_size22 font_colorff  margin_top3">
+									<text style="color: #FEDCDA;">结算利率</text>
+									<text class="font_size22 margin_left3">{{ detailData.rate }}</text>
+							</view>
+				
+						</view>
+					</view>
+				</view>
+				
+				<!-- <view class="top_moudel" style="height: 240upx;">
 					<view class="uni-flex   font_weight700">
 						<view class="width70 uni-flex">
-							<view class="font_size40 width20">银行</view>
-							<view style="border-right: 1px solid #FF9D95;height: 26upx;width: 1upx;margin-top: 4%; "></view>
-							<view class="font_size40 margin_left3">{{ detailData.bankName }}</view>
+
+							<view class="font_size40 ">{{ detailData.bankName }}</view>
 						</view>
 
 						<view class="font_size20 font_colorff width30 text_right margin_top3" v-if="detailData.promotion">
 							已推广{{ detailData.promotion }}人
-							<!--  -->
+					
 						</view>
 					</view>
 					<view class="font_size24 font_colorff margin_top3">{{ detailData.goodsName }}</view>
 
 					<view class="font_size24 font_colorff margin_top3u">
-						结算周期
-						<text class="font_size30 margin_left3">{{ detailData.cycle }}</text>
+						结算利率
+						<text class="font_size30 margin_left3">{{ detailData.rate }}</text>
 					</view>
-				</view>
+				</view> -->
 
 				<view class="page_widthMoudel margin_top4u">
 					<view class="moudel_list" v-if="detailData.raidersResult.name">
@@ -158,14 +182,18 @@
 			<view class="moudel_content_myE" style="background-color: #FFFFFF;">
 				<view class="imgEr_moudel">
 					<view style="width: 95%;" class="margin_top5u  background_colorfe text_right">
-						<image @click="colseErMoudel" style="width: 30upx;height: 30upx;" src="../../static/image/icon/close.png" mode=""></image>
+						<!-- <image  style="width: 30upx;height: 30upx;" src="../../static/image/icon/close.png" mode=""></image> -->
 					</view>
 					<view class="" style="">
+						<view style="width: 75%;" class="text_right">
+							<image @click="colseErMoudel" style="width: 30upx;height: 30upx;" src="../../static/image/icon/close.png" mode=""></image>
+						</view>
 						<view class="font_colorf7 font_size28" style="margin-left: 180upx;">
 							说明
 							<text class="font_size32 font_weight700 ">长按图片</text>
 							保存邀请二维码海报
 						</view>
+						
 						<!-- <view style="width: 434upx;margin-left: 180upx;" class=" font_size26 font_colorff text_center">
 							点击右上角选择『发送给朋友』或『分享到朋友圈』，邀请朋友一起成为合伙人
 						</view> -->
@@ -173,7 +201,7 @@
 					<view class="uni-flex" style="width: 750upx;padding-left: 10%;padding-right: 5%;">
 						<scroll-view scroll-x="true" class="wrapper" @scroll="nihao">
 							<view class="img_moudel" v-for="(item, index) in posterData" :key="index">
-								<image :src="item" mode="" style="height: 866upx;width: 580upx;border-radius: 10upx;margin-left: 30upx;"></image>
+								<image :src="item" mode="" style="height: 800upx;width: 580upx;border-radius: 10upx;margin-left: 30upx;"></image>
 							</view>
 						</scroll-view>
 					</view>
@@ -244,7 +272,7 @@ export default {
 		},
 		// 复制
 		copyData: function(content) {
-			console.log(content);
+			// console.log(content);
 			// this.copyFalg = 1 ?
 			let goodsId = '';
 			let goodsUrl = '';
@@ -252,21 +280,67 @@ export default {
 			this.dataOne[this.copyIndex].goodsId ? (goodsId = this.dataOne[this.copyIndex].goodsId) : (goodsId = '');
 			var url =
 				'https://www.hcselected.com/frontend/#/pages/shareUrl/shareUrl?referrerId=' + uni.getStorageSync('userId') + '&flag=true' + '&goodsId=' + goodsId + '&goodsUrl=' + goodsUrl;
+			
+			if (uni.getSystemInfoSync().platform === 'ios'){
+				uni.setClipboardData({
+					data: url,
+					success: function(data) {
+						uni.showToast({
+							title: '复制成功',
+							icon: 'none',
+							duration: 2000,
+							position: 'top'
+						});
+					},
+					fail: function(err) {
+						uni.showToast({
+							title: err,
+							icon: 'none',
+							duration: 2000,
+							position: 'top'
+						});
+					},
+					complete: function(res) {}
+				});
+				return
+			}
 			var _this = this;
-			uni.setClipboardData({
-				data: url,
-				success: function(data) {
-					console.log(data);
-					uni.showToast({
-						title: '复制成功',
-						icon: 'none',
-						duration: 2000,
-						position: 'top'
-					});
-				},
-				fail: function(err) {},
-				complete: function(res) {}
+			console.log('我在这')
+			var data = {
+				mbId:  uni.getStorageSync('userId'),
+				goodsUrl:goodsUrl,
+				type:true,
+				goodsId:goodsId
+				
+			};
+			this.$http.get('/api/common/poster/shortUrl', data, true).then(res => {
+					if(res.data.code == 200){
+						uni.setClipboardData({
+							data: res.data.data,
+							success: function(data) {
+								console.log(data);
+								uni.showToast({
+									title: '复制成功',
+									icon: 'none',
+									duration: 2000,
+									position: 'top'
+								});
+							},
+							fail: function(err) {},
+							complete: function(res) {}
+						});
+					}else{
+						uni.showToast({
+							title: '复制失败',
+							icon: 'none',
+							duration: 2000,
+							position: 'top'
+						});
+					}
+					
 			});
+			
+			
 		},
 		goEr: function(item, type) {
 			console.log('99');
@@ -389,7 +463,7 @@ page {
 	// height: 300upx;
 	background: #f75349;
 	padding: 30upx 40upx;
-	// padding-bottom: 0;
+	padding-bottom: 10upx;
 	color: #ffffff;
 }
 .right_btn_one {
