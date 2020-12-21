@@ -41,7 +41,7 @@
 						<view @click="openMoudel" class="font_size26 font_colorf4 text_right margin_top3">查看攻略</view>
 					</view>
 					<view class="margin_top3u" @click="goToPage('rewardRules')" style="box-shadow: 0upx 4upx 14upx 0upx #e2e5ef; ">
-						<view class="font_size50 font_color2b" style="position: absolute;margin-top: 310upx;margin-left: 15%;z-index: 2;">{{ detailData.highestReturn }}%</view>
+						<view class="font_size50 font_color2b" style="position: absolute;margin-top: 310upx;margin-left: 15%;z-index: 2;">{{ detailData.highestReturn }}</view>
 						<image style="width: 100%;height: 418upx;" src="../../static/image/my/7.png" mode=""></image>
 					</view>
 
@@ -140,7 +140,7 @@
 						<view @click="openMoudel" class="font_size26 font_colorf4 text_right margin_top3">查看攻略</view>
 					</view>
 					<view class="margin_top3u" @click="goToPage('rewardRules')" style="box-shadow: 0upx 4upx 14upx 0upx #e2e5ef; ">
-						<view class="font_size50 font_color2b" style="position: absolute;margin-top: 310upx;margin-left: 15%;z-index: 2;">{{ detailData.highestReturn }}%</view>
+						<view class="font_size50 font_color2b" style="position: absolute;margin-top: 310upx;margin-left: 15%;z-index: 2;">{{ detailData.highestReturn }}</view>
 						<image style="width: 100%;height: 418upx;" src="../../static/image/my/7.png" mode=""></image>
 					</view>
 
