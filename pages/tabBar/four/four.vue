@@ -326,7 +326,7 @@ export default {
 			var _this = this;
 			let goodsUrl = '';
 			this.dataOne[this.copyIndex].goodsUrl ? (goodsUrl = this.dataOne[this.copyIndex].goodsUrl) : (goodsUrl = '');
-			var url = 'https://www.hcselected.com/frontend/#/pages/shareUrl/shareUrl?referrerId=' + uni.getStorageSync('userId') + '&flag=false' + '&goodsUrl=' + goodsUrl;
+			var url = 'https://www.hcselected.com/frontend/#/pages/shareUrl/shareUrl?referrerId=' + uni.getStorageSync('userId') + '&flag=1' + '&goodsUrl=' + goodsUrl;
 
 			uni.setClipboardData({
 				data: url,
