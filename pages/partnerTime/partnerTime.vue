@@ -20,14 +20,14 @@
 		<view class="page_widthMoudel">
 			<view class="font_size36 margin_top4u" v-if="referrer">我的推荐人</view>
 
-			<view class="list_moudel_o" style="height: 120upx;" v-if="referrer" >
+			<view class="list_moudel_o" style="height: 120upx;" v-if="referrer">
 				<view class="uni-flex">
 					<view class="width20 text_center margin_top2"><image style="width: 80upx;height: 80upx;border-radius: 50%;" :src="referrer.avatar" mode=""></image></view>
 					<view class="width60">
-						<view class="font_size30">{{ referrer.name.length > 0 ? referrer.name :referrer.nickName }}</view>
-						<view class=""> {{referrer.mobile.substring(0,3)}}****{{referrer.mobile.substring(7,11)}}</view>
+						<view class="font_size30">{{ referrer.name.length > 0 ? referrer.name : referrer.nickName }}</view>
+						<view class="">{{ referrer.mobile.substring(0, 3) }}****{{ referrer.mobile.substring(7, 11) }}</view>
 					</view>
-					<view class=" width15 margin_top3u" >
+					<view class=" width15 margin_top3u">
 						<view style="text-align: right;" class="" @click="getPhone(referrer.mobile)">
 							<image style="width: 44upx;height: 38upx;" src="../../static/image/my/2.png" mode=""></image>
 						</view>
@@ -57,21 +57,39 @@
 							</view>
 						</view>
 					</view>
-					
-					<view  class="background_colorff padding_bottom3 padding_top2" v-for="(item, index) in teamList" :key="index">
+
+					<view class="uni-flex border_bottom padding_bottom3 padding_top3 background_colorff">
+						<view
+							class="display_inline text_center"
+							:style="index == 0 ? '' : 'marginLeft: 4%;'"
+							:class="typeFalg == item.id ? 'tabOne' : 'tabOne_two'"
+							v-for="(item, index) in typeData"
+							:key="index"
+							@click="tabType(item)"
+						>
+							{{ item.name }}
+						</view>
+					</view>
+
+					<view class="background_colorff padding_bottom3 padding_top2 " v-for="(item, index) in teamList" :key="index">
 						<view class="list_moudel_o" style="margin-top: 0;">
 							<view class="uni-flex">
 								<view class="width20 text_center margin_top2">
 									<image style="width: 80upx;height: 80upx;border-radius: 50%;" :src="item.headImgurl" mode=""></image>
 								</view>
 								<view class="width60">
-									<view class="font_size30">{{ item.name.length > 0 ? item.name :item.nickName }}</view>
-									<view class="">
-										{{item.mobile.substring(0,3)}}****{{item.mobile.substring(7,11)}}
-									<!-- {{item.mobile}} -->
+									<view class="uni-flex">
+										<view class="font_size30 text_hidden " style="max-width: 50%;">{{ item.name.length > 0 ? item.name : item.nickName }}</view>
+										<view class="margin_top2 margin_left2" v-if="item.label == 2">
+											<image src="../../static/image/1.png" style="width: 77upx;height: 30upx;" mode=""></image>
+										</view>
+										<view class="margin_top2 margin_left2" v-if="item.label == 1">
+											<image src="../../static/image/2.png" style="width: 77upx;height: 30upx;" mode=""></image>
+										</view>
 									</view>
+									<view class="" v-if="item.label == 1">{{ item.mobile.substring(0, 3) }}****{{ item.mobile.substring(7, 11) }}</view>
 								</view>
-								<view class="width15">
+								<view class="width15" v-if="item.label == 1">
 									<view v-if="item.mobile" class="text_right " @click="getPhone(item.mobile)">
 										<image style="width: 44upx;height: 38upx;" src="../../static/image/my/2.png" mode=""></image>
 									</view>
@@ -81,21 +99,17 @@
 
 						<view class="page_widthMoudel" style="background-color: #f7f8fc;border-radius: 10upx;padding-bottom: 20upx;">
 							<view class="uni-flex padding_top3 " style="">
-								<view class="font_sise28 width45 margin_left3">个人业绩:{{item.selfIncome}}元</view>
-								<view class="font_sise28 width45">团队业绩:{{item.teamIncome}}元</view>
+								<view class="font_sise28 width45 margin_left3">个人业绩:{{ item.selfIncome }}元</view>
+								<view class="font_sise28 width45">团队业绩:{{ item.teamIncome }}元</view>
 							</view>
-							<view class="font_size22 fonnt_color99 margin_left3">加入时间：{{item.createTime}}</view>
-							<view class="font_size22 font_color99 margin_left3">团队人数：{{item.coutnNum}}</view>
+							<view class="font_size22 fonnt_color99 margin_left3">加入时间：{{ item.createTime }}</view>
+							<view class="font_size22 font_color99 margin_left3">团队人数：{{ item.coutnNum }}</view>
 						</view>
 					</view>
-					
+
 					<view class="text_center background_colorff padding_bottom3u" style="padding-top: 100upx;" v-if="teamList.length == 0">
-						<view class="">
-							<image style="width: 380upx;height: 380upx;" src="../../static/image/noData/2.png" mode=""></image>
-						</view>
-						<view class="margin_top3 font_sise30">
-							暂无成员
-						</view>
+						<view class=""><image style="width: 380upx;height: 380upx;" src="../../static/image/noData/2.png" mode=""></image></view>
+						<view class="margin_top3 font_sise30">暂无成员</view>
 					</view>
 				</view>
 			</view>
@@ -113,16 +127,36 @@ export default {
 			falg: '',
 			falgType: '',
 			keyword: '',
-			teamList:[]
+			teamList: [],
+			typeFalg: 0,
+			typeData: [
+				{
+					name: '全部',
+					id: 0
+				},
+				{
+					name: '直推团队',
+					id: 1
+				},
+				{
+					name: '越级团队',
+					id: 2
+				}
+			]
 		};
 	},
 	onLoad() {
 		this.init(); //初始化
 	},
 	methods: {
+		// 处理
+		tabType: function(item) {
+			this.typeFalg = item.id;
+			this.getList()
+		},
 		// 获取数据
 		getKey: function(e) {
-			this.keyword  = e.detail.value;
+			this.keyword = e.detail.value;
 		},
 		init: function() {
 			var data = {
@@ -144,7 +178,8 @@ export default {
 			var data = {
 				mbId: uni.getStorageSync('userId'),
 				flag: this.falg,
-				keyword: this.keyword
+				keyword: this.keyword,
+				label:this.typeFalg == 0 ? '' : this.typeFalg
 			};
 			// 我的推荐人
 			this.$http.get('/api/member/teamList', data, true).then(res => {
@@ -186,5 +221,16 @@ export default {
 	padding-top: 20upx;
 	margin-top: 20upx;
 	padding-bottom: 20upx;
+}
+.tabOne {
+	color: #2b65eb;
+	font-size: 30upx;
+	width: 30%;
+	font-weight: 700;
+}
+.tabOne_two {
+	width: 30%;
+	color: #999999;
+	font-size: 30upx;
 }
 </style>

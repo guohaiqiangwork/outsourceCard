@@ -87,7 +87,7 @@
 							</view>
 							<view class="font_size22 font_color99">最高返</view>
 							<view class="">
-								<view class="list_one" v-if="item.cycle">{{ item.cycle }}</view>
+								<view class="list_one " v-if="item.cycle">{{ item.cycle }}</view>
 								<view class="list_one" v-if="item.label">{{ item.label }}</view>
 							</view>
 						</view>
@@ -136,12 +136,15 @@
 					v-for="(item, index) in featuredDiscovery"
 					:key="index"
 				>
-					<view class="uni-flex">
-						<view class="margin_top1">
-							<image style="width: 30upx;height: 30upx;" :src="item.logoUrl" mode=""></image>
+					<view class="uni-flex display_space">
+						<view class="uni-flex">
+							<view class="margin_top1">
+								<image style="width: 30upx;height: 30upx;" :src="item.logoUrl" mode=""></image>
+							</view>
+							<view class="" style="margin-left: 10upx;">{{ item.goodsName }}</view>
 						</view>
-						<view class="" style="margin-left: 10upx;">{{ item.goodsName }}</view>
-						<view class="list_one" style="margin-top: 10upx;">{{ item.cycle }}</view>
+			
+						<view class="list_one width20" style="margin-top: 10upx;">{{ item.cycle }}</view>
 					</view>
 					<view class="uni-flex">
 						<view class="width25">
@@ -151,8 +154,8 @@
 							</view>
 							<view class="font_size22 font_colorf4">最高反</view>
 						</view>
-						<view class="width50 margin_top2">
-							<view class="font_size38 font_weight700 font_color22">{{ item.minAmount }}-{{ item.maxAmount }}</view>
+						<view class="width50 margin_top2 text_center">
+							<view class="font_size38 font_weight700 font_color22">{{ item.maxAmount }}</view>
 							<view class="font_size22 font_color99 margin_top4">贷款额度(元)</view>
 						</view>
 						<view class="width25 margin_top8"><view class="right_btn">立即推广</view></view>

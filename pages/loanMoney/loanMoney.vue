@@ -43,7 +43,7 @@
 					<view class="uni-flex">
 						<view class=""><image style="width: 28upx;height: 28upx;" :src="item.logoUrl" mode=""></image></view>
 						<view class="width20 margin_left1 text_hidden">{{ item.goodsName }}</view>
-						<view v-if="item.cycle" class="list_one " style="margin-top: 0;">{{ item.cycle }}</view>
+						<view v-if="item.cycle" class="list_one width20" style="margin-top: 0;">{{ item.cycle }}</view>
 						<view v-if="item.rate" class="list_oneL  " style="margin-top: 0;">{{ item.rate }}</view>
 					</view>
 					<view class="uni-flex">
@@ -54,8 +54,8 @@
 							</view>
 							<view class="font_size22 font_colorf4">最高反</view>
 						</view>
-						<view class="width50 margin_top2">
-							<view class="font_size38 font_weight700 font_color22">{{ item.minAmount }}-{{ item.maxAmount }}</view>
+						<view class="width50 margin_top2 text_center">
+							<view class="font_size38 font_weight700 font_color22">{{ item.maxAmount }}</view>
 							<view class="font_size22 font_color99 margin_top4">贷款额度(元)</view>
 						</view>
 						<view class="width25  margin_top8"><view class="right_btn">立即推广</view></view>

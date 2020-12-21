@@ -601,7 +601,7 @@
 			"selectedIconPath": "static/image/tab/threeZ.png"
 		}, {
 			"pagePath": "pages/tabBar/four/four",
-			"text": "我的",
+			"text": "个人中心",
 			"iconPath": "static/image/tab/four.png",
 			"selectedIconPath": "static/image/tab/fourZ.png"
 		}]
