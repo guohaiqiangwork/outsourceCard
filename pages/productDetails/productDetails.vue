@@ -375,7 +375,7 @@ export default {
 				}
 				setTimeout(function() {
 					uni.hideLoading();
-				}, 3000);
+				}, 1000);
 			});
 		},
 

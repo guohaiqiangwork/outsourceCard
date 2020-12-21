@@ -156,7 +156,7 @@
 						</view>
 						<view class="width50 margin_top2 text_center">
 							<view class="font_size38 font_weight700 font_color22">{{ item.maxAmount }}</view>
-							<view class="font_size22 font_color99 margin_top4">贷款额度(元)</view>
+							<view class="font_size22 font_color99 margin_top4">最高贷款额度(元)</view>
 						</view>
 						<view class="width25 margin_top8"><view class="right_btn">立即推广</view></view>
 					</view>

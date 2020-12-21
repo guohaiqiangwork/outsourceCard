@@ -147,8 +147,8 @@
 					</view>
 					<view class="font_size26 font_color99 text_center margin_top3">新手专属社群，教你获得第一笔工资</view>
 					<view class="margin_top3 text_center"><image style="width: 340upx;height: 340upx;" src="../../../static/image/erCode.png" mode=""></image></view>
-					<view class="font_size26 font_color99 text_center margin_top3">保存二维码到相册，并微信扫码添加</view>
-					<view class="save_btn" @click="saveImg">保存至相册</view>
+					<view class="font_size26 font_color99 text_center margin_top3">长按保存二维码到相册，并微信扫码添加</view>
+					<!-- <view class="save_btn" @click="saveImg">保存至相册</view> -->
 				</view>
 			</view>
 		</template>
@@ -449,7 +449,7 @@ export default {
 				}
 				setTimeout(function() {
 					uni.hideLoading();
-				}, 3000);
+				}, 1000);
 			});
 
 			// uni.navigateTo({
@@ -461,7 +461,7 @@ export default {
 		getPhone: function() {
 			uni.makePhoneCall({
 				// 手机号
-				phoneNumber: '15049372463',
+				phoneNumber: '18857211566',
 				// 成功回调
 				success: res => {
 					console.log('调用成功!');
@@ -474,7 +474,6 @@ export default {
 		},
 
 		saveImg: function() {
-			console.log('99');
 			uni.downloadFile({
 				url: '../../../static/image/erCode.png', //图片地址
 				success: res => {
