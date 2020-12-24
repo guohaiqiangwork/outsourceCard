@@ -103,7 +103,8 @@
 								<view class="font_sise28 width45">团队业绩:{{ item.teamIncome }}元</view>
 							</view>
 							<view class="font_size22 fonnt_color99 margin_left3">加入时间：{{ item.createTime }}</view>
-							<view class="font_size22 font_color99 margin_left3">团队人数：{{ item.coutnNum }}</view>
+							<view class="font_size22 font_color99 margin_left3" v-if="item.label != 2">团队人数：{{ item.coutnNum }}</view>
+							<view class="font_size22 font_color99 margin_left3" v-else>直推上级：{{ item.coutnNum }}</view>
 						</view>
 					</view>
 
