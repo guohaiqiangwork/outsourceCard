@@ -239,8 +239,9 @@ export default {
 					url: '../../' + url + '/' + url + '?title=' + title + '&id=' + item.id
 				});
 			} else if(url == 'outUrl'){
-				console.log('99')
-				window.location.href = value;
+				// console.log('99')
+				plus.runtime.openURL(value);
+				// window.location.href = value;
 			} else {
 				uni.navigateTo({
 					url: '../../' + url + '/' + url + '?title=' + title

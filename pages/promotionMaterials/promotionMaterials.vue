@@ -94,18 +94,13 @@
 			</view>
 			<view class="page_widthMoudel">
 				<view class="">
-					<swiper class="imageContainer" circular autoplay @change="handleChange">
+					<swiper class="imageContainer" circular autoplay>
 						<block v-for="(item, index) in promotionPosterData" :key="index">
-							<swiper-item @click="swiperClick(item)"><image class="itemImg" :src="item" lazy-load mode="scaleToFill"></image></swiper-item>
+							<swiper-item><image @longpress="openSaveFenFalg(item,index)" class="itemImg" :src="item" lazy-load mode="scaleToFill"></image></swiper-item>
 						</block>
 					</swiper>
 				</view>
-				<!-- <view class="uni-flex padding_bottom3 " style="position: fixed;bottom: 0;width: 92%;">
-					<view @click="goShare(item)" class="width50 text_center" v-for="(item, index) in shareList" :key="index">
-						<view class=""><image style="width: 60upx;height: 60upx;" :src="item.img" mode=""></image></view>
-						<view class="font_size26 margin_top2">{{ item.name }}</view>
-					</view>
-				</view> -->
+
 				<view class="font_size30 text_center margin_top3u font_colorf7">长按分享</view>
 			</view>
 		</template>
@@ -117,18 +112,20 @@
 				<view class="">
 					<swiper class="imageContainer" circular autoplay style="height: 75vh;border-radius: 10upx;" @change="handleChange">
 						<block v-for="(item, index) in promotionPosterData" :key="index">
-							<swiper-item @click="swiperClick(item)">
-								<image style="height: 75vh;border-radius: 10upx;" class="itemImg" :src="item" lazy-load mode="scaleToFill"></image>
+							<swiper-item>
+								<image
+									@longpress="openSaveFenFalg(item,index)"
+									style="height: 75vh;border-radius: 10upx;"
+									class="itemImg"
+									:src="item"
+									lazy-load
+									mode="scaleToFill"
+								></image>
 							</swiper-item>
 						</block>
 					</swiper>
 				</view>
-				<!-- <view class="uni-flex padding_bottom3 " style="position: fixed;bottom: 0;width: 92%;">
-					<view @click="goShare(item)" class="width50 text_center" v-for="(item, index) in shareList" :key="index">
-						<view class=""><image style="width: 60upx;height: 60upx;" :src="item.img" mode=""></image></view>
-						<view class="font_size26 margin_top2">{{ item.name }}</view>
-					</view>
-				</view> -->
+
 				<view class="font_size30 text_center margin_top3u font_colorf7">长按分享</view>
 			</view>
 		</template>
@@ -139,6 +136,18 @@
 				<view @click="myshare" class="width25 text_center" v-for="(item, index) in [1, 2, 3, 4]" :key="index">
 					<view class=""><image style="width: 60upx;height: 60upx;" src="../../static/image/icon/home3.png" mode=""></image></view>
 					<view class="font_size26 margin_top2">分享海报</view>
+				</view>
+			</view>
+		</template>
+
+		<!-- 保存还会分享 -->
+		<template v-if="saveFenFalg">
+			<view class="moudel_content">
+				<view class="er_moudel">
+					<image @click="colseSaveFenFalg" style="width: 30upx;height: 30upx;" src="../../static/image/icon/close.png" mode=""></image>
+					<view class="text_center font_size40 font_weight700">请选择贷款类型</view>
+					<view class="moudel_btn_one" style="margin-top: 60upx;" @click="saveImgEr">保存图片</view>
+					<view class="moudel_btn_one" style="background-color: #F75349;" @click="wxShare">微信分享</view>
 				</view>
 			</view>
 		</template>
@@ -188,7 +197,11 @@ export default {
 			currentIndex: 0,
 			currentIndexOne: '',
 			memberData: '',
-			keywordData:''
+			keywordData: '',
+			saveImgData: '',
+			saveFenFalg: false,
+			dataOne:'',
+			shareUrlD:''
 		};
 	},
 	onLoad(option) {
@@ -232,39 +245,43 @@ export default {
 				type: this.tabIndexTwo + 1
 			};
 			this.$http.get('/api/shareMaterisal/promotionPoster', data, true).then(res => {
-				let dataOne = res.data.data;
+				 this.dataOne = res.data.data;
 				uni.showLoading({
 					title: '加载中'
 				});
-					this.promotionPosterData =[];
-					var typeData;
-					this.tabIndexTwo + 1 == 3 ? typeData = false :typeData = true; 
-				for (let i = 0; i < dataOne.length; i++) {
+				this.promotionPosterData = [];
+				var typeData;
+				this.tabIndexTwo + 1 == 3 ? (typeData = false) : (typeData = true);
+
+				for (let i = 0; i < this.dataOne.length; i++) {
+					console.log(this.dataOne[i].goodsUrl);
 					var a =
 						this.memberData.hostUrl +
 						'/api/common/poster/compose?mbId=' +
 						uni.getStorageSync('userId') +
 						'&goodsId=' +
 						'&imgUrl=' +
-						dataOne[i].poster +
-						'&type=' + typeData + '&goodsUrl=' +
-						dataOne[i].goodsUrl;
+						this.dataOne[i].poster +
+						'&type=' +
+						typeData +
+						'&goodsUrl=' +
+						this.dataOne[i].goodsUrl;
 
 					this.promotionPosterData.push(a);
 				}
 				setTimeout(function() {
 					uni.hideLoading();
-				}, 3000);
+				}, 1000);
 				// this.promotionPosterData = res.data.data;
 			});
 		},
 
 		tabSwich: function(e) {
 			this.tabIndexT = e;
-			if(this.tabIndexT == 1){
-				this.tabIndexTwo = 2
-			}else if(this.tabIndexT == 0){
-				this.tabIndexTwo = 0
+			if (this.tabIndexT == 1) {
+				this.tabIndexTwo = 2;
+			} else if (this.tabIndexT == 0) {
+				this.tabIndexTwo = 0;
 			}
 			// this.tabIndexT == 2 ? (this.tabIndexTwo = 2) : '';
 			this.getList();
@@ -413,9 +430,111 @@ export default {
 					success: function() {}
 				});
 			});
-		}
+		},
 
 		// #endif
+
+		// 长按图片
+		openSaveFenFalg: function(item,index) {
+			console.log(index);
+			console.log(item);
+			var _this = this;
+			var data = {
+				mbId: uni.getStorageSync('userId'),
+				goodsUrl: _this.dataOne[index].goodsUrl,
+				type: false,
+				goodsId: ''
+			};
+			console.log('收到回复空间' + JSON.stringify(data))
+			this.$http.get('/api/common/poster/shortUrl', data, true).then(res => {
+				console.log(res.data.data);
+				_this.shareUrlD = res.data.data
+			});
+
+			var _this = this;
+			_this.saveImgData = item;
+			_this.saveFenFalg = true;
+		},
+		colseSaveFenFalg: function() {
+			var _this = this;
+			_this.saveFenFalg = false;
+		},
+		// 弹窗保存
+		saveImgEr: function(item) {
+			console.log(item);
+			uni.showLoading({
+				title: '保存中'
+			});
+			var _this = this;
+			uni.downloadFile({
+				url: _this.saveImgData, //图片地址
+				success: res => {
+					uni.hideLoading();
+					if (res.statusCode === 200) {
+						uni.saveImageToPhotosAlbum({
+							filePath: res.tempFilePath,
+							success: function() {
+								_this.saveFenFalg = false;
+								uni.showToast({
+									title: '保存成功',
+									icon: 'none'
+								});
+							},
+							fail: function() {
+								uni.showToast({
+									title: '保存失败',
+									icon: 'none'
+								});
+							}
+						});
+					}
+				}
+			});
+		},
+
+		wxShare: function() {
+			var _this = this;
+			
+			// let goodsId = '';
+			// let goodsUrl = '';
+			// this.dataOne[this.copyIndex].goodsUrl ? (goodsUrl = this.dataOne[this.copyIndex].goodsUrl) : (goodsUrl = '');
+			// this.dataOne[this.copyIndex].goodsId ? (goodsId = this.dataOne[this.copyIndex].goodsId) : (goodsId = '');
+
+			// let goodsUrl = '';
+			// this.dataOne[this.copyIndex].goodsUrl ? (goodsUrl = this.dataOne[this.copyIndex].goodsUrl) : (goodsUrl = '');
+			// var url =
+			// 	'https://www.hcselected.com/frontend/#/pages/shareUrl/shareUrl?referrerId=' +
+			// 	uni.getStorageSync('userId') +
+			// 	'&flag=2' +
+			// 	'&goodsId=' +
+			// 	goodsId +
+			// 	'&goodsUrl=' +
+			// 	goodsUrl;
+			// //分享到微信朋友
+			// console.log(url);
+			uni.showLoading({
+				title: '分享中'
+			});
+			uni.share({
+				provider: 'weixin',
+				scene: 'WXSceneSession',
+				type: 0,
+				href: _this.shareUrlD,
+				title: '汇创精选',
+				summary: '让   生   活    更   优   质 ',
+				imageUrl: _this.saveImgData,
+				success: function(res) {
+					uni.hideLoading();
+					_this.colseSaveFenFalg();
+					if (res) {
+						console.log('success:' + JSON.stringify(res));
+					}
+				},
+				fail: function(err) {
+					console.log('fail:' + JSON.stringify(err));
+				}
+			});
+		}
 	}
 };
 </script>
@@ -490,5 +609,29 @@ page {
 	width: 100%;
 	height: 70vh;
 	border-radius: 10upx;
+}
+// 弹窗
+.er_moudel {
+	background-color: #ffffff;
+	width: 80%;
+	margin-left: 6%;
+	position: absolute;
+	top: 20%;
+	padding: 30upx;
+	border-radius: 20upx;
+	padding-top: 60upx;
+	padding-bottom: 60upx;
+}
+.moudel_btn_one {
+	height: 88upx;
+	background: #2b65eb;
+	border-radius: 44upx;
+	text-align: center;
+	line-height: 88upx;
+	color: #ffffff;
+	font-size: 32upx;
+	width: 80%;
+	margin-left: 10%;
+	margin-top: 30upx;
 }
 </style>

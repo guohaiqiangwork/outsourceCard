@@ -10,7 +10,7 @@
 					<view class="width30 font_size30 font_color66">提现金额</view>
 					<view class="font_size30">
 						<view class="">￥{{result.amount}}</view>
-						<view class="font_size22 font_color99">(税费{{result.taxes}}/% 手续费{{result.handFee}}/%)</view>
+						<view class="font_size22 font_color99">(税费{{result.taxes}} 手续费{{result.handFee}})</view>
 					</view>
 				</view>
 				<view class="uni-flex margin_top3">

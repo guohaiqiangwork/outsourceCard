@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="">
+	<view class="" style="padding-top:calc(30upx +  var(--status-bar-height))">
 			<image style="height: 100%;" src="../../static/image/logB.png" mode="" class="image_width"></image>
 			<view class="login_moudel" v-if="appFalg">
 				<view class="font_color00 font_size50 font_weight700">欢迎登录汇创精选</view>

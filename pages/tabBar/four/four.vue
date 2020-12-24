@@ -148,7 +148,7 @@
 					<view class="font_size26 font_color99 text_center margin_top3">新手专属社群，教你获得第一笔工资</view>
 					<view class="margin_top3 text_center"><image style="width: 340upx;height: 340upx;" src="../../../static/image/erCode.png" mode=""></image></view>
 					<view class="font_size26 font_color99 text_center margin_top3">长按保存二维码到相册，并微信扫码添加</view>
-					<!-- <view class="save_btn" @click="saveImg">保存至相册</view> -->
+					<view class="save_btn" @click="saveImg">保存至相册</view>
 				</view>
 			</view>
 		</template>
@@ -175,7 +175,7 @@
 							</view>
 						</scroll-view>
 					</view>
-					<view class="font_size24 font_colorff " style="width: 434upx;margin-left: 180upx;">
+					<view class="font_size24 font_colorff " style="width: 434upx;margin-left: 220upx;">
 						<view class="btn_m   width50 " @click="copyIosData">复制邀请链接</view>
 					</view>
 				</view>
@@ -429,6 +429,8 @@ export default {
 					});
 				}
 			});
+		
+		
 		},
 		goEr: function(item, type) {
 			this.shareaFalg = true;
@@ -486,9 +488,16 @@ export default {
 		},
 
 		saveImg: function() {
+			console.log('99')
+			uni.showLoading({
+				title: '保存中'
+			});
+			var url ='https://www.ydlhuaxia.cn/image/share/h5/assers/img/erCode.png';
 			uni.downloadFile({
-				url: '../../../static/image/erCode.png', //图片地址
+				url: encodeURI(url), //图片地址
 				success: res => {
+					uni.hideLoading();
+					console.log(JSON.stringify(res))
 					if (res.statusCode === 200) {
 						uni.saveImageToPhotosAlbum({
 							filePath: res.tempFilePath,
