@@ -439,10 +439,12 @@ export default {
 			console.log(index);
 			console.log(item);
 			var _this = this;
+			let typeData;
+			this.tabIndexTwo + 1 == 3 ? (typeData = false) : (typeData = true);
 			var data = {
 				mbId: uni.getStorageSync('userId'),
 				goodsUrl: _this.dataOne[index].goodsUrl,
-				type: false,
+				type: typeData,
 				goodsId: ''
 			};
 			console.log('收到回复空间' + JSON.stringify(data))
