@@ -2,7 +2,7 @@
 	<view>
 		<view class="">
 			<image style="height: 100%;" src="../../static/image/logB.png" mode="" class="image_width"></image>
-			<view class="login_moudel" v-if="false">
+			<view class="login_moudel" v-if="appFalg">
 				<view class="font_color00 font_size50 font_weight700">欢迎登录汇创精选</view>
 				<view class="font_size30 font_color99">未注册的手机号验证通过后将自动注册</view>
 				<view class="font_size30 font_color99" style="margin-top: 100upx;">请输入手机号码</view>
@@ -50,12 +50,17 @@ export default {
 			msgErr: '',
 			userPhone: '',
 			appid: 'wx46d808b929c79829',
-			redirect_url: 'https://www.hcselected.com/frontend'
+			redirect_url: 'https://www.hcselected.com/frontend',
+			appFalg: false
 		};
 	},
 	onLoad() {
+		// #ifdef H5
 		this.getCode();
-
+		// #endif
+		//#ifdef APP-PLUS
+		this.appFalg = true;
+		//#endif
 		// let code = this.getUrlCode('code');
 		// console.log(code + '我是code');
 
@@ -82,11 +87,11 @@ export default {
 			}
 		},
 
-		getUrlCode:function(name) {
+		getUrlCode: function(name) {
 			return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ''])[1].replace(/\+/g, '%20')) || null;
 		},
 
-		isWechat:function() {
+		isWechat: function() {
 			return String(navigator.userAgent.toLowerCase().match(/MicroMessenger/i)) === 'micromessenger';
 		},
 
@@ -169,15 +174,9 @@ export default {
 			});
 		},
 		goWxLogin: function() {
-			// uni.showToast({
-			// 	title:'进来了'
-			// })
-			// #ifdef H5
-			this.getCode();
-			// #endif
-
-			// #ifndef APP-PLUS
-
+			// // #ifdef H5
+			// this.getCode();
+			// // #endif
 			uni.showLoading({
 				title: '加载中'
 			});
@@ -189,29 +188,19 @@ export default {
 					uni.getUserInfo({
 						provider: 'weixin',
 						success: function(infoRes) {
-							uni.showToast({
-								title: '微信' + JSON.stringify(infoRes),
-								icon: 'none',
-								duration: 20000,
-								position: 'center'
-							});
 							console.log(JSON.stringify(infoRes));
 							let formdata = {
-								nickName: infoRes.userInfo.nickName, //昵称
-								avatarUrl: infoRes.userInfo.avatarUrl, //头像
-								openId: infoRes.userInfo.openId //
+								openid: infoRes.userInfo.openId, //
+								unionid: infoRes.userInfo.unionId
 							};
-							var data = {
-								openid: infoRes.userInfo.openId
-							};
-							self.$http.post('/api/common/mb/wx', data).then(res => {
-								// console.log('微信登录返沪' + JSON.stringify(res))
-								// uni.showToast({
-								// 	title:JSON.stringify(res),
-								// 	icon:'none',
-								// 	duration:90000,
-								// 	position:'top'
-								// })
+							console.log( '处理睡觉'+  JSON.stringify(formdata))
+							uni.setStorageSync('wxLoginFalg',true);
+							uni.setStorageSync('unionId', infoRes.userInfo.unionId);
+							uni.setStorageSync('openid', infoRes.userInfo.openId);
+							uni.setStorageSync('nickName', infoRes.userInfo.nickName);
+							uni.setStorageSync('avatarUrl', infoRes.userInfo.avatarUrl);
+							self.$http.post('/api/common/member/wxAppLogin', formdata).then(res => {
+								console.log(JSON.stringify(res))
 								if (res.data.code == 200) {
 									uni.setStorageSync('token', res.data.data.token);
 									uni.setStorageSync('userId', res.data.data.mbId);
@@ -229,7 +218,6 @@ export default {
 				},
 				fail: err => {}
 			});
-			// #endif
 		},
 
 		getIos: function() {
@@ -318,18 +306,6 @@ export default {
 	margin-left: 4%;
 }
 
-// .yzm_moudel {
-// 	width: 184upx;
-// 	height: 68upx;
-// 	line-height: 68upx;
-// 	font-size: 26upx;
-// 	text-align: center;
-// 	border-radius: 10upx;
-// 	color: #fbecdf;
-
-// 	background: linear-gradient(to right, #edcb80, #a58747);
-// }
-
 .img_1 {
 	width: 30upx;
 	height: 30upx;
@@ -341,6 +317,6 @@ export default {
 	margin-top: 4%;
 }
 .wx_log_moudel {
-	margin-top: 15vh;
+	margin-top: 20vh;
 }
 </style>

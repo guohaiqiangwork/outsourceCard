@@ -9,9 +9,7 @@
 							<view class="font_size34 ">{{ detailData.bankName }}</view>
 						</view>
 
-						<view class="font_size20 font_colorff width30 text_right margin_top3" v-if="detailData.promotion">
-							已推广{{ detailData.promotion }}人
-						</view>
+						<view class="font_size20 font_colorff width30 text_right margin_top3" v-if="detailData.promotion">已推广{{ detailData.promotion }}人</view>
 					</view>
 
 					<view class="uni-flex">
@@ -22,14 +20,13 @@
 						<view class="" style="margin-top:4%; width: 1px;height: 96upx;opacity: 0.3;border-left: 1px solid #ffffff;"></view>
 						<view class="width60  margin_top1" style="margin-left: 40upx;">
 							<view class="font_size22 font_colorff  margin_top3">
-									<text style="color: #FEDCDA;" class="font_size22">授信期限</text>
-									<text class="font_size22 margin_left3">{{ detailData.creditPeriod }}</text>
+								<text style="color: #FEDCDA;" class="font_size22">授信期限</text>
+								<text class="font_size22 margin_left3">{{ detailData.creditPeriod }}</text>
 							</view>
 							<view class="font_size22 font_colorff  margin_top3">
-									<text style="color: #FEDCDA;">结算利率</text>
-									<text class="font_size22 margin_left3">{{ detailData.rate }}</text>
+								<text style="color: #FEDCDA;">结算利率</text>
+								<text class="font_size22 margin_left3">{{ detailData.rate }}</text>
 							</view>
-
 						</view>
 					</view>
 				</view>
@@ -59,7 +56,7 @@
 
 					<view class="font_size40 font_weight700 margin_top3u">推广须知</view>
 
-					<view class="margin_top3"><u-parse :content="detailData.promotionNotice" :loading="loading" @preview="preview" @navigate="navigate" /></view>
+					<view class="margin_top3"><u-parse :content="detailData.promotionNotice" :loading="loading" /></view>
 				</view>
 				<view class="bottom_btn uni-flex">
 					<view class="width50 text_center leftB" @click="goPage('1')">我要推广</view>
@@ -71,7 +68,7 @@
 						<view class="product_content_block">
 							<view class="font_size40 margin_top3u font_color22 text_center font_weight700">申请攻略</view>
 							<view class="margin_top3 " style="max-height: 75vh;overflow-y:auto;padding-left: 20upx;padding-right: 20upx;">
-								<u-parse :content="detailData.raidersResult.context" :loading="loading" @preview="preview" @navigate="navigate" />
+								<u-parse :content="detailData.raidersResult.context" :loading="loading" />
 							</view>
 							<view class="moudel_bottom"><view class="moudel_btn" @click="colseMoudel">我知道了</view></view>
 						</view>
@@ -87,12 +84,10 @@
 						<view class="width70 uni-flex">
 							<view class="font_size34 ">{{ detailData.bankName }}</view>
 						</view>
-				
-						<view class="font_size20 font_colorff width30 text_right margin_top3" v-if="detailData.promotion">
-							已推广{{ detailData.promotion }}人
-						</view>
+
+						<view class="font_size20 font_colorff width30 text_right margin_top3" v-if="detailData.promotion">已推广{{ detailData.promotion }}人</view>
 					</view>
-				
+
 					<view class="uni-flex">
 						<view class="width40 text_center">
 							<view class=" font_size50 font_weight700 ">{{ detailData.maxAmount }}</view>
@@ -101,37 +96,16 @@
 						<view class="" style="margin-top:4%; width: 1px;height: 96upx;opacity: 0.3;border-left: 1px solid #ffffff;"></view>
 						<view class="width60  margin_top1" style="margin-left: 40upx;">
 							<view class="font_size22 font_colorff  margin_top3">
-									<text style="color: #FEDCDA;" class="font_size22">授信期限</text>
-									<text class="font_size22 margin_left3">{{ detailData.creditPeriod }}</text>
+								<text style="color: #FEDCDA;" class="font_size22">授信期限</text>
+								<text class="font_size22 margin_left3">{{ detailData.creditPeriod }}</text>
 							</view>
 							<view class="font_size22 font_colorff  margin_top3">
-									<text style="color: #FEDCDA;">结算利率</text>
-									<text class="font_size22 margin_left3">{{ detailData.rate }}</text>
+								<text style="color: #FEDCDA;">结算利率</text>
+								<text class="font_size22 margin_left3">{{ detailData.rate }}</text>
 							</view>
-				
 						</view>
 					</view>
 				</view>
-				
-				<!-- <view class="top_moudel" style="height: 240upx;">
-					<view class="uni-flex   font_weight700">
-						<view class="width70 uni-flex">
-
-							<view class="font_size40 ">{{ detailData.bankName }}</view>
-						</view>
-
-						<view class="font_size20 font_colorff width30 text_right margin_top3" v-if="detailData.promotion">
-							已推广{{ detailData.promotion }}人
-					
-						</view>
-					</view>
-					<view class="font_size24 font_colorff margin_top3">{{ detailData.goodsName }}</view>
-
-					<view class="font_size24 font_colorff margin_top3u">
-						结算利率
-						<text class="font_size30 margin_left3">{{ detailData.rate }}</text>
-					</view>
-				</view> -->
 
 				<view class="page_widthMoudel margin_top4u">
 					<view class="moudel_list" v-if="detailData.raidersResult.name">
@@ -158,7 +132,7 @@
 
 					<view class="font_size40 font_weight700 margin_top3u">推广须知</view>
 
-					<view class="margin_top3"><u-parse :content="detailData.promotionNotice" :loading="loading" @preview="preview" @navigate="navigate" /></view>
+					<view class="margin_top3"><u-parse :content="detailData.promotionNotice" :loading="loading" /></view>
 				</view>
 				<view class="bottom_btn uni-flex">
 					<view class="width50 text_center leftB" @click="goPage('1')">我要推广</view>
@@ -169,7 +143,7 @@
 						<view class="product_content_block">
 							<view class="font_size40 margin_top3u font_color22 text_center font_weight700">申请攻略</view>
 							<view class="margin_top3 " style="max-height: 75vh;overflow-y:auto;padding-left: 20upx;padding-right: 20upx;">
-								<u-parse :content="detailData.raidersResult.context" :loading="loading" @preview="preview" @navigate="navigate" />
+								<u-parse :content="detailData.raidersResult.context" :loading="loading" />
 							</view>
 							<view class="moudel_bottom"><view class="moudel_btn" @click="colseMoudel">我知道了</view></view>
 						</view>
@@ -185,7 +159,7 @@
 						<!-- <image  style="width: 30upx;height: 30upx;" src="../../static/image/icon/close.png" mode=""></image> -->
 					</view>
 					<view class="" style="">
-						<view style="width: 75%;" class="text_right">
+						<view style="width: 95%;" class="text_right">
 							<image @click="colseErMoudel" style="width: 30upx;height: 30upx;" src="../../static/image/icon/close.png" mode=""></image>
 						</view>
 						<view class="font_colorf7 font_size28" style="margin-left: 180upx;">
@@ -193,7 +167,7 @@
 							<text class="font_size32 font_weight700 ">长按图片</text>
 							保存邀请二维码海报
 						</view>
-						
+
 						<!-- <view style="width: 434upx;margin-left: 180upx;" class=" font_size26 font_colorff text_center">
 							点击右上角选择『发送给朋友』或『分享到朋友圈』，邀请朋友一起成为合伙人
 						</view> -->
@@ -201,7 +175,7 @@
 					<view class="uni-flex" style="width: 750upx;padding-left: 10%;padding-right: 5%;">
 						<scroll-view scroll-x="true" class="wrapper" @scroll="nihao">
 							<view class="img_moudel" v-for="(item, index) in posterData" :key="index">
-								<image :src="item" mode="" style="height: 800upx;width: 580upx;border-radius: 10upx;margin-left: 30upx;"></image>
+								<image @longpress="openSaveFenFalg(item)" :src="item" mode="" style="height: 800upx;width: 580upx;border-radius: 10upx;margin-left: 30upx;"></image>
 							</view>
 						</scroll-view>
 					</view>
@@ -219,6 +193,18 @@
 				</view>
 			</view>
 		</template>
+
+		<!-- 保存还会分享 -->
+		<template v-if="saveFenFalg">
+			<view class="moudel_content">
+				<view class="er_moudel">
+					<image @click="colseSaveFenFalg" style="width: 30upx;height: 30upx;" src="../../static/image/icon/close.png" mode=""></image>
+					<view class="text_center font_size40 font_weight700">请选择贷款类型</view>
+					<view class="moudel_btn_one" style="margin-top: 60upx;" @click="saveImgEr">保存图片</view>
+					<view class="moudel_btn_one" style="background-color: #F75349;" @click="wxShare">微信分享</view>
+				</view>
+			</view>
+		</template>
 	</view>
 </template>
 
@@ -232,14 +218,16 @@ export default {
 		return {
 			goodsId: '',
 			moudelFalg: false,
-			detailData: { raidersResult: { name } },
+			detailData: { raidersResult: { name: '' } },
 			loading: false, //开启loading不显示默认值
 			shareaFalg: false,
 			posterData: [],
 			infoData: '',
 			copyFalg: '',
 			copyIndex: 0,
-			dataOne: ''
+			dataOne: '',
+			saveImgData: '',
+			saveFenFalg: false
 		};
 	},
 	onLoad(option) {
@@ -279,9 +267,15 @@ export default {
 			this.dataOne[this.copyIndex].goodsUrl ? (goodsUrl = this.dataOne[this.copyIndex].goodsUrl) : (goodsUrl = '');
 			this.dataOne[this.copyIndex].goodsId ? (goodsId = this.dataOne[this.copyIndex].goodsId) : (goodsId = '');
 			var url =
-				'https://www.hcselected.com/frontend/#/pages/shareUrl/shareUrl?referrerId=' + uni.getStorageSync('userId') + '&flag=2' + '&goodsId=' + goodsId + '&goodsUrl=' + goodsUrl;
-			
-			if (uni.getSystemInfoSync().platform === 'ios'){
+				'https://www.hcselected.com/frontend/#/pages/shareUrl/shareUrl?referrerId=' +
+				uni.getStorageSync('userId') +
+				'&flag=2' +
+				'&goodsId=' +
+				goodsId +
+				'&goodsUrl=' +
+				goodsUrl;
+
+			if (uni.getSystemInfoSync().platform === 'ios') {
 				uni.setClipboardData({
 					data: url,
 					success: function(data) {
@@ -302,45 +296,41 @@ export default {
 					},
 					complete: function(res) {}
 				});
-				return
+				return;
 			}
 			var _this = this;
-			console.log('我在这')
+			console.log('我在这');
 			var data = {
-				mbId:  uni.getStorageSync('userId'),
-				goodsUrl:goodsUrl,
-				type:true,
-				goodsId:goodsId
-				
+				mbId: uni.getStorageSync('userId'),
+				goodsUrl: goodsUrl,
+				type: true,
+				goodsId: goodsId
 			};
 			this.$http.get('/api/common/poster/shortUrl', data, true).then(res => {
-					if(res.data.code == 200){
-						uni.setClipboardData({
-							data: res.data.data,
-							success: function(data) {
-								console.log(data);
-								uni.showToast({
-									title: '复制成功',
-									icon: 'none',
-									duration: 2000,
-									position: 'top'
-								});
-							},
-							fail: function(err) {},
-							complete: function(res) {}
-						});
-					}else{
-						uni.showToast({
-							title: '复制失败',
-							icon: 'none',
-							duration: 2000,
-							position: 'top'
-						});
-					}
-					
+				if (res.data.code == 200) {
+					uni.setClipboardData({
+						data: res.data.data,
+						success: function(data) {
+							console.log(data);
+							uni.showToast({
+								title: '复制成功',
+								icon: 'none',
+								duration: 2000,
+								position: 'top'
+							});
+						},
+						fail: function(err) {},
+						complete: function(res) {}
+					});
+				} else {
+					uni.showToast({
+						title: '复制失败',
+						icon: 'none',
+						duration: 2000,
+						position: 'top'
+					});
+				}
 			});
-			
-			
 		},
 		goEr: function(item, type) {
 			console.log('99');
@@ -450,6 +440,92 @@ export default {
 			// 		'&type=' +
 			// 		item
 			// });
+		},
+
+		// 长按图片
+		openSaveFenFalg: function(item) {
+			console.log(item);
+			var _this = this;
+			_this.saveImgData = item;
+			_this.saveFenFalg = true;
+		},
+		colseSaveFenFalg: function() {
+			var _this = this;
+			_this.saveFenFalg = false;
+		},
+		// 弹窗保存
+		saveImgEr: function(item) {
+			console.log(item);
+			uni.showLoading({
+				title: '保存中'
+			});
+			var _this = this;
+			uni.downloadFile({
+				url: _this.saveImgData, //图片地址
+				success: res => {
+					uni.hideLoading();
+					if (res.statusCode === 200) {
+						uni.saveImageToPhotosAlbum({
+							filePath: res.tempFilePath,
+							success: function() {
+								_this.saveFenFalg = false;
+								uni.showToast({
+									title: '保存成功',
+									icon: 'none'
+								});
+							},
+							fail: function() {
+								uni.showToast({
+									title: '保存失败',
+									icon: 'none'
+								});
+							}
+						});
+					}
+				}
+			});
+		},
+
+		wxShare: function() {
+			var _this = this;
+			let goodsId = '';
+			let goodsUrl = '';
+			this.dataOne[this.copyIndex].goodsUrl ? (goodsUrl = this.dataOne[this.copyIndex].goodsUrl) : (goodsUrl = '');
+			this.dataOne[this.copyIndex].goodsId ? (goodsId = this.dataOne[this.copyIndex].goodsId) : (goodsId = '');
+			// let goodsUrl = '';
+			// this.dataOne[this.copyIndex].goodsUrl ? (goodsUrl = this.dataOne[this.copyIndex].goodsUrl) : (goodsUrl = '');
+			var url =
+				'https://www.hcselected.com/frontend/#/pages/shareUrl/shareUrl?referrerId=' +
+				uni.getStorageSync('userId') +
+				'&flag=2' +
+				'&goodsId=' +
+				goodsId +
+				'&goodsUrl=' +
+				goodsUrl;
+			//分享到微信朋友
+			console.log(url);
+			uni.showLoading({
+				title: '分享中'
+			});
+			uni.share({
+				provider: 'weixin',
+				scene: 'WXSceneSession',
+				type: 0,
+				href: url,
+				title: '汇创精选',
+				summary: '让   生   活    更   优   质 ',
+				imageUrl: _this.saveImgData,
+				success: function(res) {
+					uni.hideLoading();
+					_this.colseSaveFenFalg();
+					if (res) {
+						console.log('success:' + JSON.stringify(res));
+					}
+				},
+				fail: function(err) {
+					console.log('fail:' + JSON.stringify(err));
+				}
+			});
 		}
 	}
 };
@@ -572,5 +648,29 @@ page {
 	font-size: 32upx;
 	margin-top: 10upx;
 	margin-left: 50upx;
+}
+// 弹窗
+.er_moudel {
+	background-color: #ffffff;
+	width: 80%;
+	margin-left: 6%;
+	position: absolute;
+	top: 20%;
+	padding: 30upx;
+	border-radius: 20upx;
+	padding-top: 60upx;
+	padding-bottom: 60upx;
+}
+.moudel_btn_one {
+	height: 88upx;
+	background: #2b65eb;
+	border-radius: 44upx;
+	text-align: center;
+	line-height: 88upx;
+	color: #ffffff;
+	font-size: 32upx;
+	width: 80%;
+	margin-left: 10%;
+	margin-top: 30upx;
 }
 </style>

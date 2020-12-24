@@ -63,7 +63,10 @@
 </template>
 
 <script>
+// #ifdef H5
 var jweixin = require('jweixin-module');
+// #endif
+
 export default {
 	data() {
 		return {
@@ -168,12 +171,7 @@ export default {
 
 		// 去支付
 		goPay: function() {
-			// uni.showToast({
-			// 	title: '功能正在赶来，敬请期待',
-			// 	icon: 'none',
-			// 	duration: 1500,
-			// 	position: 'center'
-			// });
+			// #ifdef H5
 			var data = {
 				mbId: uni.getStorageSync('userId')
 			};
@@ -192,16 +190,58 @@ export default {
 				})
 				.catch(err => {});
 
-			// return;
-			// var data = {
-			// 	mbId: uni.getStorageSync('userId'),
-			// 	courseId: this.detailData.id
-			// };
-			// // 课程详情
-			// this.$http.post('/api/order/goodsOrder', data, true).then(res => {
-			// 	console.log(JSON.stringify(res));
-			// 	this.detailData = res.data.data;
-			// });
+			// #endif
+
+			// #ifdef APP-PLUS
+			console.log('999');
+			var data = {
+				mbId: uni.getStorageSync('userId')
+			};
+			this.$http
+				.post('/api/order/openVip', data, true)
+				.then(res => {
+					if (res.data.code == 200) {
+						var dataOne = {
+							orderNo: res.data.data.orderNo
+						};
+						this.$http.post('/api/wx/opvipAppOrderUnifiedOrder', dataOne, true).then(res => {
+							console.log(res);
+							this.Wxpay(res.data);
+						});
+					}
+				})
+				.catch(err => {});
+			// #endif
+		},
+		// 微信支付
+		Wxpay: function(res) {
+			this.pay('wxpay', res.data);
+		},
+		pay: function(type, pay) {
+			var weiXin = pay;
+			var data = {
+				appid: weiXin.appId,
+				noncestr: weiXin.nonceStr,
+				package: weiXin.packageValue, // 固定值，以微信支付文档为主
+				partnerid: weiXin.partnerId,
+				prepayid: weiXin.prepayId,
+				timestamp: weiXin.timeStamp,
+				sign: weiXin.sign // 根据签名算法生成签名
+			};
+			type == 'wxpay' ? (pay = data) : (pay = pay);
+			uni.requestPayment({
+				provider: type,
+				orderInfo: pay, //微信、支付宝订单数据
+				success: function(res) {
+					uni.navigateTo({
+						url: '../payResult/payResult'
+					});
+					console.log('success:' + JSON.stringify(res));
+				},
+				fail: function(err) {
+					console.log('fail:' + JSON.stringify(err));
+				}
+			});
 		}
 	}
 };

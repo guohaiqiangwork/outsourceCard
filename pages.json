@@ -30,28 +30,34 @@
 	    
         ,{
             "path" : "pages/tabBar/two/two",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
+            "style": {
+            	"app-plus": {
+            		"titleNView": false,
+            		"backgroundTextStyle": "dark"
+            	},
+            	"enablePullDownRefresh": false
             }
             
         },
 		{
 		    "path" : "pages/tabBar/three/three",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false
+		    "style": {
+		    	"app-plus": {
+		    		"titleNView": false,
+		    		"backgroundTextStyle": "dark"
+		    	},
+		    	"enablePullDownRefresh": false
 		    }
 		    
 		}
         ,{
             "path" : "pages/tabBar/four/four",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
+            "style": {
+            	"app-plus": {
+            		"titleNView": false,
+            		"backgroundTextStyle": "dark"
+            	},
+            	"enablePullDownRefresh": false
             }
             
         }
@@ -573,11 +579,11 @@
         }
     ],
 	"globalStyle": {
-		"navigationStyle":"custom",//标题类型
+		// "navigationStyle":"custom",//标题类型
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"navigationBarTitleText": "汇创精选",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": "#FFFFFF"
 	},
 	"tabBar": {
 		"color": "#999999",

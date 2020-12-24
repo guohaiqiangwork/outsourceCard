@@ -103,7 +103,7 @@ export default {
 		return {
 			nameFalg: false,//名字
 			wxFalg:false,
-			infoData:'',
+			infoData:{mobile:''},
 			isVerified:true
 		};
 	},

@@ -1,6 +1,5 @@
 export default {
     memberObj:{
-        // hostUrl:'http://192.168.0.101',
 		hostUrl:'https://www.hcselected.com/service',
 		
     },

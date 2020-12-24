@@ -125,61 +125,115 @@ export default {
 
 		// 立即登录
 		bingYCode: function() {
-			// uni.switchTab({
-			// 	url:'../tabBar/one/one'
-			// });
-			// return
-			var loginData = {
-				phone: this.userPhone,
-				code: this.phoneCode,
-				openid: uni.getStorageSync('openId'),
-				headImgurl: uni.getStorageSync('headImgUrl'),
-				nickName: uni.getStorageSync('nickname')
-			};
-
-			if (!/^1[3456789]\d{9}$/.test(this.userPhone)) {
-				uni.showToast({
-					title: '请输入正确的11位手机号码',
-					icon: 'none',
-					duration: 1500,
-					position: 'center'
-				});
-				return false;
-			} else if (this.phoneCode.length < 4 || this.phoneCode.length > 15) {
-				uni.showToast({
-					title: '验证码请输入不少于6位',
-					icon: 'none',
-					duration: 1500,
-					position: 'center'
-				});
-				return false;
-			}
-			this.$http
-				.post('/api/common/mb/wxBindPhone', loginData)
-				.then(res => {
-					console.log('登录返回结果' + JSON.stringify(res));
-					if (res.data.code == 200) {
-						uni.setStorageSync('token', res.data.data.token);
-						uni.setStorageSync('userId', res.data.data.mbId);
-						uni.switchTab({
-							url: '../tabBar/one/one'
-						});
-					} else if (res.data.code == 300) {
-						uni.navigateTo({
-							url: '../bindingCode/bindingCode?phone=' + this.userPhone
-						});
-					} else {
-						this.msgErr = res.data.message;
-					}
-				})
-				.catch(err => {
+			if(uni.getStorageSync('wxLoginFalg')){
+				
+				var loginData = {
+					phone: this.userPhone,
+					code: this.phoneCode,
+					openid: uni.getStorageSync('openid'),
+					headImgurl: uni.getStorageSync('avatarUrl'),
+					nickName: uni.getStorageSync('nickName'),
+					unionid:uni.getStorageSync('unionId')
+				};
+				console.log('我是参数' + JSON.stringify(loginData))
+				if (!/^1[3456789]\d{9}$/.test(this.userPhone)) {
 					uni.showToast({
-						title: err.data.message,
+						title: '请输入正确的11位手机号码',
 						icon: 'none',
 						duration: 1500,
 						position: 'center'
 					});
-				});
+					return false;
+				} else if (this.phoneCode.length < 4 || this.phoneCode.length > 15) {
+					uni.showToast({
+						title: '验证码请输入不少于6位',
+						icon: 'none',
+						duration: 1500,
+						position: 'center'
+					});
+					return false;
+				}
+				this.$http
+					.post('/api/common/mb/wxAppBindPhone', loginData)
+					.then(res => {
+						console.log('登录返回结果' + JSON.stringify(res));
+						if (res.data.code == 200) {
+							uni.setStorageSync('token', res.data.data.token);
+							uni.setStorageSync('userId', res.data.data.mbId);
+							uni.switchTab({
+								url: '../tabBar/one/one'
+							});
+						} else if (res.data.code == 300) {
+							uni.navigateTo({
+								url: '../bindingCode/bindingCode?phone=' + this.userPhone
+							});
+						} else {
+							this.msgErr = res.data.message;
+						}
+					})
+					.catch(err => {
+						uni.showToast({
+							title: err.data.message,
+							icon: 'none',
+							duration: 1500,
+							position: 'center'
+						});
+					});
+			}else{
+				
+				var loginData = {
+					phone: this.userPhone,
+					code: this.phoneCode,
+					openid: uni.getStorageSync('openId'),
+					headImgurl: uni.getStorageSync('headImgUrl'),
+					nickName: uni.getStorageSync('nickname')
+				};
+				
+				if (!/^1[3456789]\d{9}$/.test(this.userPhone)) {
+					uni.showToast({
+						title: '请输入正确的11位手机号码',
+						icon: 'none',
+						duration: 1500,
+						position: 'center'
+					});
+					return false;
+				} else if (this.phoneCode.length < 4 || this.phoneCode.length > 15) {
+					uni.showToast({
+						title: '验证码请输入不少于6位',
+						icon: 'none',
+						duration: 1500,
+						position: 'center'
+					});
+					return false;
+				}
+				this.$http
+					.post('/api/common/mb/wxBindPhone', loginData)
+					.then(res => {
+						console.log('登录返回结果' + JSON.stringify(res));
+						if (res.data.code == 200) {
+							uni.setStorageSync('token', res.data.data.token);
+							uni.setStorageSync('userId', res.data.data.mbId);
+							uni.switchTab({
+								url: '../tabBar/one/one'
+							});
+						} else if (res.data.code == 300) {
+							uni.navigateTo({
+								url: '../bindingCode/bindingCode?phone=' + this.userPhone
+							});
+						} else {
+							this.msgErr = res.data.message;
+						}
+					})
+					.catch(err => {
+						uni.showToast({
+							title: err.data.message,
+							icon: 'none',
+							duration: 1500,
+							position: 'center'
+						});
+					});
+			}
+			
 		},
 
 		// 去用户协议 去隐私协议

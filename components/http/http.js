@@ -10,7 +10,7 @@ http.setConfig((config) => { /* 设置全局配置 */
 		 // config.baseUrl = 'http://rdquvc.natappfree.cc';
 		// console.log('开发环境H5')　　　　　　　　　　　　　　
 	} else {
-		config.baseUrl = 'http://service.expresslines.cn/';
+		config.baseUrl = 'https://www.hcselected.com/service';
 	}
 	config.header = {
 		//token: token,
