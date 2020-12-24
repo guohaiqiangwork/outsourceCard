@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="page_widthMoudel " style="padding-top: 80upx;">
+		<view class="page_widthMoudel " style="padding-top: 30upx;">
 			<view class="font_size44">绑定下级</view>
 			<view class="font_sise26 font_color99" style="margin-top: 100upx;">手机号</view>
 			<view class="margin_top5u border_bottom"><input type="text" value="" @input="getPhone" /></view>

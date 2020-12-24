@@ -1,6 +1,6 @@
 <template>
 	<view class="padding_bottom3" style="padding-bottom: 120upx;">
-		<view class="background_color2b" style="height: 440upx;">
+		<view class="background_color2b" style="height: 440upx;padding-top:calc( var(--status-bar-height))">
 			<view class="page_widthMoudel " style="padding-top: 5%;">
 				<view class="display_space uni-flex">
 					<view class="" @click="goToPage('setUp')"><image style="width: 35upx;height: 38upx;" src="../../../static/image/icon/set.png" mode=""></image></view>
@@ -158,7 +158,8 @@
 			<view class="moudel_content_myE" style="background-color: #FFFFFF;">
 				<view class="imgEr_moudel">
 					<view class="" style="margin-top: 60upx;">
-						<view class="text_right" style="width: 75%;">
+			
+						<view class="text_right" style="width: 75%;padding-top:calc(30px +  var(--status-bar-height))">
 							<image @click="colseMoudel" style="width: 30upx;height: 30upx;" src="../../../static/image/icon/close.png" mode=""></image>
 						</view>
 						<view class="font_colorf7 font_size28" style="margin-left: 180upx;">

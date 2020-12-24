@@ -2,7 +2,7 @@
 	<view>
 		<!-- 个人贷款 -->
 		<template v-if="falg == 1">
-			<view class="page_widthMoudel padding_bottom3" style="padding-top:calc(30upx +  var(--status-bar-height))">
+			<view class="page_widthMoudel padding_bottom3" style="padding-top:30upx">
 				<view style="border-top-left-radius: 10upx;border-top-right-radius: 10upx;" class="background_color2b padding_bottom3 padding_top3 padding_left3 padding_right3">
 					<view class="uni-flex display_space">
 						<view class="font_size32 font_colorff font_weight700">匹配贷款</view>
@@ -135,7 +135,7 @@
 		</template>
 		<!-- 企业 -->
 		<template v-if="falg == 2">
-			<view class="page_widthMoudel padding_bottom3" style="padding-top:calc(30upx +  var(--status-bar-height))">
+			<view class="page_widthMoudel padding_bottom3" style="padding-top:30upx">
 				<view style="border-top-left-radius: 10upx;border-top-right-radius: 10upx;" class="background_color2b padding_bottom3 padding_top3 padding_left3 padding_right3">
 					<view class="uni-flex display_space">
 						<view class="font_size32 font_colorff font_weight700">匹配贷款</view>

@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="background_color2b" style="height: 200upx;"></view>
+		<view class="background_color2b" style="height: 240upx;"></view>
 
 		<view class="margin_top3">
 			<swiper class="imageContainer" circular autoplay>

@@ -20,7 +20,7 @@
 				简介
 			</view>
 			<view class="" style="padding-bottom: 120upx;">
-				<u-parse :content="detailData.context" :loading="loading" @preview="preview" @navigate="navigate" />
+				<u-parse :content="detailData.context" :loading="loading" />
 			</view>
 		</view>
 		<view @click="goOrder" class="bottm_btn" v-if="!openVip" >

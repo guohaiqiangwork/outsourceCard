@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view style="padding-top:calc(30px +  var(--status-bar-height))" class="background_color2b font_colorff padding_top3 padding_left3 padding_right3 padding_bottom3">
+		<view class="background_color2b font_colorff padding_top3 padding_left3 padding_right3 padding_bottom3">
 			<view class="font_sise30">可提现（元）</view>
 			<view class="uni-flex display_space">
 				<view style="font-size: 60upx ;" class="font_weight700">{{totalRevenue.balance}}</view>

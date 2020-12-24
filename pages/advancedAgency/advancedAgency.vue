@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="page_widthMoudel" style="padding-top:calc(30upx +  var(--status-bar-height))">
+		<view class="page_widthMoudel" >
 			<view @click="goDetail(item)" v-for="(item, index) in listData" :key="index" class="border_bottom padding_bottom3 padding_top3 uni-flex">
 				<view class="width30"><image style="width: 180upx;height: 180upx;border-radius: 10upx;" :src="item.pictureUrl" mode=""></image></view>
 				<view class="width75">

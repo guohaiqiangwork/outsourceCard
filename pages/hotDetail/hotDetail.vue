@@ -1,8 +1,7 @@
 <template>
 	<view>
-		<view class="">
-			<u-parse :content="hotDetail.detail" :loading="loading" @preview="preview" @navigate="navigate" />
-			
+		<view class="" style="padding: 30upx;">
+			<u-parse :content="hotDetail.detail" :loading="loading"  />
 		</view>
 	</view>
 </template>

@@ -1,6 +1,6 @@
 <template>
 	<view class="">
-		<view class="background_colorff" style="padding-top:calc(70upx +  var(--status-bar-height));padding-bottom: 60upx;">
+		<view class="background_colorff" style="padding-bottom: 60upx;">
 			<view class="page_widthMoudel">
 				<view class="uni-flex display_space">
 					<view class="width50" @click="openName">

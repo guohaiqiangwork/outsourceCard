@@ -254,7 +254,7 @@
             "path" : "pages/loanMatching/loanMatching",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "匹配贷款",
                 "enablePullDownRefresh": false
             }
             
