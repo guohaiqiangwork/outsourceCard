@@ -90,7 +90,7 @@
 									{{ item.highestReturn }}
 									<text class="font_size24">%</text>
 								</view>
-								<view class="font_size22 font_color99">最高反</view>
+								<view class="font_size22 font_color99">最高返</view>
 							</view>
 							<view class="width50 margin_top2">
 								<view class="font_size38 font_weight700 font_color22">{{ item.minAmount }}-{{ item.maxAmount }}</view>
