@@ -14,7 +14,7 @@
 								100
 								<text class="font_size24">元</text>
 							</view>
-							<view class="font_size22 font_color99">最高返</view>
+							<view class="font_size22 font_color99">最高返佣</view>
 						</view>
 						<view class="width50 margin_top3">
 							<view class="font_size28 font_weight700 font_color22">中信信用卡面签版</view>
