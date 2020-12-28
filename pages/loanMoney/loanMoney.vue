@@ -52,7 +52,7 @@
 								{{ item.highestReturn }}
 								<!-- <text class="font_size24">%</text> -->
 							</view>
-							<view class="font_size22 font_colorf4">最高返</view>
+							<view class="font_size22 font_colorf4">最高返佣</view>
 						</view>
 						<view class="width50 margin_top2 text_center">
 							<view class="font_size38 font_weight700 font_color22">{{ item.maxAmount }}</view>
