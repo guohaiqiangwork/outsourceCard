@@ -2,7 +2,8 @@
 	<view>
 		<view class="text_center " style="padding-top: 80upx;">
 			<view class=""><image src="../../static/image/noData/7.png" style="width: 365upx;height: 394upx;" mode=""></image></view>
-			<view class="font_size30 margin_top3u">支付成功</view>
+			<view class="font_size30 margin_top3u" v-if="type == 1">支付成功</view>
+			<view class="font_size30 margin_top3u" v-if="type == 2">支付失败</view>
 
 			<view class="btn" @click="goHome">完成</view>
 		</view>
@@ -12,7 +13,12 @@
 <script>
 export default {
 	data() {
-		return {};
+		return {
+			type:''
+		};
+	},
+	onLoad(option) {
+		this.type = option.type
 	},
 	methods: {
 		goHome:function(){

@@ -354,8 +354,8 @@ export default {
 			this.dataOne[this.copyIndex].goodsUrl ? (goodsUrl = this.dataOne[this.copyIndex].goodsUrl) : (goodsUrl = '');
 			var url = 'https://www.hcselected.com/frontend/#/pages/shareUrl/shareUrl?referrerId=' + uni.getStorageSync('userId') + '&flag=false' + '&goodsUrl=' + goodsUrl;
 			var _this = this;
-			
-			if (uni.getSystemInfoSync().platform === 'ios'){
+
+			if (uni.getSystemInfoSync().platform === 'ios') {
 				uni.setClipboardData({
 					data: url,
 					success: function(data) {
@@ -376,7 +376,7 @@ export default {
 					},
 					complete: function(res) {}
 				});
-				return
+				return;
 			}
 			var data = {
 				mbId: uni.getStorageSync('userId'),
@@ -387,27 +387,26 @@ export default {
 			this.$http.get('/api/common/poster/shortUrl', data, true).then(res => {
 				if (res.data.code == 200) {
 					_this.copyDataOne = JSON.stringify(res.data.data);
-						uni.setClipboardData({
-							data: res.data.data,
-							success: function(data) {
-								uni.showToast({
-									title: '复制成功',
-									icon: 'none',
-									duration: 2000,
-									position: 'top'
-								});
-							},
-							fail: function(err) {
-								uni.showToast({
-									title: err,
-									icon: 'none',
-									duration: 2000,
-									position: 'top'
-								});
-							},
-							complete: function(res) {}
-						});
-				
+					uni.setClipboardData({
+						data: res.data.data,
+						success: function(data) {
+							uni.showToast({
+								title: '复制成功',
+								icon: 'none',
+								duration: 2000,
+								position: 'top'
+							});
+						},
+						fail: function(err) {
+							uni.showToast({
+								title: err,
+								icon: 'none',
+								duration: 2000,
+								position: 'top'
+							});
+						},
+						complete: function(res) {}
+					});
 				} else {
 					uni.showToast({
 						title: '复制失败,请重试',

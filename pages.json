@@ -575,7 +575,7 @@
 	"globalStyle": {
 		"navigationStyle":"custom",//标题类型
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "",
+		"navigationBarTitleText": "汇创精选",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	},
