@@ -103,7 +103,7 @@
 			</view>
 			<view class="margin_top2">
 				<view
-					@click="goPromotion('trainingDetail', '代理攻略', item)"
+					@click="goPromotion('trainingDetail', '攻略', item)"
 					v-for="(item, index) in agentData"
 					:key="index"
 					class="border_bottom padding_bottom3 padding_top3 uni-flex"
