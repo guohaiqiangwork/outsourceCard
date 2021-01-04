@@ -554,7 +554,7 @@
             "path" : "pages/shareUrl/shareUrl",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "邀请好友",
+                "navigationBarTitleText": "立即加入合伙人",
                 "enablePullDownRefresh": false
             }
             
