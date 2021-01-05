@@ -133,13 +133,13 @@ export default {
 						console.log(res);
 						// var route =  'payResult' + '?type=1'
 						uni.navigateTo({
-							url: '../payResult/payResult'
+							url: '../payResult/payResult?type=1'
 						});
 					},
 					cancel: function(r) {
 						// var route =  'payResult' + '?type=2'
 						uni.navigateTo({
-							url: '../payResult/payResult'
+							url: '../payResult/payResult?type=2'
 						});
 					},
 					fail: function(res) {

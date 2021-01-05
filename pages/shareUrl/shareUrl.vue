@@ -64,7 +64,7 @@
 						<view class="font_size50 font_color2b" style="position: absolute;margin-top: 330upx;margin-left: 15%;z-index: 2;">3%</view>
 						<image src="../../static/image/my/1.png" style="width: 100%;height: 524upx;" mode=""></image>
 					</view>
-					<view class="font_size44  margin_top3u">邀请好友</view>
+					<view class="font_size44  margin_top3u">合伙人招募</view>
 
 					<view class=" margin_top3u">
 						<view class="">
@@ -130,7 +130,7 @@
 						<view class="font_size50 font_color2b" style="position: absolute;margin-top: 330upx;margin-left: 15%;z-index: 2;">3%</view>
 						<image src="../../static/image/my/1.png" style="width: 100%;height: 524upx;" mode=""></image>
 					</view>
-					<view class="font_size44  margin_top3u">邀请好友</view>
+					<view class="font_size44  margin_top3u">合伙人招募</view>
 
 					<view class=" margin_top3u">
 						<view class="">

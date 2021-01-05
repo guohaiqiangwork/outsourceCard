@@ -548,7 +548,7 @@
             "path" : "pages/shareUrl/shareUrl",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "邀请好友",
+                "navigationBarTitleText": "合伙人招募",
                 "enablePullDownRefresh": false
             }
             
