@@ -20,7 +20,7 @@
 						<validcode :maxlength="4" :isPwd="false" @finish="getPwd" ref="yzm"></validcode>
 				</view>
 				<view class="font_sise24 font_color99 margin_top4u">
-					该手机号将用于接受汇创精选业务的短信通知
+					该手机号将用于接受慧伙业务的短信通知
 				</view>
 				<view class="btn_phone" @click="setP">
 					更换手机号

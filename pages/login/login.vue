@@ -3,7 +3,7 @@
 		<view class="">
 			<image style="height: 100%;" src="../../static/image/logB.png" mode="" class="image_width"></image>
 			<view class="login_moudel" v-if="false">
-				<view class="font_color00 font_size50 font_weight700">欢迎登录汇创精选</view>
+				<view class="font_color00 font_size50 font_weight700">欢迎登录慧伙</view>
 				<view class="font_size30 font_color99">未注册的手机号验证通过后将自动注册</view>
 				<view class="font_size30 font_color99" style="margin-top: 100upx;">请输入手机号码</view>
 				<view class="uni-flex" style="margin-top: 60upx;">

@@ -1,5 +1,5 @@
 {
-    "name" : "outsourceCard",
+    "name" : "慧伙",
     "appid" : "__UNI__84A8F19",
     "description" : "",
     "versionName" : "1.0.0",
@@ -78,7 +78,7 @@
         "enable" : false
     },
     "h5" : {
-        "title" : "汇创精选",
+        "title" : "慧伙",
         "domain" : "https://www.hcselected.com/frontend",
         "router" : {
             "base" : "./"

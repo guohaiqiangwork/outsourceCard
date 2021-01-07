@@ -87,7 +87,8 @@ export default {
 			areaList: [{ label: '' }],
 			indexAre: 0,
 			provinceData: '请选择',
-			cityData: '请选择'
+			cityData: '请选择',
+			typeCard:''
 		};
 	},
 	onLoad(option) {
@@ -95,6 +96,10 @@ export default {
 		// citys:cityList[this.defaultVal[0]],
 		console.log(option.typeId);
 		this.typeId = option.typeId;
+		if( option.type){
+			this.typeCard = option.type;//判断是否全部
+		}
+		
 		this.getTwoList();
 		this.init();
 		this.getAddressList(); //获取省市
@@ -185,12 +190,17 @@ export default {
 			rebateRatio == '全部' ? (rebateRatio = '') : (rebateRatio = this.rebateRatioList[this.index].name);
 			let cycle = this.billingCycleList[this.index].name;
 			cycle == '全部' ? (cycle = '') : (cycle = this.billingCycleList[this.index].name);
-			if (e) {
-				(this.provinceData = '请选择'), (this.cityData = '请选择');
+			if (this.typeCard == '全部') {
+				var pData = '';
+				var cData = '';
+				this.provinceData == '请选择' ? (pData = '') : (pData = this.provinceData);
+				this.cityData == '请选择' ? (cData = '') : (cData = this.cityData);
+				
+				console.log('8888')
 				var data = {
 					// cid1: this.typeId,
 					cid2: this.tabFalg,
-					area: '',
+					area: pData + '_' + cData,
 					rebateRatio: rebateRatio,
 					cycle: cycle,
 					whetherSelected: 1
@@ -201,7 +211,7 @@ export default {
 				this.provinceData == '请选择' ? (pData = '') : (pData = this.provinceData);
 				this.cityData == '请选择' ? (cData = '') : (cData = this.cityData);
 				var data = {
-					// cid1: this.typeId,
+					cid1: this.typeId,
 					cid2: this.tabFalg,
 					area: pData + '_' + cData,
 					rebateRatio: rebateRatio,

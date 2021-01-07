@@ -124,7 +124,7 @@
 			<view class="uni-flex  margin_top5" >
 				<view class="font_size36 font_color22 width50">精选产品</view>
 				<view class="uni-flex width50 display_right">
-					<view class="font_size26 font_color99 " @click="goLoanM(featuredDiscovery[0].cid1)">查看全部</view>
+					<view class="font_size26 font_color99 " @click="goLoanM(featuredDiscovery[0].cid1,'全部')">查看全部</view>
 					<view class="margin_left3"><image style="width: 12upx;height: 20upx;" src="../../../static/image/icon/right99.png" mode=""></image></view>
 				</view>
 			</view>
@@ -166,7 +166,7 @@
 			
 			<view class="uni-flex display_center margin_top5">
 				<view class=""><image style="width: 26upx;height: 26upx;" src="../../../static/image/my/log.png" mode=""></image></view>
-				<view class="font_size26 margin_left3 font_weight700">汇创精选</view>
+				<view class="font_size26 margin_left3 font_weight700">慧伙</view>
 			</view>
 			
 			<view class="font_size22 font_color99 text_center">您的专业推广顾问，24小时贴心服务</view>
@@ -297,9 +297,9 @@ export default {
 		},
 
 		// 去精选贷款
-		goLoanM: function(id) {
+		goLoanM: function(id,type) {
 			uni.navigateTo({
-				url: '../../loanMoney/loanMoney?typeId=' + id
+				url: '../../loanMoney/loanMoney?typeId=' + id + '&type=' + type
 			});
 		},
 		// 推广产品
