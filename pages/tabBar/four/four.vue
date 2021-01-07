@@ -124,7 +124,7 @@
 
 			<view class="uni-flex display_center margin_top5">
 				<view class=""><image style="width: 26upx;height: 26upx;" src="../../../static/image/my/log.png" mode=""></image></view>
-				<view class="font_size26 margin_left3 font_weight700">汇创精选</view>
+				<view class="font_size26 margin_left3 font_weight700">慧伙</view>
 			</view>
 
 			<view class="font_size22 font_color99 text_center">您的专业推广顾问，24小时贴心服务</view>

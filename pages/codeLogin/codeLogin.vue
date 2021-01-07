@@ -5,7 +5,7 @@
 			
 			<view class="login_moudel">
 				<view class="font_size50 font_weight700">
-					欢迎登录汇创精选
+					欢迎登录慧伙
 				</view>
 				<view class="font_size30 font_color99" style="margin-top: 80upx;">
 					验证码发送至

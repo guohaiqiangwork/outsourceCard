@@ -21,7 +21,7 @@
 				<view class=""><image src="../../static/image/icon/right99.png" style="width: 14upx;height: 24upx;" mode=""></image></view>
 			</view>
 		</view>
-		<view class="font_size22 font_color99 text_center" style="position: fixed; bottom :3%;width:100%">@汇创精选 版权所有</view>
+		<view class="font_size22 font_color99 text_center" style="position: fixed; bottom :3%;width:100%">@慧伙 版权所有</view>
 	</view>
 </template>
 

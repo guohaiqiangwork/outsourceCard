@@ -15,19 +15,18 @@
 			<view class="width30 margin_left3">
 				<picker @change="bindPickerChange1" :value="index1" :range="provinceList" range-key="label">
 					<view class="uni-input text_hidden">
-						{{provinceData}}
-					<!-- {{ provinceList[index1].label }} -->
-				</view>
-				
+						{{ provinceData }}
+						<!-- {{ provinceList[index1].label }} -->
+					</view>
 				</picker>
 				<view class="padding_top2"><image src="../../static/image/icon/homeDown.png" class="selsect_img" mode=""></image></view>
 			</view>
 			<view class="width30 margin_left3">
 				<picker @change="bindPickerChange" :value="indexAre" :range="areaList" range-key="label">
 					<view class="uni-input text_hidden">
-						{{cityData}}
-					<!-- {{ areaList[indexAre].label }} -->
-				</view>
+						{{ cityData }}
+						<!-- {{ areaList[indexAre].label }} -->
+					</view>
 				</picker>
 				<view class="padding_top2"><image src="../../static/image/icon/homeDown.png" class="selsect_img" mode=""></image></view>
 			</view>
@@ -87,8 +86,9 @@ export default {
 			provinceList: [{ label: '' }],
 			areaList: [{ label: '' }],
 			indexAre: 0,
-			provinceData:'请选择',
-			cityData:'请选择'
+			provinceData: '请选择',
+			cityData: '请选择',
+			typeCard:''
 		};
 	},
 	onLoad(option) {
@@ -96,6 +96,10 @@ export default {
 		// citys:cityList[this.defaultVal[0]],
 		console.log(option.typeId);
 		this.typeId = option.typeId;
+		if( option.type){
+			this.typeCard = option.type;//判断是否全部
+		}
+		
 		this.getTwoList();
 		this.init();
 		this.getAddressList(); //获取省市
@@ -130,10 +134,10 @@ export default {
 		bindPickerChange1: function(e) {
 			console.log('picker发送选择改变，携带值为：' + e.detail.value);
 			this.index1 = e.detail.value;
-			var dataR =  this.provinceList[this.index1].label
+			var dataR = this.provinceList[this.index1].label;
 			this.provinceData = dataR;
 			this.getArea(this.provinceList[this.index1].value);
-			this.cityData ='请选择'
+			this.cityData = '请选择';
 			this.getLoanList();
 		},
 
@@ -144,14 +148,13 @@ export default {
 			};
 			this.$http.get('/api/common/area/list', data, true).then(res => {
 				this.areaList = res.data.data;
-				
 			});
 		},
 		// 分类
 		bindPickerChange: function(e) {
 			console.log('picker发送选择改变，携带值为：' + e.detail.value);
 			this.indexAre = e.detail.value;
-			this.cityData = this.areaList[this.indexAre].label
+			this.cityData = this.areaList[this.indexAre].label;
 			this.getLoanList();
 		},
 
@@ -174,7 +177,7 @@ export default {
 			plus.key.hideSoftKeybord();
 			this.$refs['region'].show();
 		},
-		onConfirm:function(val) {
+		onConfirm: function(val) {
 			this.area = val.checkArr[1];
 			this.getLoanList();
 		},
@@ -187,27 +190,33 @@ export default {
 			rebateRatio == '全部' ? (rebateRatio = '') : (rebateRatio = this.rebateRatioList[this.index].name);
 			let cycle = this.billingCycleList[this.index].name;
 			cycle == '全部' ? (cycle = '') : (cycle = this.billingCycleList[this.index].name);
-			if (e) {
-				this.provinceData='请选择',
-			this.cityData='请选择'
+			if (this.typeCard == '全部') {
+				var pData = '';
+				var cData = '';
+				this.provinceData == '请选择' ? (pData = '') : (pData = this.provinceData);
+				this.cityData == '请选择' ? (cData = '') : (cData = this.cityData);
+				
+				console.log('8888')
 				var data = {
-					cid1: this.typeId,
+					// cid1: this.typeId,
 					cid2: this.tabFalg,
-					area: '',
+					area: pData + '_' + cData,
 					rebateRatio: rebateRatio,
-					cycle: cycle
+					cycle: cycle,
+					whetherSelected: 1
 				};
 			} else {
-				var pData ='';
+				var pData = '';
 				var cData = '';
-				this.provinceData  == '请选择' ? pData = '' : pData = this.provinceData;
-				this.cityData  == '请选择' ? cData = '' : cData = this.cityData;
+				this.provinceData == '请选择' ? (pData = '') : (pData = this.provinceData);
+				this.cityData == '请选择' ? (cData = '') : (cData = this.cityData);
 				var data = {
 					cid1: this.typeId,
 					cid2: this.tabFalg,
 					area: pData + '_' + cData,
 					rebateRatio: rebateRatio,
-					cycle: cycle
+					cycle: cycle,
+					whetherSelected: 1
 				};
 			}
 
@@ -252,7 +261,7 @@ page {
 	height: 60upx;
 	border-radius: 40upx;
 	padding-top: 0;
-	line-height:76upx;
+	line-height: 76upx;
 }
 .list_one {
 	// width: 10%;
