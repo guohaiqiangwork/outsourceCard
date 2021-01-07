@@ -548,7 +548,7 @@
             "path" : "pages/shareUrl/shareUrl",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "合伙人招募",
+                "navigationBarTitleText": "产品推广",
                 "enablePullDownRefresh": false
             }
             
@@ -575,7 +575,7 @@
 	"globalStyle": {
 		"navigationStyle":"custom",//标题类型
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "汇创精选",
+		"navigationBarTitleText": "慧伙",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	},
