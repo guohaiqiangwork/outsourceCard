@@ -522,7 +522,7 @@ export default {
 				scene: 'WXSceneSession',
 				type: 0,
 				href: _this.shareUrlD,
-				title: '汇创精选',
+				title: '慧伙',
 				summary: '让   生   活    更   优   质 ',
 				imageUrl: _this.saveImgData,
 				success: function(res) {

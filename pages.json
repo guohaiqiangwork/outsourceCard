@@ -554,7 +554,7 @@
             "path" : "pages/shareUrl/shareUrl",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "立即加入合伙人",
+                "navigationBarTitleText": "产品推广",
                 "enablePullDownRefresh": false
             }
             
@@ -572,7 +572,7 @@
             "path" : "pages/payResult/payResult",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "支付结果",
                 "enablePullDownRefresh": false
             }
             
@@ -581,7 +581,7 @@
 	"globalStyle": {
 		// "navigationStyle":"custom",//标题类型
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "汇创精选",
+		"navigationBarTitleText": "慧伙",
 		"navigationBarBackgroundColor": "#FFFFFF",
 		"backgroundColor": "#FFFFFF"
 	},
