@@ -548,7 +548,7 @@
             "path" : "pages/shareUrl/shareUrl",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "产品推广",
+                "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
             

@@ -44,7 +44,7 @@
 						<view class="font_sise26 width30">常用手机号码</view>
 						<view class=""><input type="text" value="" @input="getPhone" /></view>
 					</view>
-					<view class="uni-flex   margin_top3u" v-if="detailData.types == 1">
+					<view class="uni-flex   margin_top3u" >
 						<view class="font_sise26 width30">短信验证码</view>
 						<view class=""><input type="text" value="" @input="getCode" /></view>
 
@@ -55,7 +55,7 @@
 					</view>
 					<view class="uni-flex border_bottom padding_bottom3 margin_top3u" v-if="detailData.types == 2">
 						<view class="font_sise26 width30">企业名称</view>
-						<view class=""><input type="text" value="" @input="getCode" /></view>
+						<view class=""><input type="text" value="" @input="getCompanyName" /></view>
 					</view>
 				</view>
 
@@ -79,7 +79,7 @@
 							<view class="font_size26 font_color99">本人身份证号</view>
 							<view class=" border_bottom padding_bottom3 margin_top6"><input type="text" value="" @input="getIdCard" /></view>
 						</view>
-						<view class="">
+						<view class="border_bottom">
 							<view class="uni-flex display_space margin_top6">
 								<view class="font_size26 font_color99">验证码</view>
 								<view class="yzm_moudel" @click="yzm_function">
@@ -381,6 +381,10 @@ export default {
 		getCode: function(e) {
 			this.code = e.detail.value;
 		},
+		// 获取企业名称
+		getCompanyName:function(e){
+			this.companyName = e.detail.value;
+		},
 		// 获取验证码
 		yzm_function: function() {
 			var that = this;
@@ -501,7 +505,8 @@ export default {
 						phone: this.phone,
 						idcard: this.idCard,
 						openid: uni.getStorageSync('openId'),
-						companyName: this.code, //企业名称
+						code: this.code, 
+						companyName:this.companyName,//企业名称
 						goodsId: this.goodsId || ''
 					};
 					this.$http.post('/api/common/member/bindCompany', data, false).then(res => {
