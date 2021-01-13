@@ -44,7 +44,7 @@
 						<view class="font_sise26 width30">常用手机号码</view>
 						<view class=""><input type="text" value="" @input="getPhone" /></view>
 					</view>
-					<view class="uni-flex   margin_top3u" >
+					<view class="uni-flex border_bottom padding_bottom3  margin_top3u" >
 						<view class="font_sise26 width30">短信验证码</view>
 						<view class=""><input type="text" value="" @input="getCode" /></view>
 
