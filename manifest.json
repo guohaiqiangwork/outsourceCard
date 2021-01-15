@@ -59,20 +59,20 @@
                 "payment" : {
                     "weixin" : {
                         "__platform__" : [ "android" ],
-                        "appid" : "wx1ccaa7ed5dc640cb",
+                        "appid" : "wx8dfbc605a3ab7fb5",
                         "UniversalLinks" : "https://www.hcselected.com/.well-known/apple-app-site-association"
                     }
                 },
                 "share" : {
                     "weixin" : {
-                        "appid" : "wx1ccaa7ed5dc640cb",
+                        "appid" : "wx8dfbc605a3ab7fb5",
                         "UniversalLinks" : "https://www.hcselected.com/.well-known/apple-app-site-association"
                     }
                 },
                 "oauth" : {
                     "weixin" : {
-                        "appid" : "wx1ccaa7ed5dc640cb",
-                        "appsecret" : "",
+                        "appid" : "wx8dfbc605a3ab7fb5",
+                        "appsecret" : "883690fc8448c83f66c20159b4d8daa2",
                         "UniversalLinks" : "https://www.hcselected.com/.well-known/apple-app-site-association"
                     }
                 }

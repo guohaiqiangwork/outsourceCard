@@ -88,7 +88,7 @@
 							<view class="width25">
 								<view class="font_size54 font_weight700 font_colorf4">
 									{{ item.highestReturn }}
-									<text class="font_size24">%</text>
+									<!-- <text class="font_size24">%</text> -->
 								</view>
 								<view class="font_size22 font_color99">最高返佣</view>
 							</view>

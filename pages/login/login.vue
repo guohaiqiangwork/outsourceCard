@@ -184,6 +184,7 @@ export default {
 			uni.login({
 				provider: 'weixin',
 				success: res => {
+					console.log(res)
 					uni.hideLoading();
 					uni.getUserInfo({
 						provider: 'weixin',
