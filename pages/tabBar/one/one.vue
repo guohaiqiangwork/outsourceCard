@@ -180,7 +180,7 @@ export default {
 		return {
 			msg: [],
 			homeList: [],
-			appid: 'wx5d7f40ad90aaa137',
+			appid: 'wx8dfbc605a3ab7fb5',
 			redirect_url: 'http://zhichengdapay.com/h5_web/index.html',
 			lunList: [], //轮播
 			creditCardList: [], //精选信用卡

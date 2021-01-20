@@ -241,7 +241,7 @@ export default {
 			goodsUrl: '', //第三方链接
 			referrerId: '', //分享人ID
 			flag: '', //true 产品 false个人
-			appid: 'wx46d808b929c79829',
+			appid: 'wx8dfbc605a3ab7fb5',
 			redirect_url: 'https://www.hcselected.com/frontend',
 			wxFalg: false
 		};

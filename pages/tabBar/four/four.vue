@@ -625,8 +625,10 @@ page {
 	height: 110upx;
 	position: fixed;
 	width: 100%;
-	bottom: 6%;
+	// bottom: 6%;
+	// top:85vh;
 	z-index: 9;
+	bottom: calc(var(--window-bottom));
 }
 
 .moudel_content_myE {
@@ -673,6 +675,6 @@ page {
 	color: #ffffff;
 	font-size: 32upx;
 	margin-top: 10upx;
-	margin-left: 50upx;
+	margin-left: 20%;
 }
 </style>
