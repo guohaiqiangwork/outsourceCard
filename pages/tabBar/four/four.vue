@@ -161,7 +161,7 @@
 						
 					</view> -->
 					<view class="" style="margin-top: 60upx;">
-						<view class="text_right" style="width: 75%;">
+						<view class="text_right" style="width: 95%;">
 							<image @click="colseMoudel" style="width: 30upx;height: 30upx;" src="../../../static/image/icon/close.png" mode=""></image>
 						</view>
 						<view class="font_colorf7 font_size28" style="margin-left: 180upx;">
@@ -170,7 +170,8 @@
 							保存邀请二维码海报
 						</view>
 					</view>
-					<view class="uni-flex" style="width: 750upx;padding-left: 10%;padding-right: 5%;">
+					<!-- padding-left: 10%;padding-left: 10%; -->
+					<view class="uni-flex" style="width: 750upx;padding-right: 5%;">
 						<scroll-view scroll-x="true" class="wrapper" @scroll="nihao">
 							<view class="img_moudel" v-for="(item, index) in posterData" :key="index">
 								<image :src="item" mode="" style="height: 800upx;width: 580upx;border-radius: 10upx;margin-left: 30upx;"></image>
@@ -641,7 +642,7 @@ page {
 	left: 0;
 }
 .wrapper {
-	width: 90%;
+	width: 100%;
 	white-space: nowrap;
 	display: flex;
 	margin-top: 30upx;

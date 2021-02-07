@@ -26,7 +26,7 @@
 									<text class="font_size22 margin_left3">{{ detailData.creditPeriod }}</text>
 							</view>
 							<view class="font_size22 font_colorff  margin_top3">
-									<text style="color: #FEDCDA;">结算利率</text>
+									<text style="color: #FEDCDA;">借款利率</text>
 									<text class="font_size22 margin_left3">{{ detailData.rate }}</text>
 							</view>
 
@@ -105,7 +105,7 @@
 									<text class="font_size22 margin_left3">{{ detailData.creditPeriod }}</text>
 							</view>
 							<view class="font_size22 font_colorff  margin_top3">
-									<text style="color: #FEDCDA;">结算利率</text>
+									<text style="color: #FEDCDA;">借款利率</text>
 									<text class="font_size22 margin_left3">{{ detailData.rate }}</text>
 							</view>
 				
@@ -128,7 +128,7 @@
 					<view class="font_size24 font_colorff margin_top3">{{ detailData.goodsName }}</view>
 
 					<view class="font_size24 font_colorff margin_top3u">
-						结算利率
+						借款利率
 						<text class="font_size30 margin_left3">{{ detailData.rate }}</text>
 					</view>
 				</view> -->
@@ -185,7 +185,7 @@
 						<!-- <image  style="width: 30upx;height: 30upx;" src="../../static/image/icon/close.png" mode=""></image> -->
 					</view>
 					<view class="" style="">
-						<view style="width: 75%;" class="text_right">
+						<view style="width: 95%;" class="text_right">
 							<image @click="colseErMoudel" style="width: 30upx;height: 30upx;" src="../../static/image/icon/close.png" mode=""></image>
 						</view>
 						<view class="font_colorf7 font_size28" style="margin-left: 180upx;">

@@ -24,7 +24,7 @@
 								<text class="font_size22 margin_left3">{{ detailData.creditPeriod }}</text>
 							</view>
 							<view class="font_size22 font_colorff  margin_top3">
-								<text style="color: #FEDCDA;">结算利率</text>
+								<text style="color: #FEDCDA;">借款利率</text>
 								<text class="font_size22 margin_left3">{{ detailData.rate }}</text>
 							</view>
 						</view>
@@ -44,7 +44,7 @@
 						<view class="font_sise26 width30">常用手机号码</view>
 						<view class=""><input type="text" value="" @input="getPhone" /></view>
 					</view>
-					<view class="uni-flex border_bottom padding_bottom3  margin_top3u" >
+					<view class="uni-flex border_bottom padding_bottom3  margin_top3u">
 						<view class="font_sise26 width30">短信验证码</view>
 						<view class=""><input type="text" value="" @input="getCode" /></view>
 
@@ -75,10 +75,10 @@
 							<view class="font_size26 font_color99">手机号</view>
 							<view class=" border_bottom padding_bottom3 margin_top6"><input type="text" value="" @input="getPhone" /></view>
 						</view>
-						<view class="margin_top6">
+						<!-- <view class="margin_top6">
 							<view class="font_size26 font_color99">本人身份证号</view>
 							<view class=" border_bottom padding_bottom3 margin_top6"><input type="text" value="" @input="getIdCard" /></view>
-						</view>
+						</view> -->
 						<view class="border_bottom">
 							<view class="uni-flex display_space margin_top6">
 								<view class="font_size26 font_color99">验证码</view>
@@ -92,7 +92,7 @@
 					</view>
 				</view>
 
-				<view class="page_widthMoudel" style="padding-bottom: 100upx;">
+				<!-- 	<view class="page_widthMoudel" style="padding-bottom: 100upx;">
 					<view class="" v-if="false">
 						<view class="font_size40 font_weight700 margin_top3u">申请条件</view>
 
@@ -107,7 +107,7 @@
 						<view class="font_size40 font_weight700 margin_top3u">申请人信息</view>
 					</view>
 				</view>
-
+ -->
 				<view class="bottom_btn " @click="openMoudel">立即申请</view>
 
 				<template v-if="moudelFalg">
@@ -123,7 +123,7 @@
 			</view>
 		</template>
 
-		<template v-if="false">
+		<!-- 	<template v-if="false">
 			<view style="padding-bottom: 99upx;">
 				<view class="page_widthMoudel" v-if="flag == 1">
 					<view class="four_moudel" @click="goToPage('rewardRules')">
@@ -155,24 +155,6 @@
 							</view>
 							<view class=" border_bottom padding_bottom3 margin_top6"><input type="text" value="" @input="getCode" /></view>
 						</view>
-
-						<!-- <view class="uni-flex border_bottom padding_bottom3 margin_top3u ">
-							<view class="font_sise26 width30 ">本人身份证号</view>
-							<view class=""><input type="text" value="" @input="getIdCard" /></view>
-						</view> -->
-						<!-- <view class="uni-flex border_bottom padding_bottom3 margin_top3u">
-							<view class="font_sise26 width30">常用手机号码</view>
-							<view class=""><input type="text" value="" @input="getPhone" /></view>
-						</view>
-						<view class="uni-flex   margin_top3u">
-							<view class="font_sise26 width30">短信验证码</view>
-							<view class=""><input type="text" value="" @input="getCode" /></view>
-
-							<view class="yzm_moudel" @click="yzm_function">
-								{{ countdown }}
-								<text v-show="timestatus" class="forgetpwd2">秒重获</text>
-							</view>
-						</view> -->
 					</view>
 				</view>
 
@@ -189,7 +171,7 @@
 				</template>
 			</view>
 		</template>
-
+ -->
 		<!-- 解绑微信 -->
 		<template v-if="wxFalg">
 			<view class="moudel_content">
@@ -197,7 +179,7 @@
 					<view class="font_size34 text_center font_size40 font_weight700">请确认申请人信息</view>
 					<view class="font_size30 margin_top3u">姓名：{{ name }}</view>
 					<view class="font_size30 margin_top2">手机：{{ phone }}</view>
-					<view class="font_size30 border_bottom padding_bottom3u margin_top2">身份证：{{ idCard }}</view>
+					<view v-if="idCard" class="font_size30 border_bottom padding_bottom3u margin_top2">身份证：{{ idCard }}</view>
 
 					<view class="font_size28 font_weight700 margin_top3u">重要提示</view>
 					<view class="font_size28">
@@ -274,6 +256,9 @@ export default {
 				this.getProduct(); //获取详情
 			}
 		} else {
+			uni.setNavigationBarTitle({
+				title: '慧伙精选合伙人'
+			});
 			this.flag = uni.getStorageSync('flag'); //true 产品 false个人
 			this.referrerId = uni.getStorageSync('referrerId'); //分享人ID
 			if (uni.getStorageSync('goodsId')) {
@@ -382,7 +367,7 @@ export default {
 			this.code = e.detail.value;
 		},
 		// 获取企业名称
-		getCompanyName:function(e){
+		getCompanyName: function(e) {
 			this.companyName = e.detail.value;
 		},
 		// 获取验证码
@@ -505,8 +490,8 @@ export default {
 						phone: this.phone,
 						idcard: this.idCard,
 						openid: uni.getStorageSync('openId'),
-						code: this.code, 
-						companyName:this.companyName,//企业名称
+						code: this.code,
+						companyName: this.companyName, //企业名称
 						goodsId: this.goodsId || ''
 					};
 					this.$http.post('/api/common/member/bindCompany', data, false).then(res => {
